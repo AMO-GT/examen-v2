@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('eigenaars', function (Blueprint $table) {
-            $table->id('eigenaar_id'); // Primaire sleutel
+        Schema::create('klanten', function (Blueprint $table) {
+            $table->id();
             $table->string('naam', 50);
-            $table->string('email', 50);
-            $table->timestamps(); // Optioneel: voor created_at en updated_at
+            $table->string('email', 50)->unique();
+            $table->string('telefoon', 15);
+            $table->string('password');
+            $table->timestamps();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('eigenaars');
+        Schema::dropIfExists('klanten');
     }
 };
