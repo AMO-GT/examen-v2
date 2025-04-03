@@ -11,7 +11,7 @@
             <thead class="text-white" style="background-color: #0047AB;">
             <tr>
                 <th>#</th>
-                <th>Naam</th>   
+                <th>Naam</th>
                 <th>Email</th>
                 <th>Actie</th>
             </tr>
