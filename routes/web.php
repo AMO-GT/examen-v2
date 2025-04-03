@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KlantenController;
 use App\Http\Controllers\BeheerdersController;
 use App\Http\Controllers\MedewerkersController;
+use App\Http\Controllers\Auth\KlantAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,12 +30,17 @@ Route::get('/medewerkers', [MedewerkersController::class, 'index'])->name('medew
 // Klanten routes
 Route::get('/klanten', [KlantenController::class, 'index'])->name('klanten.index');
 
+// Klant Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('klant/register', [KlantAuthController::class, 'showRegistrationForm'])->name('klant.register');
+    Route::post('klant/register', [KlantAuthController::class, 'register']);
+    Route::get('klant/login', [KlantAuthController::class, 'showLoginForm'])->name('klant.login');
+    Route::post('klant/login', [KlantAuthController::class, 'login']);
+});
 
-
-
-
-
-
+Route::middleware('auth:klant')->group(function () {
+    Route::post('klant/logout', [KlantAuthController::class, 'logout'])->name('klant.logout');
+});
 
 //<-----------------------------------------Badr------------------------------------------>
 

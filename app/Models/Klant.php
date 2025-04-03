@@ -2,15 +2,31 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Klant extends Model
+class Klant extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
+    protected $table = 'klanten';
     protected $primaryKey = 'klant_id';
 
-    protected $fillable = ['naam', 'email'];
+    protected $fillable = [
+        'naam',
+        'email',
+        'password',
+        'telefoon',
+        'adres',
+        'postcode',
+        'plaats'
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     // 🔁 Relaties
     public function reserveringen()
