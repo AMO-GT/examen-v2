@@ -297,6 +297,11 @@
                     <i class="far fa-clock"></i> Tijdsblokken
                 </a>
             </li>
+            <li class="sidebar-menu-item">
+                <a href="{{ route('producten.index') }}" class="sidebar-menu-link {{ request()->routeIs('producten.*') ? 'active' : '' }}">
+                    <i class="fas fa-tags"></i> Producten
+                </a>
+            </li>
             <!-- Rapportage menu items -->
             <li class="sidebar-menu-item">
                 <a href="#rapportageMenu" class="sidebar-menu-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" aria-expanded="false">

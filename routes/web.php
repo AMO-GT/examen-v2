@@ -6,6 +6,7 @@ use App\Http\Controllers\BeheerdersController;
 use App\Http\Controllers\MedewerkersController;
 use App\Http\Controllers\TijdsblokController;
 use App\Http\Controllers\RapportageController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -66,5 +67,8 @@ Route::middleware('auth')->group(function () {
 
 // Rapportage routes
 Route::get('/rapportage/uren-overzicht', [RapportageController::class, 'urenOverzicht'])->name('rapportage.uren-overzicht');
+
+// Producten routes
+Route::resource('producten', ProductController::class);
 
 require __DIR__.'/auth.php';

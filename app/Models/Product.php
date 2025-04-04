@@ -11,6 +11,9 @@ class Product extends Model
 
     protected $primaryKey = 'product_id';
 
+    // Definieer de tabelnaam expliciet
+    protected $table = 'producten';
+
     protected $fillable = ['naam', 'prijs', 'beschrijving', 'eigenaar_id'];
 
     // 🔁 Relaties

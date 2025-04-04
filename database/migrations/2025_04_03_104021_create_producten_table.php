@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('product_id'); // Primaire sleutel
             $table->string('naam', 100);
             $table->decimal('prijs', 10, 2);
-            $table->text('beschrijving');
-            $table->unsignedBigInteger('eigenaar_id'); // Foreign key
+            $table->text('beschrijving')->nullable();
+            $table->unsignedBigInteger('eigenaar_id')->nullable(); // Foreign key
             $table->timestamps();
 
             // Foreign key constraint
