@@ -18,9 +18,25 @@ class ApiController extends Controller
         // Find all medewerkers that have a tijdsblok on this day
         $medewerkers = Medewerker::whereHas('tijdsblokken', function($query) use ($dayOfWeek) {
             $query->where('day_of_week', $dayOfWeek);
-        })->get(['medewerker_id', 'naam']);
+        })->with('behandelingen')->get();
         
-        return response()->json($medewerkers);
+        // Format response to include medewerker_id, naam, and behandelingen
+        $response = $medewerkers->map(function($medewerker) {
+            return [
+                'medewerker_id' => $medewerker->medewerker_id,
+                'naam' => $medewerker->naam,
+                'behandelingen' => $medewerker->behandelingen->map(function($behandeling) {
+                    return [
+                        'behandeling_id' => $behandeling->behandeling_id,
+                        'naam' => $behandeling->naam,
+                        'prijs' => $behandeling->prijs,
+                        'duur' => $behandeling->duur
+                    ];
+                })
+            ];
+        });
+        
+        return response()->json($response);
     }
     
     /**

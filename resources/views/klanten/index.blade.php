@@ -183,6 +183,9 @@
                                                     // Enable the medewerker select
                                                     medewerkerSelect.disabled = false;
                                                     
+                                                    // Store the medewerkers data for later use
+                                                    window.medewerkerData = data;
+                                                    
                                                     // Add the medewerkers as options
                                                     if (data.length > 0) {
                                                         data.forEach(medewerker => {
@@ -205,6 +208,51 @@
                                     medewerkerSelect.addEventListener('change', function() {
                                         // Reset de tijd select
                                         tijdSelect.innerHTML = '<option value="">Selecteer een tijd</option>';
+                                        
+                                        // Toon de behandelingen van de geselecteerde medewerker
+                                        if (this.value && window.medewerkerData) {
+                                            const medewerkerId = parseInt(this.value);
+                                            const medewerker = window.medewerkerData.find(m => m.medewerker_id === medewerkerId);
+                                            
+                                            if (medewerker && medewerker.behandelingen) {
+                                                // Vind het container element om behandelingen te tonen
+                                                let behandelingenContainer = document.getElementById('medewerker-behandelingen');
+                                                
+                                                // Maak een container als die nog niet bestaat
+                                                if (!behandelingenContainer) {
+                                                    behandelingenContainer = document.createElement('div');
+                                                    behandelingenContainer.id = 'medewerker-behandelingen';
+                                                    behandelingenContainer.className = 'alert alert-info mt-3';
+                                                    
+                                                    // Voeg de container toe na de selectie van de medewerker
+                                                    this.parentNode.appendChild(behandelingenContainer);
+                                                }
+                                                
+                                                // Toon de behandelingen in de container
+                                                let html = `<h5>Behandelingen die ${medewerker.naam} kan uitvoeren:</h5>`;
+                                                html += '<ul class="list-group">';
+                                                
+                                                if (medewerker.behandelingen.length > 0) {
+                                                    medewerker.behandelingen.forEach(behandeling => {
+                                                        html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                                            ${behandeling.naam} (${behandeling.duur} min)
+                                                            <span class="badge bg-primary rounded-pill">€${parseFloat(behandeling.prijs).toFixed(2)}</span>
+                                                        </li>`;
+                                                    });
+                                                } else {
+                                                    html += '<li class="list-group-item">Geen behandelingen gevonden voor deze medewerker</li>';
+                                                }
+                                                
+                                                html += '</ul>';
+                                                behandelingenContainer.innerHTML = html;
+                                            }
+                                        } else {
+                                            // Als er geen medewerker is geselecteerd, verwijder de behandelingen container
+                                            const behandelingenContainer = document.getElementById('medewerker-behandelingen');
+                                            if (behandelingenContainer) {
+                                                behandelingenContainer.remove();
+                                            }
+                                        }
                                         
                                         if (this.value) {
                                             const medewerkerId = this.value;

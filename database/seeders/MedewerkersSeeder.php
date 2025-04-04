@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Eigenaar;
 use App\Models\Medewerker;
 use App\Models\Tijdsblok;
+use App\Models\Behandeling;
 
 class MedewerkersSeeder extends Seeder
 {
@@ -20,11 +21,42 @@ class MedewerkersSeeder extends Seeder
             ['naam' => 'Hoofdeigenaar']
         );
 
+        // Maak eerst wat standaard behandelingen aan als ze nog niet bestaan
+        $behandelingen = [
+            ['naam' => 'Knippen', 'duur' => 30, 'prijs' => 29.50],
+            ['naam' => 'Wassen & knippen', 'duur' => 45, 'prijs' => 35.00],
+            ['naam' => 'Kleuren', 'duur' => 60, 'prijs' => 65.00],
+            ['naam' => 'Highlights', 'duur' => 90, 'prijs' => 75.00],
+            ['naam' => 'Föhnen & Stylen', 'duur' => 30, 'prijs' => 25.00],
+            ['naam' => 'Permanente wave', 'duur' => 120, 'prijs' => 80.00],
+            ['naam' => 'Bruidskapsels', 'duur' => 90, 'prijs' => 120.00],
+            ['naam' => 'Kinderen knippen (t/m 12 jaar)', 'duur' => 30, 'prijs' => 19.50],
+        ];
+
+        $behandelingModels = [];
+        foreach ($behandelingen as $behandeling) {
+            $model = Behandeling::firstOrCreate(
+                ['naam' => $behandeling['naam']],
+                [
+                    'duur' => $behandeling['duur'],
+                    'prijs' => $behandeling['prijs']
+                ]
+            );
+            $behandelingModels[] = $model;
+        }
+
         // Medewerker 1 - Werkt alleen op maandag, woensdag en vrijdag
         $medewerker1 = Medewerker::create([
             'eigenaar_id' => $eigenaar->eigenaar_id,
             'naam' => 'Janneke Jansen',
             'email' => 'janneke@voorbeeld.com',
+        ]);
+
+        // Voeg behandelingen toe aan medewerker 1
+        $medewerker1->behandelingen()->attach([
+            $behandelingModels[0]->behandeling_id, // Knippen
+            $behandelingModels[1]->behandeling_id, // Wassen & knippen
+            $behandelingModels[2]->behandeling_id, // Kleuren
         ]);
 
         // Tijdsblokken voor medewerker 1
@@ -59,6 +91,13 @@ class MedewerkersSeeder extends Seeder
             'email' => 'pieter@voorbeeld.com',
         ]);
 
+        // Voeg behandelingen toe aan medewerker 2
+        $medewerker2->behandelingen()->attach([
+            $behandelingModels[0]->behandeling_id, // Knippen
+            $behandelingModels[4]->behandeling_id, // Föhnen & Stylen
+            $behandelingModels[3]->behandeling_id, // Highlights
+        ]);
+
         // Tijdsblokken voor medewerker 2
         // Dinsdag
         Tijdsblok::create([
@@ -83,6 +122,12 @@ class MedewerkersSeeder extends Seeder
             'email' => 'mohammed@voorbeeld.com',
         ]);
 
+        // Voeg behandelingen toe aan medewerker 3 (alle behandelingen)
+        $behandelingIds = array_map(function($model) {
+            return $model->behandeling_id;
+        }, $behandelingModels);
+        $medewerker3->behandelingen()->attach($behandelingIds);
+
         // Tijdsblokken voor medewerker 3 (maandag t/m vrijdag)
         for ($day = 1; $day <= 5; $day++) {
             Tijdsblok::create([
@@ -98,6 +143,14 @@ class MedewerkersSeeder extends Seeder
             'eigenaar_id' => $eigenaar->eigenaar_id,
             'naam' => 'Fatima Bakker',
             'email' => 'fatima@voorbeeld.com',
+        ]);
+
+        // Voeg behandelingen toe aan medewerker 4
+        $medewerker4->behandelingen()->attach([
+            $behandelingModels[6]->behandeling_id, // Bruidskapsels
+            $behandelingModels[5]->behandeling_id, // Permanente wave
+            $behandelingModels[3]->behandeling_id, // Highlights
+            $behandelingModels[7]->behandeling_id, // Kinderen knippen
         ]);
 
         // Tijdsblokken voor medewerker 4
