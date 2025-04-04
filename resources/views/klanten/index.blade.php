@@ -99,7 +99,7 @@
                                 
                                 <hr><br>
                                 <h5>Nieuwe Afspraak Maken</h5>
-                                <form action="{{ route('reserveringen.store') }}" method="POST">
+                                <form action="{{ route('reserveringen.store') }}" method="POST" id="afspraakForm">
                                     @csrf
                                     <input type="hidden" name="klant_id" value="{{ $klant->klant_id }}">
                                     
@@ -112,34 +112,23 @@
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="tijd" class="form-label">Tijd</label>
-                                        <select class="form-select @error('tijd') is-invalid @enderror" id="tijd" name="tijd" required>
-                                            <option value="">Kies een tijd</option>
-                                            <option value="09:00:00">09:00</option>
-                                            <option value="10:00:00">10:00</option>
-                                            <option value="11:00:00">11:00</option>
-                                            <option value="12:00:00">12:00</option>
-                                            <option value="13:00:00">13:00</option>
-                                            <option value="14:00:00">14:00</option>
-                                            <option value="15:00:00">15:00</option>
-                                            <option value="16:00:00">16:00</option>
-                                            <option value="17:00:00">17:00</option>
+                                        <label for="medewerker_id" class="form-label">Medewerker</label>
+                                        <select class="form-select @error('medewerker_id') is-invalid @enderror" id="medewerker_id" name="medewerker_id" required disabled>
+                                            <option value="">Selecteer eerst een datum</option>
                                         </select>
-                                        <small class="form-text text-muted">Afspraken zijn per uur beschikbaar.</small>
-                                        @error('tijd')
+                                        <small class="form-text text-muted">De beschikbare medewerkers zijn afhankelijk van de gekozen dag.</small>
+                                        @error('medewerker_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="medewerker_id" class="form-label">Medewerker</label>
-                                        <select class="form-select @error('medewerker_id') is-invalid @enderror" id="medewerker_id" name="medewerker_id" required>
-                                            <option value="">Kies een medewerker</option>
-                                            @foreach($medewerkers as $medewerker)
-                                                <option value="{{ $medewerker->medewerker_id }}">{{ $medewerker->naam }}</option>
-                                            @endforeach
+                                        <label for="tijd" class="form-label">Tijd</label>
+                                        <select class="form-select @error('tijd') is-invalid @enderror" id="tijd" name="tijd" required disabled>
+                                            <option value="">Selecteer eerst een medewerker</option>
                                         </select>
-                                        @error('medewerker_id')
+                                        <small class="form-text text-muted">Afspraken zijn per uur beschikbaar.</small>
+                                        @error('tijd')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -163,6 +152,92 @@
                                     
                                     <button type="submit" class="btn btn-success">Afspraak Maken</button>
                                 </form>
+
+                                <!-- Javascript voor dynamische medewerkers en tijden -->
+                                <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const datumInput = document.getElementById('datum');
+                                    const medewerkerSelect = document.getElementById('medewerker_id');
+                                    const tijdSelect = document.getElementById('tijd');
+                                    
+                                    // Wanneer de datum verandert
+                                    datumInput.addEventListener('change', function() {
+                                        // Reset de medewerker en tijd selects
+                                        medewerkerSelect.innerHTML = '<option value="">Selecteer een medewerker</option>';
+                                        tijdSelect.innerHTML = '<option value="">Selecteer eerst een medewerker</option>';
+                                        tijdSelect.disabled = true;
+                                        
+                                        const selectedDate = new Date(this.value);
+                                        if (selectedDate) {
+                                            // Get the day of week (0 = Sunday, 1 = Monday, etc.)
+                                            const dayOfWeek = selectedDate.getDay();
+                                            
+                                            // Fetch available medewerkers for this day
+                                            fetch(`/api/available-medewerkers/${dayOfWeek}`)
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    // Enable the medewerker select
+                                                    medewerkerSelect.disabled = false;
+                                                    
+                                                    // Add the medewerkers as options
+                                                    if (data.length > 0) {
+                                                        data.forEach(medewerker => {
+                                                            const option = document.createElement('option');
+                                                            option.value = medewerker.medewerker_id;
+                                                            option.textContent = medewerker.naam;
+                                                            medewerkerSelect.appendChild(option);
+                                                        });
+                                                    } else {
+                                                        medewerkerSelect.innerHTML = '<option value="">Geen medewerkers beschikbaar op deze dag</option>';
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error fetching medewerkers:', error);
+                                                });
+                                        }
+                                    });
+                                    
+                                    // Wanneer de medewerker verandert
+                                    medewerkerSelect.addEventListener('change', function() {
+                                        // Reset de tijd select
+                                        tijdSelect.innerHTML = '<option value="">Selecteer een tijd</option>';
+                                        
+                                        if (this.value) {
+                                            const medewerkerId = this.value;
+                                            const selectedDate = datumInput.value;
+                                            
+                                            // Fetch available times for this medewerker on this date
+                                            fetch(`/api/available-times/${medewerkerId}/${selectedDate}`)
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    // Enable the tijd select
+                                                    tijdSelect.disabled = false;
+                                                    
+                                                    // Add the times as options
+                                                    if (data.length > 0) {
+                                                        data.forEach(time => {
+                                                            const option = document.createElement('option');
+                                                            option.value = time;
+                                                            
+                                                            // Format the time for display (e.g., "09:00")
+                                                            const timeParts = time.split(':');
+                                                            option.textContent = `${timeParts[0]}:${timeParts[1]}`;
+                                                            
+                                                            tijdSelect.appendChild(option);
+                                                        });
+                                                    } else {
+                                                        tijdSelect.innerHTML = '<option value="">Geen tijden beschikbaar</option>';
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error fetching times:', error);
+                                                });
+                                        } else {
+                                            tijdSelect.disabled = true;
+                                        }
+                                    });
+                                });
+                                </script>
                             </div>
                         </div>
                         

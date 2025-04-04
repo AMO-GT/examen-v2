@@ -11,7 +11,11 @@ class Medewerker extends Model
 
     protected $primaryKey = 'medewerker_id';
 
-    protected $fillable = ['eigenaar_id', 'naam', 'email'];
+    protected $fillable = ['eigenaar_id', 'naam', 'email', 'werkdagen'];
+    
+    protected $casts = [
+        'werkdagen' => 'array',
+    ];
 
     // 🔁 Relaties
     public function eigenaar()
