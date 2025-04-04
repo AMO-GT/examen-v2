@@ -7,6 +7,8 @@ use App\Http\Controllers\MedewerkersController;
 use App\Http\Controllers\Auth\KlantAuthController;
 use App\Http\Controllers\ReserveringenController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Auth\KlantPasswordResetLinkController;
+use App\Http\Controllers\Auth\KlantNewPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,6 +41,16 @@ Route::middleware('guest')->group(function () {
     Route::get('klant/login', [KlantAuthController::class, 'showLoginForm'])->name('klant.login');
     Route::post('klant/login', [KlantAuthController::class, 'login']);
 });
+
+// Klant Password Reset Routes
+Route::get('klant/forgot-password', [KlantPasswordResetLinkController::class, 'create'])
+     ->name('klant.password.request');
+Route::post('klant/forgot-password', [KlantPasswordResetLinkController::class, 'store'])
+     ->name('klant.password.email');
+Route::get('klant/reset-password/{token}', [KlantNewPasswordController::class, 'create'])
+     ->name('klant.password.reset');
+Route::post('klant/reset-password', [KlantNewPasswordController::class, 'store'])
+     ->name('klant.password.store');
 
 Route::middleware('auth:klant')->group(function () {
     Route::post('klant/logout', [KlantAuthController::class, 'logout'])->name('klant.logout');

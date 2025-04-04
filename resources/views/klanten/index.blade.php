@@ -1663,6 +1663,9 @@
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                <div class="mt-2 mb-3">
+                                    <a href="{{ route('klant.password.request') }}" class="text-decoration-none small">Wachtwoord vergeten?</a>
+                                </div>
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="remember" name="remember">
