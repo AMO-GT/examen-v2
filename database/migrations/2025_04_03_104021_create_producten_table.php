@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('prijs', 10, 2);
             $table->text('beschrijving');
             $table->unsignedBigInteger('eigenaar_id'); // Foreign key
+            $table->integer('voorraad')->default(0);
             $table->timestamps();
 
             // Foreign key constraint

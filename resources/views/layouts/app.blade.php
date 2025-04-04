@@ -545,6 +545,45 @@
                 background-color: var(--primary-purple);
                 border-color: var(--primary-purple);
             }
+
+            /* Product Card Styles */
+            .product-card {
+                transition: transform 0.2s, box-shadow 0.2s;
+                background: white;
+                border: none;
+            }
+            
+            .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .product-image {
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            
+            .product-title {
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: #333;
+            }
+            
+            .product-description {
+                font-size: 0.9rem;
+                color: #666;
+                min-height: 40px;
+            }
+            
+            .product-price {
+                font-size: 1.1rem;
+                color: #333;
+            }
+            
+            .badge.bg-purple {
+                background-color: #6c5ce7 !important;
+                font-weight: 500;
+            }
         </style>
 
         <!-- Scripts -->

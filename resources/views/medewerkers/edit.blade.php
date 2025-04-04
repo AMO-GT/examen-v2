@@ -57,12 +57,39 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="prijs" class="form-label">Prijs (€)</label>
-                            <input type="number" step="0.01" class="form-control @error('prijs') is-invalid @enderror" 
-                                   id="prijs" name="prijs" value="{{ old('prijs', $behandeling->prijs) }}" required>
-                            @error('prijs')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <label for="prijs" class="form-label">Basis Prijs Behandeling (€)</label>
+                            <input type="number" class="form-control" id="prijs" name="prijs" 
+                                   value="{{ $behandeling->prijs }}" step="0.01" min="0" required 
+                                   onchange="updateTotalPrice()">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Benodigde Producten</label>
+                            <div class="product-selection">
+                                @foreach($producten as $product)
+                                <div class="product-item mb-2">
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="checkbox" 
+                                               name="product_ids[]" 
+                                               value="{{ $product->product_id }}"
+                                               onchange="updateTotalPrice()"
+                                               data-price="{{ $product->prijs }}"
+                                               {{ $behandeling->products->contains($product->product_id) ? 'checked' : '' }}>
+                                        <label class="form-check-label ms-2">
+                                            {{ $product->naam }} (€{{ number_format($product->prijs, 2) }})
+                                        </label>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Totaalprijs (incl. producten)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">€</span>
+                                <input type="text" class="form-control" id="totaalprijs" readonly>
+                            </div>
                         </div>
 
                         <div class="mb-3">
@@ -147,4 +174,26 @@
         </div>
     </div>
 </div>
+
+<script>
+function updateTotalPrice() {
+    // Basis behandelingsprijs ophalen
+    let basisPrijs = parseFloat(document.getElementById('prijs').value) || 0;
+    
+    // Alle aangevinkte producten ophalen en prijzen optellen
+    let productPrijzen = 0;
+    document.querySelectorAll('input[name="product_ids[]"]:checked').forEach(checkbox => {
+        productPrijzen += parseFloat(checkbox.dataset.price);
+    });
+    
+    // Totaalprijs berekenen en weergeven
+    let totaal = basisPrijs + productPrijzen;
+    document.getElementById('totaalprijs').value = '€ ' + totaal.toFixed(2);
+}
+
+// Initiële berekening bij het laden van de pagina
+document.addEventListener('DOMContentLoaded', function() {
+    updateTotalPrice();
+});
+</script>
 @endsection 

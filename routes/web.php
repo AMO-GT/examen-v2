@@ -6,6 +6,7 @@ use App\Http\Controllers\BeheerdersController;
 use App\Http\Controllers\MedewerkersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MedewerkerController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -32,6 +33,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/medewerkers/behandeling/{id}', [MedewerkersController::class, 'update'])->name('medewerkers.behandeling.update');
     Route::post('/medewerkers/behandeling/{id}/delete', [MedewerkersController::class, 'destroy'])->name('medewerkers.behandeling.delete');
     Route::get('/medewerkers/behandeling/{id}/edit', [MedewerkersController::class, 'edit'])->name('medewerkers.behandeling.edit');
+    
+    // Products routes
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.delete');
     
     // Klanten routes
     Route::get('/klanten', [KlantenController::class, 'index'])->name('klanten.index');

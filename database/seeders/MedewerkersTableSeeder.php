@@ -28,18 +28,23 @@ class MedewerkersTableSeeder extends Seeder
 
         $medewerkers = [
             [
-                'naam' => 'Mo',
-                'email' => 'mo@hairhub.nl',
+                'naam' => 'Oumnia',
+                'email' => 'oumnia@hairhub.nl',
                 'eigenaar_id' => $eigenaar->eigenaar_id
             ],
             [
-                'naam' => 'Badr',
-                'email' => 'badr@hairhub.nl',
+                'naam' => 'Anna',
+                'email' => 'anna@hairhub.nl',
                 'eigenaar_id' => $eigenaar->eigenaar_id
             ],
             [
-                'naam' => 'Ahmad',
-                'email' => 'ahmad@hairhub.nl',
+                'naam' => 'Fleur',
+                'email' => 'fleur@hairhub.nl',
+                'eigenaar_id' => $eigenaar->eigenaar_id
+            ],
+            [
+                'naam' => 'Nazli',
+                'email' => 'nazli@hairhub.nl',
                 'eigenaar_id' => $eigenaar->eigenaar_id
             ],
             [

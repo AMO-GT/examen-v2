@@ -32,4 +32,10 @@ class Behandeling extends Model
     {
         return $this->belongsToMany(Medewerker::class, 'medewerker_behandeling', 'behandeling_id', 'medewerker_id');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'behandeling_product', 'behandeling_id', 'product_id')
+                    ->withPivot('aantal');
+    }
 } 

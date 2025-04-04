@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Behandeling;
 use App\Models\Medewerker;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -28,12 +29,17 @@ class MedewerkersController extends Controller
             }
 
             $medewerkers = Medewerker::all();
+            $producten = Product::all();
             
-            return view('medewerkers.index', compact('behandelingen', 'medewerkers'));
+            return view('medewerkers.index', compact('behandelingen', 'medewerkers', 'producten'));
         } catch (\Exception $e) {
             \Log::error('Fout bij ophalen behandelingen: ' . $e->getMessage());
             \Log::error($e->getTraceAsString());
-            return view('medewerkers.index', ['behandelingen' => collect([])]);
+            return view('medewerkers.index', [
+                'behandelingen' => collect([]),
+                'medewerkers' => collect([]),
+                'producten' => collect([])
+            ]);
         }
     }
 
@@ -49,7 +55,11 @@ class MedewerkersController extends Controller
                 'prijs' => 'required|numeric|min:0',
                 'duur_minuten' => 'required|integer|min:1',
                 'is_populair' => 'boolean',
-                'medewerker_ids' => 'array'
+                'medewerker_ids' => 'array|required',
+                'medewerker_ids.*' => 'exists:medewerkers,medewerker_id',
+                'product_ids' => 'nullable|array',
+                'product_quantities' => 'nullable|array',
+                'product_quantities.*' => 'integer|min:1'
             ]);
 
             $behandeling = Behandeling::create([
@@ -66,7 +76,35 @@ class MedewerkersController extends Controller
                 $behandeling->medewerkers()->attach($request->medewerker_ids);
             }
 
-            Log::info('Behandeling aangemaakt:', $behandeling->toArray());
+            // Verwerk de geselecteerde producten
+            if ($request->has('product_ids')) {
+                $productData = [];
+                foreach ($request->product_ids as $productId) {
+                    $quantity = 1; // Standaard 1 product per behandeling
+                    
+                    // Haal het product op
+                    $product = Product::findOrFail($productId);
+                    
+                    // Controleer of er genoeg voorraad is
+                    if ($product->voorraad < $quantity) {
+                        throw new \Exception("Onvoldoende voorraad voor product: {$product->naam}");
+                    }
+                    
+                    // Update de voorraad
+                    $product->voorraad -= $quantity;
+                    $product->save();
+                    
+                    $productData[$productId] = ['aantal' => $quantity];
+                    
+                    Log::info('Product voorraad bijgewerkt:', [
+                        'product_id' => $productId,
+                        'naam' => $product->naam,
+                        'oude_voorraad' => $product->voorraad + $quantity,
+                        'nieuwe_voorraad' => $product->voorraad
+                    ]);
+                }
+                $behandeling->products()->sync($productData);
+            }
 
             return redirect()->route('medewerkers.index')->with('success', 'Behandeling succesvol toegevoegd!');
         } catch (\Exception $e) {
@@ -105,10 +143,12 @@ class MedewerkersController extends Controller
                 'prijs' => 'required|numeric|min:0',
                 'duur_minuten' => 'required|integer|min:1',
                 'is_populair' => 'boolean',
-                'medewerker_ids' => 'array'
+                'medewerker_ids' => 'array',
+                'product_ids' => 'nullable|array'
             ]);
 
-            $behandeling = Behandeling::findOrFail($id);
+            $behandeling = Behandeling::with('products')->findOrFail($id);
+
             $behandeling->update([
                 'naam' => $validated['naam'],
                 'beschrijving' => $validated['beschrijving'],
@@ -120,10 +160,57 @@ class MedewerkersController extends Controller
 
             $behandeling->medewerkers()->sync($request->medewerker_ids ?? []);
 
-            Log::info('Behandeling bijgewerkt:', [
-                'id' => $id,
-                'data' => $validated
-            ]);
+            // Update products en voorraad
+            if ($request->has('product_ids')) {
+                $productData = [];
+                $newProductIds = $request->product_ids;
+                
+                // Herstel voorraad voor verwijderde producten
+                foreach ($behandeling->products as $product) {
+                    if (!in_array($product->product_id, $newProductIds)) {
+                        $product->voorraad += $product->pivot->aantal;
+                        $product->save();
+                    }
+                }
+                
+                // Update voorraad voor nieuwe en bestaande producten
+                foreach ($newProductIds as $productId) {
+                    $quantity = 1; // Standaard 1 product per behandeling
+                    
+                    // Haal het product op
+                    $product = Product::findOrFail($productId);
+                    
+                    // Als het product al aan de behandeling was gekoppeld, hoeven we de voorraad niet aan te passen
+                    if (!$behandeling->products->contains($productId)) {
+                        // Controleer of er genoeg voorraad is
+                        if ($product->voorraad < $quantity) {
+                            throw new \Exception("Onvoldoende voorraad voor product: {$product->naam}");
+                        }
+                        
+                        // Update de voorraad alleen voor nieuwe producten
+                        $product->voorraad -= $quantity;
+                        $product->save();
+                        
+                        Log::info('Product voorraad bijgewerkt:', [
+                            'product_id' => $productId,
+                            'naam' => $product->naam,
+                            'oude_voorraad' => $product->voorraad + $quantity,
+                            'nieuwe_voorraad' => $product->voorraad
+                        ]);
+                    }
+                    
+                    $productData[$productId] = ['aantal' => $quantity];
+                }
+                
+                $behandeling->products()->sync($productData);
+            } else {
+                // Als er geen producten zijn geselecteerd, herstel dan de voorraad van alle huidige producten
+                foreach ($behandeling->products as $product) {
+                    $product->voorraad += $product->pivot->aantal;
+                    $product->save();
+                }
+                $behandeling->products()->detach();
+            }
 
             return redirect()->route('medewerkers.index')->with('success', 'Behandeling succesvol bijgewerkt!');
         } catch (\Exception $e) {
@@ -135,7 +222,7 @@ class MedewerkersController extends Controller
 
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Er is een fout opgetreden bij het bijwerken van de behandeling.');
+                ->with('error', 'Er is een fout opgetreden: ' . $e->getMessage());
         }
     }
 
@@ -160,9 +247,10 @@ class MedewerkersController extends Controller
     public function edit($id)
     {
         try {
-            $behandeling = Behandeling::with('medewerkers')->findOrFail($id);
+            $behandeling = Behandeling::with('medewerkers', 'products')->findOrFail($id);
             $medewerkers = Medewerker::all();
-            return view('medewerkers.edit', compact('behandeling', 'medewerkers'));
+            $producten = Product::all();
+            return view('medewerkers.edit', compact('behandeling', 'medewerkers', 'producten'));
         } catch (\Exception $e) {
             \Log::error('Fout bij ophalen behandeling voor bewerken: ' . $e->getMessage());
             return redirect()->route('medewerkers.index')
