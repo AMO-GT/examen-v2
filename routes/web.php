@@ -6,6 +6,7 @@ use App\Http\Controllers\BeheerdersController;
 use App\Http\Controllers\MedewerkersController;
 use App\Http\Controllers\Auth\KlantAuthController;
 use App\Http\Controllers\ReserveringenController;
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -46,6 +47,10 @@ Route::middleware('auth:klant')->group(function () {
     Route::post('/reserveringen', [ReserveringenController::class, 'store'])->name('reserveringen.store');
     Route::delete('/reserveringen/{id}', [ReserveringenController::class, 'destroy'])->name('reserveringen.destroy');
 });
+
+// API routes voor afspraken maken
+Route::get('/api/available-medewerkers/{dayOfWeek}', [ApiController::class, 'getAvailableMedewerkers']);
+Route::get('/api/available-times/{medewerkerId}/{date}', [ApiController::class, 'getAvailableTimes']);
 
 //<-----------------------------------------Badr------------------------------------------>
 

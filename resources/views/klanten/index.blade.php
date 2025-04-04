@@ -174,8 +174,12 @@
                                             
                                             // Fetch available medewerkers for this day
                                             fetch(`/api/available-medewerkers/${dayOfWeek}`)
-                                                .then(response => response.json())
+                                                .then(response => {
+                                                    console.log('Medewerkers response:', response);
+                                                    return response.json();
+                                                })
                                                 .then(data => {
+                                                    console.log('Medewerkers data:', data);
                                                     // Enable the medewerker select
                                                     medewerkerSelect.disabled = false;
                                                     
@@ -208,8 +212,12 @@
                                             
                                             // Fetch available times for this medewerker on this date
                                             fetch(`/api/available-times/${medewerkerId}/${selectedDate}`)
-                                                .then(response => response.json())
+                                                .then(response => {
+                                                    console.log('Times response:', response);
+                                                    return response.json();
+                                                })
                                                 .then(data => {
+                                                    console.log('Times data:', data);
                                                     // Enable the tijd select
                                                     tijdSelect.disabled = false;
                                                     
