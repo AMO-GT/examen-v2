@@ -43,6 +43,10 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth:klant')->group(function () {
     Route::post('klant/logout', [KlantAuthController::class, 'logout'])->name('klant.logout');
     
+    // Klantgegevens routes
+    Route::get('/klant/edit', [KlantenController::class, 'edit'])->name('klant.edit');
+    Route::put('/klant/update', [KlantenController::class, 'update'])->name('klant.update');
+    
     // Reserveringen routes
     Route::post('/reserveringen', [ReserveringenController::class, 'store'])->name('reserveringen.store');
     Route::delete('/reserveringen/{id}', [ReserveringenController::class, 'destroy'])->name('reserveringen.destroy');

@@ -346,7 +346,7 @@
                             </div>
                             
                             <div class="dashboard-actions">
-                                <a href="#" class="btn btn-primary btn-sm">
+                                <a href="{{ route('klant.edit') }}" class="btn btn-primary btn-sm">
                                     <i class="fas fa-edit"></i> Wijzig gegevens
                                 </a>
                                 
