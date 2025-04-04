@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('prijs', 10, 2);
             $table->text('beschrijving')->nullable();
             $table->unsignedBigInteger('eigenaar_id')->nullable(); // Foreign key
+            $table->string('foto_pad')->nullable(); // Voor het opslaan van het pad naar de foto
             $table->timestamps();
 
             // Foreign key constraint

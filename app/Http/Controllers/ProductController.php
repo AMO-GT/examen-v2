@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -33,13 +34,25 @@ class ProductController extends Controller
             'naam' => 'required|string|max:100',
             'prijs' => 'required|numeric|min:0',
             'beschrijving' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'naam.required' => 'Je moet een productnaam invullen.',
             'naam.max' => 'De productnaam mag niet langer zijn dan 100 tekens.',
             'prijs.required' => 'Je moet een prijs invullen.',
             'prijs.numeric' => 'De prijs moet een getal zijn.',
             'prijs.min' => 'De prijs kan niet negatief zijn.',
+            'foto.image' => 'Het bestand moet een afbeelding zijn.',
+            'foto.mimes' => 'Alleen jpeg, png, jpg en gif bestanden zijn toegestaan.',
+            'foto.max' => 'De afbeelding mag niet groter zijn dan 2MB.',
         ]);
+
+        // Verwerk foto upload indien aanwezig
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $fotoNaam = time() . '.' . $foto->getClientOriginalExtension();
+            $fotoPad = $foto->storeAs('producten', $fotoNaam, 'public');
+            $validatie['foto_pad'] = $fotoPad;
+        }
 
         $product = Product::create($validatie);
 
@@ -74,15 +87,33 @@ class ProductController extends Controller
             'naam' => 'required|string|max:100',
             'prijs' => 'required|numeric|min:0',
             'beschrijving' => 'nullable|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
             'naam.required' => 'Je moet een productnaam invullen.',
             'naam.max' => 'De productnaam mag niet langer zijn dan 100 tekens.',
             'prijs.required' => 'Je moet een prijs invullen.',
             'prijs.numeric' => 'De prijs moet een getal zijn.',
             'prijs.min' => 'De prijs kan niet negatief zijn.',
+            'foto.image' => 'Het bestand moet een afbeelding zijn.',
+            'foto.mimes' => 'Alleen jpeg, png, jpg en gif bestanden zijn toegestaan.',
+            'foto.max' => 'De afbeelding mag niet groter zijn dan 2MB.',
         ]);
 
         $product = Product::findOrFail($id);
+
+        // Verwerk foto upload indien aanwezig
+        if ($request->hasFile('foto')) {
+            // Verwijder oude foto indien aanwezig
+            if ($product->foto_pad) {
+                Storage::disk('public')->delete($product->foto_pad);
+            }
+            
+            $foto = $request->file('foto');
+            $fotoNaam = time() . '.' . $foto->getClientOriginalExtension();
+            $fotoPad = $foto->storeAs('producten', $fotoNaam, 'public');
+            $validatie['foto_pad'] = $fotoPad;
+        }
+
         $product->update($validatie);
 
         return redirect()->route('producten.index')
@@ -95,6 +126,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+        
+        // Verwijder de foto indien aanwezig
+        if ($product->foto_pad) {
+            Storage::disk('public')->delete($product->foto_pad);
+        }
+        
         $product->delete();
 
         return redirect()->route('producten.index')

@@ -18,7 +18,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('producten.update', $product->product_id) }}" method="POST">
+            <form action="{{ route('producten.update', $product->product_id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -38,6 +38,17 @@
                 <div class="mb-3">
                     <label for="beschrijving" class="form-label">Beschrijving</label>
                     <textarea class="form-control" id="beschrijving" name="beschrijving" rows="4">{{ old('beschrijving', $product->beschrijving) }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="foto" class="form-label">Productfoto</label>
+                    @if($product->foto_pad)
+                        <div class="mb-2">
+                            <img src="{{ asset('storage/' . $product->foto_pad) }}" alt="{{ $product->naam }}" style="max-width: 200px; max-height: 200px;" class="img-thumbnail">
+                        </div>
+                    @endif
+                    <input type="file" class="form-control" id="foto" name="foto" accept="image/*">
+                    <div class="form-text">Upload een nieuwe afbeelding om de huidige te vervangen (optioneel)</div>
                 </div>
 
                 <div class="d-flex justify-content-end gap-2">

@@ -14,7 +14,7 @@ class Product extends Model
     // Definieer de tabelnaam expliciet
     protected $table = 'producten';
 
-    protected $fillable = ['naam', 'prijs', 'beschrijving', 'eigenaar_id'];
+    protected $fillable = ['naam', 'prijs', 'beschrijving', 'eigenaar_id', 'foto_pad'];
 
     // 🔁 Relaties
     public function eigenaar()

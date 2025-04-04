@@ -22,6 +22,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Foto</th>
                             <th>Naam</th>
                             <th>Prijs</th>
                             <th>Acties</th>
@@ -31,6 +32,15 @@
                         @forelse($producten as $product)
                             <tr>
                                 <td>{{ $product->product_id }}</td>
+                                <td>
+                                    @if($product->foto_pad)
+                                        <img src="{{ asset('storage/' . $product->foto_pad) }}" alt="{{ $product->naam }}" class="img-thumbnail" style="max-width: 80px; max-height: 80px; width: auto; height: auto;">
+                                    @else
+                                        <div class="text-center text-muted">
+                                            <i class="fas fa-image fa-2x"></i>
+                                        </div>
+                                    @endif
+                                </td>
                                 <td>{{ $product->naam }}</td>
                                 <td>€ {{ number_format($product->prijs, 2, ',', '.') }}</td>
                                 <td>

@@ -46,11 +46,26 @@
                             <h6 class="mb-0">Beschrijving</h6>
                         </div>
                         <div class="card-body">
-                            {{ $product->beschrijving }}
+                            {{ $product->beschrijving ?? 'Geen beschrijving beschikbaar' }}
                         </div>
                     </div>
                 </div>
             </div>
+            
+            @if($product->foto_pad)
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">Productfoto</h6>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="{{ asset('storage/' . $product->foto_pad) }}" alt="{{ $product->naam }}" class="img-fluid" style="max-height: 300px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
 
             <div class="mt-4">
                 <form action="{{ route('producten.destroy', $product->product_id) }}" method="POST" class="d-inline">
