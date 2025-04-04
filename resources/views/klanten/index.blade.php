@@ -1424,12 +1424,12 @@
                 <div class="customer-card card">
                     <div class="card-header">
                         <h5 class="mb-0">Nieuwe Afspraak Maken</h5>
-                        <i class="fas fa-calendar-plus"></i>
+                        <i class="fas fa-cut"></i>
                     </div>
                     <div class="card-body text-center p-4">
                         <p class="mb-4">Klik op onderstaande knop om een nieuwe afspraak te maken bij The Hair Hub.</p>
                         <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#appointmentModal">
-                            <i class="fas fa-calendar-plus me-2"></i>Afspraak Maken
+                            <i class="fas fa-cut me-2"></i>Afspraak Maken
                         </button>
                     </div>
                 </div>
@@ -1440,7 +1440,7 @@
                         <div class="modal-content">
                             <div class="modal-header" style="background: var(--gradient-primary); color: white;">
                                 <h5 class="modal-title" id="appointmentModalLabel">
-                                    <i class="fas fa-calendar-plus me-2"></i>Nieuwe Afspraak Maken
+                                    <i class="fas fa-calendar-plus me-1"></i><i class="fas fa-cut me-2"></i>Nieuwe Afspraak Maken
                                 </h5>
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
