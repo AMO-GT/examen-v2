@@ -513,11 +513,212 @@
             flex: 0 0 calc(50% - 10px);
         }
     }
+
+    /* Styling voor de stappenplan */
+    .appointment-status {
+        margin-bottom: 30px;
+    }
+    
+    .step-indicator {
+        text-align: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 70px;
+    }
+    
+    .step-number {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        color: #666;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        margin-bottom: 5px;
+        transition: all 0.3s ease;
+    }
+    
+    .step-label {
+        font-size: 0.8rem;
+        color: #666;
+        transition: all 0.3s ease;
+    }
+    
+    .step-indicator.active .step-number {
+        background: var(--gradient-primary);
+        color: white;
+        box-shadow: 0 3px 10px rgba(107, 70, 193, 0.3);
+    }
+    
+    .step-indicator.active .step-label {
+        color: var(--primary-purple);
+        font-weight: 600;
+    }
+    
+    .step-indicator.completed .step-number {
+        background: var(--primary-purple);
+        color: white;
+    }
+    
+    .appointment-step {
+        display: none;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .appointment-step.active {
+        display: block;
+    }
+    
+    .afspraak-overzicht {
+        border-left: 3px solid var(--primary-purple);
+    }
+
+    /* Custom Alert Styling */
+    #notifications-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        max-width: 400px;
+        width: 100%;
+    }
+    
+    .custom-alert {
+        margin-bottom: 15px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+    }
+    
+    .custom-alert-content {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+    }
+    
+    .custom-alert-success {
+        background-color: #f0f9eb;
+        border-left: 4px solid #67c23a;
+    }
+    
+    .custom-alert-danger {
+        background-color: #fef0f0;
+        border-left: 4px solid #f56c6c;
+    }
+    
+    .custom-alert-icon {
+        margin-right: 15px;
+        font-size: 24px;
+    }
+    
+    .custom-alert-success .custom-alert-icon {
+        color: #67c23a;
+    }
+    
+    .custom-alert-danger .custom-alert-icon {
+        color: #f56c6c;
+    }
+    
+    .custom-alert-message {
+        flex-grow: 1;
+        font-size: 14px;
+        color: #333;
+    }
+    
+    .custom-alert-close {
+        background: none;
+        border: none;
+        color: #909399;
+        cursor: pointer;
+        font-size: 16px;
+        padding: 0;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+    }
+    
+    .custom-alert-close:hover {
+        opacity: 1;
+    }
+    
+    .custom-alert-progress {
+        height: 3px;
+        background: #ddd;
+        position: relative;
+    }
+    
+    .custom-alert-progress::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        background: linear-gradient(to right, #67c23a, #6B46C1);
+        animation: progress-animation 5s linear forwards;
+    }
+    
+    .custom-alert-danger .custom-alert-progress::before {
+        background: linear-gradient(to right, #f56c6c, #ff9999);
+    }
+    
+    @keyframes progress-animation {
+        from { width: 100%; }
+        to { width: 0%; }
+    }
+    
+    /* Animate.css classes */
+    .animate__animated {
+        animation-duration: 0.5s;
+    }
+    
+    .animate__fadeInDown {
+        animation-name: fadeInDown;
+    }
+    
+    .animate__fadeOutUp {
+        animation-name: fadeOutUp;
+    }
+    
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translate3d(0, -30px, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    @keyframes fadeOutUp {
+        from {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+        to {
+            opacity: 0;
+            transform: translate3d(0, -30px, 0);
+        }
+    }
 </style>
 
 <div class="page-header">
     <div class="container">
-        <h1 class="section-title text-white" style="-webkit-text-fill-color: white;">Klanten Portaal</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="section-title text-white" style="-webkit-text-fill-color: white;">Klanten Portaal</h1>
+            @if($isAuthenticated)
+            <div class="welcome-text text-white">
+                <p class="mb-0"><i class="fas fa-user-circle me-2"></i>Welkom, {{ $klant->naam }}</p>
+            </div>
+            @endif
+        </div>
         <p class="lead">Uw persoonlijke omgeving bij The Hair Hub</p>
     </div>
 </div>
@@ -525,37 +726,135 @@
 <div class="container">
     @if($isAuthenticated)
         <!-- Welkomstbericht voor ingelogde gebruikers -->
-        <div class="welcome-banner">
-            <div class="d-flex align-items-center justify-content-between">
-                <div>
-                    <h3>Welkom, {{ $klant->naam }}!</h3>
-                    <p class="mb-0">U bent succesvol ingelogd als klant. Hier kunt u uw gegevens bekijken en afspraken beheren.</p>
+        <!-- Removing the welcome banner as requested -->
+        
+        <!-- Enhanced Success/Error Messages -->
+        <div id="notifications-container">
+            @if(session('success'))
+                <div class="custom-alert custom-alert-success animate__animated animate__fadeInDown" role="alert">
+                    <div class="custom-alert-content">
+                        <div class="custom-alert-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="custom-alert-message">{{ session('success') }}</div>
+                        <button type="button" class="custom-alert-close" onclick="this.parentElement.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="custom-alert-progress"></div>
                 </div>
-                <div class="d-none d-md-block">
-                    <i class="fas fa-user-circle fa-3x"></i>
+            @endif
+            
+            @if(session('error'))
+                <div class="custom-alert custom-alert-danger animate__animated animate__fadeInDown" role="alert">
+                    <div class="custom-alert-content">
+                        <div class="custom-alert-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="custom-alert-message">{{ session('error') }}</div>
+                        <button type="button" class="custom-alert-close" onclick="this.parentElement.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="custom-alert-progress"></div>
                 </div>
-            </div>
+            @endif
         </div>
         
-        <!-- Success/Error Messages -->
-        @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        
-        @if(session('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        
         <div class="row">
-            <!-- Linker kolom: Klant informatie -->
+            <!-- Linker kolom: Afspraken & Klant informatie -->
             <div class="col-lg-4 mb-4 mb-lg-0">
                 <div class="sticky-sidebar">
+                    <!-- Afspraken Sectie -->
+                    <div class="customer-card card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">Uw Afspraken</h5>
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="card-body">
+                            @if($klant->reserveringen->count() > 0)
+                                <div class="appointments-scroll" style="max-height: 300px; overflow-y: auto;">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead style="position: sticky; top: 0; background: white; z-index: 10;">
+                                                <tr>
+                                                    <th>Datum</th>
+                                                    <th>Tijd</th>
+                                                    <th>Acties</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php
+                                                    // Paginate the appointments
+                                                    $perPage = 5;
+                                                    $currentPage = request()->get('page', 1);
+                                                    $offset = ($currentPage - 1) * $perPage;
+                                                    $reserveringenPaginated = $klant->reserveringen->sortByDesc('datum')->slice($offset, $perPage);
+                                                    $totalPages = ceil($klant->reserveringen->count() / $perPage);
+                                                @endphp
+                                                
+                                                @foreach($reserveringenPaginated as $reservering)
+                                                    <tr>
+                                                        <td>{{ date('d-m-Y', strtotime($reservering->datum)) }}</td>
+                                                        <td>{{ date('H:00', strtotime($reservering->tijd)) }}</td>
+                                                        <td>
+                                                            <div class="d-flex gap-2">
+                                                                <form action="{{ route('reserveringen.destroy', $reservering->reservering_id) }}" method="POST" class="d-inline">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Weet u zeker dat u deze afspraak wilt annuleren?')">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                                <a href="{{ route('reserveringen.edit', $reservering->reservering_id) }}" class="btn btn-sm btn-primary">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <!-- Pagination controls -->
+                                @if($totalPages > 1)
+                                <div class="mt-3 d-flex justify-content-center">
+                                    <nav aria-label="Afspraken paginering">
+                                        <ul class="pagination pagination-sm">
+                                            <li class="page-item {{ $currentPage == 1 ? 'disabled' : '' }}">
+                                                <a class="page-link" href="?page={{ $currentPage - 1 }}" aria-label="Vorige">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            
+                                            @for($i = 1; $i <= $totalPages; $i++)
+                                                <li class="page-item {{ $currentPage == $i ? 'active' : '' }}">
+                                                    <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
+                                                </li>
+                                            @endfor
+                                            
+                                            <li class="page-item {{ $currentPage == $totalPages ? 'disabled' : '' }}">
+                                                <a class="page-link" href="?page={{ $currentPage + 1 }}" aria-label="Volgende">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                @endif
+                            @else
+                                <div class="alert alert-info">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-info-circle fa-2x me-3"></i>
+                                        <p class="mb-0">U heeft nog geen afspraken gepland.</p>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    
                     <!-- Klant informatie -->
                     <div class="customer-card card">
                         <div class="card-header">
@@ -620,81 +919,50 @@
                 </div>
             </div>
             
-            <!-- Rechter kolom: Afspraken -->
+            <!-- Rechter kolom: Afspraak maken -->
             <div class="col-lg-8">
-                <!-- Afspraken Sectie -->
+                <!-- Afspraak maken Sectie -->
                 <div class="customer-card card">
                     <div class="card-header">
-                        <h5 class="mb-0">Uw Afspraken</h5>
-                        <i class="fas fa-calendar-alt"></i>
+                        <h5 class="mb-0">Nieuwe Afspraak Maken</h5>
+                        <i class="fas fa-calendar-plus"></i>
                     </div>
                     <div class="card-body">
-                        @if($klant->reserveringen->count() > 0)
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Datum</th>
-                                            <th>Tijd</th>
-                                            <th>Medewerker</th>
-                                            <th>Behandelingen</th>
-                                            <th>Acties</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($klant->reserveringen as $reservering)
-                                            <tr>
-                                                <td>{{ date('d-m-Y', strtotime($reservering->datum)) }}</td>
-                                                <td>{{ date('H:00', strtotime($reservering->tijd)) }}</td>
-                                                <td>{{ $reservering->medewerker->naam }}</td>
-                                                <td>
-                                                    @foreach($reservering->behandelingen as $behandeling)
-                                                        <span class="badge bg-primary">{{ $behandeling->naam }}</span>
-                                                    @endforeach
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex gap-2">
-                                                        <form action="{{ route('reserveringen.destroy', $reservering->reservering_id) }}" method="POST" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Weet u zeker dat u deze afspraak wilt annuleren?')">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                        <a href="{{ route('reserveringen.edit', $reservering->reservering_id) }}" class="btn btn-sm btn-primary">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        @else
-                            <div class="alert alert-info">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-info-circle fa-2x me-3"></i>
-                                    <p class="mb-0">U heeft nog geen afspraken gepland. Maak hieronder uw eerste afspraak!</p>
+                        <div class="appointment-form">
+                            <!-- Status bar voor afspraak maken -->
+                            <div class="appointment-status mb-4">
+                                <div class="progress" style="height: 8px; background-color: #f0f0f0;">
+                                    <div class="progress-bar" role="progressbar" style="width: 0%; background: var(--gradient-primary);" id="appointment-progress"></div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <div class="step-indicator active" id="step1-indicator">
+                                        <div class="step-number">1</div>
+                                        <div class="step-label">Datum</div>
+                                    </div>
+                                    <div class="step-indicator" id="step2-indicator">
+                                        <div class="step-number">2</div>
+                                        <div class="step-label">Medewerker</div>
+                                    </div>
+                                    <div class="step-indicator" id="step3-indicator">
+                                        <div class="step-number">3</div>
+                                        <div class="step-label">Tijd</div>
+                                    </div>
+                                    <div class="step-indicator" id="step4-indicator">
+                                        <div class="step-number">4</div>
+                                        <div class="step-label">Behandelingen</div>
+                                    </div>
                                 </div>
                             </div>
-                        @endif
-                        
-                        <div class="appointment-form">
-                            <h4 class="mb-4" style="color: var(--primary-purple);">
-                                <i class="fas fa-calendar-plus me-2"></i>
-                                Nieuwe Afspraak Maken
-                            </h4>
+                            
                             <form action="{{ route('reserveringen.store') }}" method="POST" id="afspraakForm">
                                 @csrf
                                 <input type="hidden" name="klant_id" value="{{ $klant->klant_id }}">
                                 <input type="hidden" name="datum" id="hidden_datum">
                                 
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="datumDisplay" class="form-label">
-                                            <i class="fas fa-calendar me-2 text-primary"></i>Datum
-                                        </label>
+                                <div class="appointment-steps">
+                                    <!-- Stap 1: Datum -->
+                                    <div class="appointment-step active" id="step1">
+                                        <h5 class="mb-3">Stap 1: Kies een datum</h5>
                                         <div class="custom-datepicker">
                                             <div class="date-picker-box">
                                                 <div class="date-picker-header">
@@ -726,12 +994,17 @@
                                         @error('datum')
                                             <div class="text-danger mt-2">{{ $message }}</div>
                                         @enderror
+                                        
+                                        <div class="mt-3 text-end">
+                                            <button type="button" class="btn btn-primary" id="nextToStep2">
+                                                Volgende <i class="fas fa-arrow-right ms-1"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">
-                                            <i class="fas fa-user-md me-2 text-primary"></i>Medewerker
-                                        </label>
+                                    
+                                    <!-- Stap 2: Medewerker -->
+                                    <div class="appointment-step" id="step2" style="display: none;">
+                                        <h5 class="mb-3">Stap 2: Kies een medewerker</h5>
                                         <div id="medewerkerContainer">
                                             <div class="alert alert-info">
                                                 <i class="fas fa-info-circle me-2"></i>
@@ -742,44 +1015,81 @@
                                         @error('medewerker_id')
                                             <div class="text-danger mt-2">{{ $message }}</div>
                                         @enderror
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label class="form-label">
-                                        <i class="fas fa-clock me-2 text-primary"></i>Tijd
-                                    </label>
-                                    <div id="tijdContainer">
-                                        <div class="alert alert-info">
-                                            <i class="fas fa-info-circle me-2"></i>
-                                            Selecteer eerst een medewerker
+                                        
+                                        <div class="mt-3 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-outline-secondary" id="backToStep1">
+                                                <i class="fas fa-arrow-left me-1"></i> Terug
+                                            </button>
+                                            <button type="button" class="btn btn-primary" id="nextToStep3">
+                                                Volgende <i class="fas fa-arrow-right ms-1"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="tijd" id="tijd" required>
-                                    @error('tijd')
-                                        <div class="text-danger mt-2">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                
-                                <div class="mb-4">
-                                    <label for="behandelingen" class="form-label">
-                                        <i class="fas fa-cut me-2 text-primary"></i>Behandelingen
-                                    </label>
-                                    <div id="behandelingenContainer" class="card p-3 bg-white border-0 shadow-sm">
-                                        <div class="alert alert-info">
-                                            <i class="fas fa-info-circle me-2"></i>
-                                            Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                                    
+                                    <!-- Stap 3: Tijd -->
+                                    <div class="appointment-step" id="step3" style="display: none;">
+                                        <h5 class="mb-3">Stap 3: Kies een tijd</h5>
+                                        <div id="tijdContainer">
+                                            <div class="alert alert-info">
+                                                <i class="fas fa-info-circle me-2"></i>
+                                                Selecteer eerst een medewerker
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="tijd" id="tijd" required>
+                                        @error('tijd')
+                                            <div class="text-danger mt-2">{{ $message }}</div>
+                                        @enderror
+                                        
+                                        <div class="mt-3 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-outline-secondary" id="backToStep2">
+                                                <i class="fas fa-arrow-left me-1"></i> Terug
+                                            </button>
+                                            <button type="button" class="btn btn-primary" id="nextToStep4">
+                                                Volgende <i class="fas fa-arrow-right ms-1"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                    @error('behandelingen')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                
-                                <div class="text-end">
-                                    <button type="submit" class="btn btn-success" id="submitButton">
-                                        <i class="fas fa-check me-2"></i>Afspraak Maken
-                                    </button>
+                                    
+                                    <!-- Stap 4: Behandelingen -->
+                                    <div class="appointment-step" id="step4" style="display: none;">
+                                        <h5 class="mb-3">Stap 4: Kies behandelingen</h5>
+                                        <div id="behandelingenContainer" class="card p-3 bg-white border-0 shadow-sm">
+                                            <div class="alert alert-info">
+                                                <i class="fas fa-info-circle me-2"></i>
+                                                Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                                            </div>
+                                        </div>
+                                        @error('behandelingen')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                        
+                                        <div class="afspraak-overzicht mt-4 mb-4 p-3 bg-light rounded">
+                                            <h6 class="mb-3"><i class="fas fa-clipboard-check me-2"></i> Uw afspraak overzicht</h6>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <p class="mb-1"><strong>Datum:</strong></p>
+                                                    <p id="overview-datum">Nog niet geselecteerd</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="mb-1"><strong>Tijd:</strong></p>
+                                                    <p id="overview-tijd">Nog niet geselecteerd</p>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <p class="mb-1"><strong>Medewerker:</strong></p>
+                                                    <p id="overview-medewerker">Nog niet geselecteerd</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-3 d-flex justify-content-between">
+                                            <button type="button" class="btn btn-outline-secondary" id="backToStep3">
+                                                <i class="fas fa-arrow-left me-1"></i> Terug
+                                            </button>
+                                            <button type="submit" class="btn btn-success" id="submitButton">
+                                                <i class="fas fa-check me-2"></i>Afspraak Bevestigen
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -799,6 +1109,155 @@
                             const tijdContainer = document.getElementById('tijdContainer');
                             const behandelingenContainer = document.getElementById('behandelingenContainer');
                             const submitButton = document.getElementById('submitButton');
+                            
+                            // Navigatie tussen stappen
+                            const step1 = document.getElementById('step1');
+                            const step2 = document.getElementById('step2');
+                            const step3 = document.getElementById('step3');
+                            const step4 = document.getElementById('step4');
+                            
+                            const step1Indicator = document.getElementById('step1-indicator');
+                            const step2Indicator = document.getElementById('step2-indicator');
+                            const step3Indicator = document.getElementById('step3-indicator');
+                            const step4Indicator = document.getElementById('step4-indicator');
+                            
+                            const progressBar = document.getElementById('appointment-progress');
+                            
+                            const nextToStep2Btn = document.getElementById('nextToStep2');
+                            const backToStep1Btn = document.getElementById('backToStep1');
+                            const nextToStep3Btn = document.getElementById('nextToStep3');
+                            const backToStep2Btn = document.getElementById('backToStep2');
+                            const nextToStep4Btn = document.getElementById('nextToStep4');
+                            const backToStep3Btn = document.getElementById('backToStep3');
+                            
+                            const overviewDatum = document.getElementById('overview-datum');
+                            const overviewTijd = document.getElementById('overview-tijd');
+                            const overviewMedewerker = document.getElementById('overview-medewerker');
+                            
+                            // Navigatie handlers
+                            nextToStep2Btn.addEventListener('click', function() {
+                                if (!hiddenDatumInput.value) {
+                                    datumDisplay.innerHTML = `
+                                        <div class="text-danger">
+                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                            Selecteer een datum
+                                        </div>
+                                    `;
+                                    return;
+                                }
+                                
+                                step1.classList.remove('active');
+                                step2.classList.add('active');
+                                step1.style.display = 'none';
+                                step2.style.display = 'block';
+                                
+                                step1Indicator.classList.add('completed');
+                                step2Indicator.classList.add('active');
+                                
+                                progressBar.style.width = '33%';
+                            });
+                            
+                            backToStep1Btn.addEventListener('click', function() {
+                                step2.classList.remove('active');
+                                step1.classList.add('active');
+                                step2.style.display = 'none';
+                                step1.style.display = 'block';
+                                
+                                step2Indicator.classList.remove('active');
+                                step1Indicator.classList.remove('completed');
+                                step1Indicator.classList.add('active');
+                                
+                                progressBar.style.width = '0%';
+                            });
+                            
+                            nextToStep3Btn.addEventListener('click', function() {
+                                if (!medewerkerIdInput.value) {
+                                    medewerkerContainer.innerHTML += `
+                                        <div class="alert alert-danger mt-3">
+                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                            Selecteer een medewerker
+                                        </div>
+                                    `;
+                                    return;
+                                }
+                                
+                                step2.classList.remove('active');
+                                step3.classList.add('active');
+                                step2.style.display = 'none';
+                                step3.style.display = 'block';
+                                
+                                step2Indicator.classList.add('completed');
+                                step2Indicator.classList.remove('active');
+                                step3Indicator.classList.add('active');
+                                
+                                progressBar.style.width = '66%';
+                            });
+                            
+                            backToStep2Btn.addEventListener('click', function() {
+                                step3.classList.remove('active');
+                                step2.classList.add('active');
+                                step3.style.display = 'none';
+                                step2.style.display = 'block';
+                                
+                                step3Indicator.classList.remove('active');
+                                step2Indicator.classList.remove('completed');
+                                step2Indicator.classList.add('active');
+                                
+                                progressBar.style.width = '33%';
+                            });
+                            
+                            nextToStep4Btn.addEventListener('click', function() {
+                                if (!tijdInput.value) {
+                                    tijdContainer.innerHTML += `
+                                        <div class="alert alert-danger mt-3">
+                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                            Selecteer een tijd
+                                        </div>
+                                    `;
+                                    return;
+                                }
+                                
+                                step3.classList.remove('active');
+                                step4.classList.add('active');
+                                step3.style.display = 'none';
+                                step4.style.display = 'block';
+                                
+                                step3Indicator.classList.add('completed');
+                                step3Indicator.classList.remove('active');
+                                step4Indicator.classList.add('active');
+                                
+                                progressBar.style.width = '100%';
+                                
+                                // Update afspraak overzicht
+                                const selectedMedewerkerCard = document.querySelector('.medewerker-card.selected');
+                                if (selectedMedewerkerCard) {
+                                    const medewerkerNaam = selectedMedewerkerCard.querySelector('.medewerker-info h5').textContent;
+                                    overviewMedewerker.textContent = medewerkerNaam;
+                                }
+                                
+                                const selectedTimeCard = document.querySelector('.tijd-card.selected');
+                                if (selectedTimeCard) {
+                                    const tijdTekst = selectedTimeCard.querySelector('.tijd').textContent;
+                                    overviewTijd.textContent = tijdTekst;
+                                }
+                                
+                                if (hiddenDatumInput.value) {
+                                    overviewDatum.textContent = formateerDatum(hiddenDatumInput.value);
+                                }
+                            });
+                            
+                            backToStep3Btn.addEventListener('click', function() {
+                                step4.classList.remove('active');
+                                step3.classList.add('active');
+                                step4.style.display = 'none';
+                                step3.style.display = 'block';
+                                
+                                step4Indicator.classList.remove('active');
+                                step3Indicator.classList.remove('completed');
+                                step3Indicator.classList.add('active');
+                                
+                                progressBar.style.width = '66%';
+                            });
                             
                             let currentDate = new Date();
                             let selectedDate = null;
@@ -1218,42 +1677,6 @@
                             
                             // Validatie bij verzenden
                             document.getElementById('afspraakForm').addEventListener('submit', function(e) {
-                                // Controleer of er een datum is geselecteerd
-                                if (!hiddenDatumInput.value) {
-                                    e.preventDefault();
-                                    datumDisplay.innerHTML = `
-                                        <div class="text-danger">
-                                            <i class="fas fa-exclamation-circle me-2"></i>
-                                            Selecteer een datum
-                                        </div>
-                                    `;
-                                    return;
-                                }
-                                
-                                // Controleer of er een medewerker is geselecteerd
-                                if (!medewerkerIdInput.value) {
-                                    e.preventDefault();
-                                    medewerkerContainer.innerHTML += `
-                                        <div class="alert alert-danger mt-3">
-                                            <i class="fas fa-exclamation-circle me-2"></i>
-                                            Selecteer een medewerker
-                                        </div>
-                                    `;
-                                    return;
-                                }
-                                
-                                // Controleer of er een tijd is geselecteerd
-                                if (!tijdInput.value) {
-                                    e.preventDefault();
-                                    tijdContainer.innerHTML += `
-                                        <div class="alert alert-danger mt-3">
-                                            <i class="fas fa-exclamation-circle me-2"></i>
-                                            Selecteer een tijd
-                                        </div>
-                                    `;
-                                    return;
-                                }
-                                
                                 // Controleer of er behandelingen zijn geselecteerd
                                 const behandelingen = document.querySelectorAll('input[name="behandelingen[]"]:checked');
                                 if (behandelingen.length === 0) {
@@ -1385,6 +1808,24 @@
         </div>
     @endif
 </div>
+
+<script>
+    // Auto-dismiss alerts after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+        const alerts = document.querySelectorAll('.custom-alert');
+        
+        alerts.forEach(function(alert) {
+            setTimeout(function() {
+                alert.classList.remove('animate__fadeInDown');
+                alert.classList.add('animate__fadeOutUp');
+                
+                setTimeout(function() {
+                    alert.remove();
+                }, 500);
+            }, 5000);
+        });
+    });
+</script>
 @endsection
 
 
