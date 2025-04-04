@@ -297,6 +297,20 @@
                     <i class="far fa-clock"></i> Tijdsblokken
                 </a>
             </li>
+            <!-- Rapportage menu items -->
+            <li class="sidebar-menu-item">
+                <a href="#rapportageMenu" class="sidebar-menu-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" aria-expanded="false">
+                    <span><i class="fas fa-chart-bar"></i> Rapportages</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="collapse list-unstyled ms-4" id="rapportageMenu">
+                    <li class="sidebar-menu-item">
+                        <a href="{{ route('rapportage.uren-overzicht') }}" class="sidebar-menu-link {{ request()->routeIs('rapportage.uren-overzicht') ? 'active' : '' }}">
+                            <i class="fas fa-clock"></i> Uren Overzicht
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
         
         <!-- User profiel -->
