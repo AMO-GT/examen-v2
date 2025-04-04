@@ -86,6 +86,140 @@
                 background: var(--light-bg);
                 color: var(--primary-purple);
             }
+
+            /* Footer styles */
+            .footer {
+                background-color: #2D3748;
+                color: #f8f9fa;
+                font-size: 0.95rem;
+            }
+
+            .footer-title {
+                font-weight: 600;
+                color: white;
+                position: relative;
+                padding-bottom: 0.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-title::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 40px;
+                height: 3px;
+                background: var(--gradient-primary);
+            }
+
+            .footer-description {
+                color: #cbd5e0;
+                line-height: 1.6;
+            }
+
+            .social-icons {
+                display: flex;
+                gap: 12px;
+            }
+
+            .social-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                transition: all 0.3s ease;
+            }
+
+            .social-icon:hover {
+                background: var(--gradient-primary);
+                transform: translateY(-3px);
+                color: white;
+            }
+
+            .footer-hours, .footer-contact {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .footer-hours li, .footer-contact li {
+                padding: 0.4rem 0;
+                color: #cbd5e0;
+            }
+
+            .footer-hours span {
+                font-weight: 600;
+                color: white;
+                display: inline-block;
+                width: 100px;
+            }
+
+            .footer-contact li {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .footer-contact li i {
+                color: var(--accent-color);
+                font-size: 1rem;
+            }
+
+            .btn-outline-light {
+                border-color: var(--accent-color);
+                color: white;
+            }
+
+            .btn-outline-light:hover {
+                background: var(--gradient-primary);
+                border-color: transparent;
+            }
+
+            .footer-divider {
+                height: 1px;
+                background-color: rgba(255, 255, 255, 0.1);
+                margin: 2rem 0 1.5rem;
+            }
+
+            .copyright {
+                color: #a0aec0;
+                font-size: 0.9rem;
+            }
+
+            .footer-links {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                justify-content: flex-end;
+                gap: 20px;
+            }
+
+            .footer-links li a {
+                color: #a0aec0;
+                text-decoration: none;
+                transition: color 0.3s ease;
+                font-size: 0.9rem;
+            }
+
+            .footer-links li a:hover {
+                color: white;
+            }
+
+            @media (max-width: 767px) {
+                .footer-links, .copyright {
+                    text-align: center;
+                }
+                
+                .footer-links {
+                    justify-content: center;
+                    margin-top: 1rem;
+                }
+            }
         </style>
 
         <!-- Scripts -->
@@ -147,6 +281,58 @@
         <main class="container py-4">
             @yield('content')
         </main>
+
+        <!-- Footer -->
+        <footer class="footer mt-5 pt-5 pb-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <h5 class="footer-title">The Hair Hub</h5>
+                        <p class="footer-description">Uw vertrouwde kapsalon voor een frisse look en professionele haarverzorging. Wij staan klaar om u de beste service te bieden.</p>
+                        <div class="social-icons mt-3">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <h5 class="footer-title">Openingstijden</h5>
+                        <ul class="footer-hours">
+                            <li><span>Maandag:</span> 09:00 - 17:00</li>
+                            <li><span>Dinsdag:</span> 09:00 - 17:00</li>
+                            <li><span>Woensdag:</span> 09:00 - 17:00</li>
+                            <li><span>Donderdag:</span> 09:00 - 20:00</li>
+                            <li><span>Vrijdag:</span> 09:00 - 17:00</li>
+                            <li><span>Zaterdag:</span> 10:00 - 18:00</li>
+                            <li><span>Zondag:</span> 12:00 - 16:00</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <h5 class="footer-title">Contact</h5>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-map-marker-alt"></i> Kapsalonstraat 123, 1234 AB Amsterdam</li>
+                            <li><i class="fas fa-phone"></i> 020 - 123 45 67</li>
+                            <li><i class="fas fa-envelope"></i> info@thehairhub.nl</li>
+                        </ul>
+                        <div class="mt-3">
+                            <a href="#" class="btn btn-outline-light btn-sm">Contact opnemen</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-divider"></div>
+                <div class="row">
+                    <div class="col-md-6 copyright">
+                        <p>&copy; {{ date('Y') }} The Hair Hub. Alle rechten voorbehouden.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <ul class="footer-links">
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Algemene Voorwaarden</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <!-- Bootstrap JS and dependencies -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
