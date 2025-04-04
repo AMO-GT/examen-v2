@@ -255,6 +255,264 @@
             position: static;
         }
     }
+
+    .behandeling-card {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .behandeling-card:hover {
+        border-color: var(--primary-purple);
+        background-color: rgba(107, 70, 193, 0.05);
+    }
+    
+    .behandeling-card.selected {
+        border-color: var(--primary-purple);
+        background-color: rgba(107, 70, 193, 0.1);
+    }
+    
+    .behandeling-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .form-select, .form-control {
+        box-shadow: none;
+        transition: all 0.2s ease;
+    }
+    
+    .form-select:focus, .form-control:focus {
+        border-color: var(--primary-purple);
+        box-shadow: 0 0 0 0.25rem rgba(107, 70, 193, 0.25);
+    }
+    
+    /* Maak formuliervelden groter en beter leesbaar op mobiel */
+    @media (max-width: 768px) {
+        .form-select, .form-control {
+            font-size: 16px;
+            padding: 12px;
+        }
+    }
+    
+    /* Styling voor de custom datepicker */
+    .custom-datepicker {
+        position: relative;
+    }
+    
+    .date-picker-box {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        background-color: white;
+        transition: all 0.3s ease;
+    }
+    
+    .date-picker-header {
+        background: var(--gradient-primary);
+        color: white;
+        padding: 12px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .date-picker-header h5 {
+        margin: 0;
+        font-weight: 600;
+    }
+    
+    .date-picker-body {
+        padding: 15px;
+    }
+    
+    .date-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+        margin-top: 10px;
+    }
+    
+    .day-name {
+        text-align: center;
+        font-weight: 600;
+        color: var(--text-color);
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+    
+    .date-btn {
+        width: 100%;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: none;
+        background: none;
+        font-weight: 500;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .date-btn:hover:not(:disabled) {
+        background-color: rgba(107, 70, 193, 0.1);
+    }
+    
+    .date-btn.active {
+        background: var(--gradient-primary);
+        color: white;
+    }
+    
+    .date-btn:disabled {
+        color: #ccc;
+        cursor: not-allowed;
+    }
+    
+    .date-display {
+        padding: 10px 15px;
+        font-weight: 500;
+        text-align: center;
+        color: var(--primary-purple);
+    }
+    
+    .month-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    .month-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+    
+    .month-btn:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .current-month {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    /* Styling voor medewerker kaarten */
+    .medewerker-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+        margin-top: 10px;
+    }
+    
+    .medewerker-card {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        background-color: white;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+        height: 100%;
+    }
+    
+    .medewerker-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .medewerker-card.selected {
+        border-color: var(--primary-purple);
+    }
+    
+    .medewerker-img {
+        height: 120px;
+        background: var(--gradient-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .medewerker-img i {
+        font-size: 3rem;
+        color: white;
+        opacity: 0.8;
+    }
+    
+    .medewerker-info {
+        padding: 15px;
+        text-align: center;
+    }
+    
+    .medewerker-info h5 {
+        margin: 0;
+        color: var(--primary-purple);
+        font-weight: 600;
+    }
+    
+    /* Styling voor tijd kaarten */
+    .tijd-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .tijd-card {
+        flex: 0 0 calc(25% - 10px);
+        min-width: 100px;
+        border-radius: 10px;
+        padding: 15px 10px;
+        background-color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+        border: 2px solid transparent;
+    }
+    
+    .tijd-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .tijd-card.selected {
+        background: var(--gradient-primary);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(107, 70, 193, 0.3);
+    }
+    
+    .tijd-card .tijd {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+        .tijd-card {
+            flex: 0 0 calc(33.333% - 10px);
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .tijd-card {
+            flex: 0 0 calc(50% - 10px);
+        }
+    }
 </style>
 
 <div class="page-header">
@@ -430,42 +688,76 @@
                             <form action="{{ route('reserveringen.store') }}" method="POST" id="afspraakForm">
                                 @csrf
                                 <input type="hidden" name="klant_id" value="{{ $klant->klant_id }}">
+                                <input type="hidden" name="datum" id="hidden_datum">
                                 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="datum" class="form-label">
+                                        <label for="datumDisplay" class="form-label">
                                             <i class="fas fa-calendar me-2 text-primary"></i>Datum
                                         </label>
-                                        <input type="date" class="form-control @error('datum') is-invalid @enderror" id="datum" name="datum" required min="{{ date('Y-m-d') }}">
+                                        <div class="custom-datepicker">
+                                            <div class="date-picker-box">
+                                                <div class="date-picker-header">
+                                                    <div class="month-navigation">
+                                                        <button type="button" class="month-btn" id="prevMonth">
+                                                            <i class="fas fa-chevron-left"></i>
+                                                        </button>
+                                                        <div class="current-month" id="currentMonth"></div>
+                                                        <button type="button" class="month-btn" id="nextMonth">
+                                                            <i class="fas fa-chevron-right"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="date-picker-body">
+                                                    <div class="date-grid" id="daysOfWeek">
+                                                        <div class="day-name">Ma</div>
+                                                        <div class="day-name">Di</div>
+                                                        <div class="day-name">Wo</div>
+                                                        <div class="day-name">Do</div>
+                                                        <div class="day-name">Vr</div>
+                                                        <div class="day-name">Za</div>
+                                                        <div class="day-name">Zo</div>
+                                                    </div>
+                                                    <div class="date-grid" id="dateGrid"></div>
+                                                    <div class="date-display mt-2" id="datumDisplay">Selecteer een datum</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         @error('datum')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="text-danger mt-2">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 
                                     <div class="col-md-6 mb-3">
-                                        <label for="medewerker_id" class="form-label">
+                                        <label class="form-label">
                                             <i class="fas fa-user-md me-2 text-primary"></i>Medewerker
                                         </label>
-                                        <select class="form-select @error('medewerker_id') is-invalid @enderror" id="medewerker_id" name="medewerker_id" required disabled>
-                                            <option value="">Selecteer eerst een datum</option>
-                                        </select>
-                                        <small class="form-text text-muted">De beschikbare medewerkers zijn afhankelijk van de gekozen dag.</small>
+                                        <div id="medewerkerContainer">
+                                            <div class="alert alert-info">
+                                                <i class="fas fa-info-circle me-2"></i>
+                                                Selecteer eerst een datum
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="medewerker_id" id="medewerker_id" required>
                                         @error('medewerker_id')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="text-danger mt-2">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="tijd" class="form-label">
+                                    <label class="form-label">
                                         <i class="fas fa-clock me-2 text-primary"></i>Tijd
                                     </label>
-                                    <select class="form-select @error('tijd') is-invalid @enderror" id="tijd" name="tijd" required disabled>
-                                        <option value="">Selecteer eerst een medewerker</option>
-                                    </select>
-                                    <small class="form-text text-muted">Afspraken zijn per uur beschikbaar.</small>
+                                    <div id="tijdContainer">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            Selecteer eerst een medewerker
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="tijd" id="tijd" required>
                                     @error('tijd')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="text-danger mt-2">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 
@@ -485,7 +777,7 @@
                                 </div>
                                 
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-success">
+                                    <button type="submit" class="btn btn-success" id="submitButton">
                                         <i class="fas fa-check me-2"></i>Afspraak Maken
                                     </button>
                                 </div>
@@ -495,157 +787,484 @@
                         <!-- Javascript voor dynamische medewerkers en tijden -->
                         <script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            const datumInput = document.getElementById('datum');
-                            const medewerkerSelect = document.getElementById('medewerker_id');
-                            const tijdSelect = document.getElementById('tijd');
+                            const hiddenDatumInput = document.getElementById('hidden_datum');
+                            const datumDisplay = document.getElementById('datumDisplay');
+                            const dateGrid = document.getElementById('dateGrid');
+                            const currentMonthElement = document.getElementById('currentMonth');
+                            const prevMonthBtn = document.getElementById('prevMonth');
+                            const nextMonthBtn = document.getElementById('nextMonth');
+                            const medewerkerIdInput = document.getElementById('medewerker_id');
+                            const medewerkerContainer = document.getElementById('medewerkerContainer');
+                            const tijdInput = document.getElementById('tijd');
+                            const tijdContainer = document.getElementById('tijdContainer');
                             const behandelingenContainer = document.getElementById('behandelingenContainer');
+                            const submitButton = document.getElementById('submitButton');
                             
-                            // Wanneer de datum verandert
-                            datumInput.addEventListener('change', function() {
-                                // Reset de medewerker en tijd selects
-                                medewerkerSelect.innerHTML = '<option value="">Selecteer een medewerker</option>';
-                                tijdSelect.innerHTML = '<option value="">Selecteer eerst een medewerker</option>';
-                                tijdSelect.disabled = true;
+                            let currentDate = new Date();
+                            let selectedDate = null;
+                            
+                            // Hulpfunctie voor het formatteren van datums
+                            function formateerDatum(datumString) {
+                                const maanden = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+                                const dagen = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
                                 
-                                // Reset behandelingen container
-                                behandelingenContainer.innerHTML = `
+                                // Let op: datumString is in formaat YYYY-MM-DD (ISO-formaat)
+                                // Maak een nieuwe date-object van de string en corrigeer voor tijdzone-issues
+                                const datum = new Date(datumString + 'T00:00:00');
+                                
+                                // Zorg dat we de correcte dag krijgen, ongeacht de tijdzone
+                                const dateParts = datumString.split('-');
+                                const year = parseInt(dateParts[0]);
+                                const month = parseInt(dateParts[1]) - 1; // Maanden zijn 0-gebaseerd in JavaScript
+                                const day = parseInt(dateParts[2]);
+                                
+                                // Gebruik de lokale tijd voor weergave
+                                return `${dagen[datum.getDay()]} ${day} ${maanden[month]} ${year}`;
+                            }
+                            
+                            // Functie om de kalender te renderen
+                            function renderCalendar(year, month) {
+                                dateGrid.innerHTML = '';
+                                
+                                // Stel de huidige maand in
+                                currentMonthElement.textContent = new Date(year, month, 1).toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' });
+                                
+                                // Bereken de eerste dag van de maand
+                                const firstDay = new Date(year, month, 1).getDay();
+                                // In JavaScript is zondag 0, maar we willen maandag als eerste dag (1)
+                                const firstDayOfGrid = firstDay === 0 ? 6 : firstDay - 1;
+                                
+                                // Bereken het aantal dagen in de huidige maand
+                                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                                
+                                // Voeg lege cellen toe voor dagen vóór de eerste dag van de maand
+                                for (let i = 0; i < firstDayOfGrid; i++) {
+                                    const emptyCell = document.createElement('div');
+                                    dateGrid.appendChild(emptyCell);
+                                }
+                                
+                                // Voeg knoppen toe voor elke dag van de maand
+                                const today = new Date();
+                                today.setHours(0, 0, 0, 0);
+                                
+                                for (let day = 1; day <= daysInMonth; day++) {
+                                    const date = new Date(year, month, day);
+                                    const btn = document.createElement('button');
+                                    btn.type = 'button';
+                                    btn.className = 'date-btn';
+                                    btn.textContent = day;
+                                    
+                                    // Markeer geselecteerde datum
+                                    if (selectedDate && date.getTime() === selectedDate.getTime()) {
+                                        btn.classList.add('active');
+                                    }
+                                    
+                                    // Schakel datums in het verleden uit
+                                    if (date < today) {
+                                        btn.disabled = true;
+                                    } else {
+                                        btn.addEventListener('click', function() {
+                                            // Verwijder de actieve klasse van alle datumknoppen
+                                            document.querySelectorAll('.date-btn').forEach(btn => {
+                                                btn.classList.remove('active');
+                                            });
+                                            
+                                            // Voeg de actieve klasse toe aan de geselecteerde knop
+                                            this.classList.add('active');
+                                            
+                                            // Sla de geselecteerde datum op
+                                            selectedDate = new Date(year, month, day);
+                                            
+                                            // Formatteer de datum in ISO-formaat (YYYY-MM-DD)
+                                            // Zorg dat de juiste dag wordt opgeslagen, ook voor de 31e van een maand
+                                            const formattedYear = selectedDate.getFullYear();
+                                            const formattedMonth = String(selectedDate.getMonth() + 1).padStart(2, '0');
+                                            const formattedDay = String(selectedDate.getDate()).padStart(2, '0');
+                                            const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
+                                            
+                                            hiddenDatumInput.value = formattedDate;
+                                            
+                                            // Update de datumweergave
+                                            datumDisplay.textContent = formateerDatum(formattedDate);
+                                            datumDisplay.style.fontWeight = 'bold';
+                                            
+                                            // Reset medewerker en tijd
+                                            medewerkerIdInput.value = '';
+                                            tijdInput.value = '';
+                                            
+                                            // Reset medewerker en tijd containers
+                                            tijdContainer.innerHTML = `
+                                                <div class="alert alert-info">
+                                                    <i class="fas fa-info-circle me-2"></i>
+                                                    Selecteer eerst een medewerker
+                                                </div>
+                                            `;
+                                            
+                                            // Reset behandelingen container
+                                            behandelingenContainer.innerHTML = `
+                                                <div class="alert alert-info">
+                                                    <i class="fas fa-info-circle me-2"></i>
+                                                    Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                                                </div>
+                                            `;
+                                            
+                                            // Get the day of week (0 = Sunday, 1 = Monday, etc.)
+                                            const dayOfWeek = selectedDate.getDay();
+                                            
+                                            // Toon laad indicator
+                                            medewerkerContainer.innerHTML = `
+                                                <div class="alert alert-info">
+                                                    <i class="fas fa-spinner fa-spin me-2"></i>
+                                                    Medewerkers laden...
+                                                </div>
+                                            `;
+                                            
+                                            // Fetch available medewerkers for this day
+                                            fetch(`/api/available-medewerkers/${dayOfWeek}`)
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    // Store the medewerkers data for later use
+                                                    window.medewerkerData = data;
+                                                    
+                                                    // Toon beschikbare medewerkers als kaarten
+                                                    if (data.length > 0) {
+                                                        let html = '<div class="medewerker-grid">';
+                                                        
+                                                        data.forEach(medewerker => {
+                                                            html += `
+                                                                <div class="medewerker-card" data-id="${medewerker.medewerker_id}">
+                                                                    <div class="medewerker-img">
+                                                                        <i class="fas fa-user-md"></i>
+                                                                    </div>
+                                                                    <div class="medewerker-info">
+                                                                        <h5>${medewerker.naam}</h5>
+                                                                    </div>
+                                                                </div>
+                                                            `;
+                                                        });
+                                                        
+                                                        html += '</div>';
+                                                        medewerkerContainer.innerHTML = html;
+                                                        
+                                                        // Voeg click event toe aan medewerker kaarten
+                                                        document.querySelectorAll('.medewerker-card').forEach(card => {
+                                                            card.addEventListener('click', function() {
+                                                                // Verwijder selected class van alle medewerker kaarten
+                                                                document.querySelectorAll('.medewerker-card').forEach(c => {
+                                                                    c.classList.remove('selected');
+                                                                });
+                                                                
+                                                                // Voeg selected class toe aan gekozen kaart
+                                                                this.classList.add('selected');
+                                                                
+                                                                // Update hidden input
+                                                                const medewerkerId = this.getAttribute('data-id');
+                                                                medewerkerIdInput.value = medewerkerId;
+                                                                
+                                                                // Laad tijden voor deze medewerker
+                                                                loadTijden(medewerkerId);
+                                                                
+                                                                // Laad behandelingen voor deze medewerker
+                                                                loadBehandelingen(medewerkerId);
+                                                            });
+                                                        });
+                                                    } else {
+                                                        medewerkerContainer.innerHTML = `
+                                                            <div class="alert alert-warning">
+                                                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                                                Geen medewerkers beschikbaar op deze dag
+                                                            </div>
+                                                        `;
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error fetching medewerkers:', error);
+                                                    medewerkerContainer.innerHTML = `
+                                                        <div class="alert alert-danger">
+                                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                                            Er is een fout opgetreden bij het laden van medewerkers
+                                                        </div>
+                                                    `;
+                                                });
+                                        });
+                                    }
+                                    
+                                    dateGrid.appendChild(btn);
+                                }
+                            }
+                            
+                            // Functie om tijden te laden voor een medewerker
+                            function loadTijden(medewerkerId) {
+                                // Toon laad indicator
+                                tijdContainer.innerHTML = `
                                     <div class="alert alert-info">
-                                        <i class="fas fa-info-circle me-2"></i>
-                                        Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                                        <i class="fas fa-spinner fa-spin me-2"></i>
+                                        Beschikbare tijden laden...
                                     </div>
                                 `;
                                 
-                                const selectedDate = new Date(this.value);
-                                if (selectedDate) {
-                                    // Get the day of week (0 = Sunday, 1 = Monday, etc.)
-                                    const dayOfWeek = selectedDate.getDay();
-                                    
-                                    // Fetch available medewerkers for this day
-                                    fetch(`/api/available-medewerkers/${dayOfWeek}`)
-                                        .then(response => {
-                                            console.log('Medewerkers response:', response);
-                                            return response.json();
-                                        })
-                                        .then(data => {
-                                            console.log('Medewerkers data:', data);
-                                            // Enable the medewerker select
-                                            medewerkerSelect.disabled = false;
-                                            
-                                            // Store the medewerkers data for later use
-                                            window.medewerkerData = data;
-                                            
-                                            // Add the medewerkers as options
-                                            if (data.length > 0) {
-                                                data.forEach(medewerker => {
-                                                    const option = document.createElement('option');
-                                                    option.value = medewerker.medewerker_id;
-                                                    option.textContent = medewerker.naam;
-                                                    medewerkerSelect.appendChild(option);
-                                                });
-                                            } else {
-                                                medewerkerSelect.innerHTML = '<option value="">Geen medewerkers beschikbaar op deze dag</option>';
-                                            }
-                                        })
-                                        .catch(error => {
-                                            console.error('Error fetching medewerkers:', error);
-                                        });
-                                }
-                            });
-                            
-                            // Wanneer de medewerker verandert
-                            medewerkerSelect.addEventListener('change', function() {
-                                // Reset de tijd select
-                                tijdSelect.innerHTML = '<option value="">Selecteer een tijd</option>';
+                                // Reset tijd input
+                                tijdInput.value = '';
                                 
-                                // Toon de behandelingen van de geselecteerde medewerker
-                                if (this.value && window.medewerkerData) {
-                                    const medewerkerId = parseInt(this.value);
-                                    const medewerker = window.medewerkerData.find(m => m.medewerker_id === medewerkerId);
-                                    
-                                    if (medewerker && medewerker.behandelingen) {
-                                        // Update de behandelingen container
-                                        let html = '<div class="row">';
+                                // Huidige geselecteerde datum
+                                const selectedDateStr = hiddenDatumInput.value;
+                                
+                                // Controleer nogmaals of we een geldige datum en medewerker hebben
+                                if (!selectedDateStr || !medewerkerId) {
+                                    tijdContainer.innerHTML = `
+                                        <div class="alert alert-warning">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            Selecteer eerst een geldige datum en medewerker
+                                        </div>
+                                    `;
+                                    return;
+                                }
+                                
+                                console.log(`Tijden ophalen voor medewerker ${medewerkerId} op datum ${selectedDateStr}`);
+                                
+                                // Fetch beschikbare tijden voor deze medewerker op de geselecteerde datum
+                                fetch(`/api/available-times/${medewerkerId}/${selectedDateStr}`)
+                                    .then(response => {
+                                        // Controleer of de respons OK is
+                                        if (!response.ok) {
+                                            throw new Error(`HTTP error! Status: ${response.status}`);
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        console.log('Tijden data ontvangen:', data);
                                         
-                                        if (medewerker.behandelingen.length > 0) {
-                                            medewerker.behandelingen.forEach(behandeling => {
+                                        // Zelfs als de API een lege array terugstuurt, toon standaard tijden
+                                        // Dit is een fallback voor het geval er een probleem is met de tijdsblokken
+                                        if (!Array.isArray(data) || data.length === 0) {
+                                            // Genereer standaard werktijden als fallback (9:00 - 17:00)
+                                            const defaultTimes = ['09:00:00', '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00', '15:00:00', '16:00:00'];
+                                            
+                                            let html = `
+                                                <div class="alert alert-info mb-3">
+                                                    <i class="fas fa-info-circle me-2"></i>
+                                                    Er zijn geen specifieke tijden gevonden. Hieronder ziet u de standaard beschikbare tijden.
+                                                </div>
+                                                <div class="tijd-grid">
+                                            `;
+                                            
+                                            defaultTimes.forEach(time => {
+                                                const timeParts = time.split(':');
+                                                const displayTime = `${timeParts[0]}:${timeParts[1]}`;
+                                                
                                                 html += `
-                                                    <div class="col-md-6 mb-2">
-                                                        <div class="form-check d-flex align-items-center">
-                                                            <input class="form-check-input me-2" type="checkbox" name="behandelingen[]" value="${behandeling.behandeling_id}" id="behandeling_${behandeling.behandeling_id}">
-                                                            <label class="form-check-label d-flex justify-content-between w-100" for="behandeling_${behandeling.behandeling_id}">
-                                                                <span>${behandeling.naam}</span>
-                                                                <span class="badge bg-primary">€${parseFloat(behandeling.prijs).toFixed(2)}</span>
-                                                            </label>
-                                                        </div>
+                                                    <div class="tijd-card" data-time="${time}">
+                                                        <div class="tijd">${displayTime}</div>
                                                     </div>
                                                 `;
                                             });
+                                            
+                                            html += '</div>';
+                                            tijdContainer.innerHTML = html;
+                                            
+                                            // Voeg click events toe aan tijd kaarten
+                                            addTimeCardEvents();
                                         } else {
+                                            // Normaal verwerken als we geldige tijden hebben
+                                            let html = '<div class="tijd-grid">';
+                                            
+                                            data.forEach(time => {
+                                                // Format the time for display (e.g., "09:00")
+                                                const timeParts = time.split(':');
+                                                const displayTime = `${timeParts[0]}:${timeParts[1]}`;
+                                                
+                                                html += `
+                                                    <div class="tijd-card" data-time="${time}">
+                                                        <div class="tijd">${displayTime}</div>
+                                                    </div>
+                                                `;
+                                            });
+                                            
+                                            html += '</div>';
+                                            tijdContainer.innerHTML = html;
+                                            
+                                            // Voeg click events toe aan tijd kaarten
+                                            addTimeCardEvents();
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching times:', error);
+                                        
+                                        // Toon een gebruiksvriendelijke foutmelding en bied een fallback
+                                        tijdContainer.innerHTML = `
+                                            <div class="alert alert-danger mb-3">
+                                                <i class="fas fa-exclamation-circle me-2"></i>
+                                                Er is een fout opgetreden bij het laden van beschikbare tijden.
+                                            </div>
+                                            <div class="tijd-grid">
+                                                <div class="tijd-card" data-time="09:00:00">
+                                                    <div class="tijd">09:00</div>
+                                                </div>
+                                                <div class="tijd-card" data-time="10:00:00">
+                                                    <div class="tijd">10:00</div>
+                                                </div>
+                                                <div class="tijd-card" data-time="11:00:00">
+                                                    <div class="tijd">11:00</div>
+                                                </div>
+                                                <div class="tijd-card" data-time="13:00:00">
+                                                    <div class="tijd">13:00</div>
+                                                </div>
+                                                <div class="tijd-card" data-time="14:00:00">
+                                                    <div class="tijd">14:00</div>
+                                                </div>
+                                                <div class="tijd-card" data-time="15:00:00">
+                                                    <div class="tijd">15:00</div>
+                                                </div>
+                                                <div class="tijd-card" data-time="16:00:00">
+                                                    <div class="tijd">16:00</div>
+                                                </div>
+                                            </div>
+                                        `;
+                                        
+                                        // Voeg click events toe aan tijd kaarten
+                                        addTimeCardEvents();
+                                    });
+                            }
+                            
+                            // Helper functie om click events toe te voegen aan tijd kaarten
+                            function addTimeCardEvents() {
+                                document.querySelectorAll('.tijd-card').forEach(card => {
+                                    card.addEventListener('click', function() {
+                                        // Verwijder selected class van alle tijd kaarten
+                                        document.querySelectorAll('.tijd-card').forEach(c => {
+                                            c.classList.remove('selected');
+                                        });
+                                        
+                                        // Voeg selected class toe aan gekozen kaart
+                                        this.classList.add('selected');
+                                        
+                                        // Update hidden input
+                                        tijdInput.value = this.getAttribute('data-time');
+                                    });
+                                });
+                            }
+                            
+                            // Functie om behandelingen te laden voor een medewerker
+                            function loadBehandelingen(medewerkerId) {
+                                if (!window.medewerkerData) return;
+                                
+                                const medewerker = window.medewerkerData.find(m => m.medewerker_id == medewerkerId);
+                                
+                                if (medewerker && medewerker.behandelingen) {
+                                    // Update de behandelingen container
+                                    let html = '<div class="row">';
+                                    
+                                    if (medewerker.behandelingen.length > 0) {
+                                        medewerker.behandelingen.forEach(behandeling => {
                                             html += `
-                                                <div class="col-12">
-                                                    <div class="alert alert-warning">
-                                                        <i class="fas fa-exclamation-triangle me-2"></i>
-                                                        Deze medewerker heeft geen beschikbare behandelingen.
+                                                <div class="col-md-6 mb-2">
+                                                    <div class="behandeling-card" data-id="${behandeling.behandeling_id}">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="behandelingen[]" value="${behandeling.behandeling_id}" id="behandeling_${behandeling.behandeling_id}">
+                                                            <div class="behandeling-inner">
+                                                                <label class="form-check-label" for="behandeling_${behandeling.behandeling_id}">
+                                                                    ${behandeling.naam}
+                                                                </label>
+                                                                <span class="badge bg-primary">€${parseFloat(behandeling.prijs).toFixed(2)}</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             `;
-                                        }
-                                        
-                                        html += '</div>';
-                                        behandelingenContainer.innerHTML = html;
+                                        });
+                                    } else {
+                                        html += `
+                                            <div class="col-12">
+                                                <div class="alert alert-warning">
+                                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                                    Deze medewerker heeft geen beschikbare behandelingen.
+                                                </div>
+                                            </div>
+                                        `;
                                     }
                                     
-                                    // Let's also remove the old medewerker-behandelingen container if it exists
-                                    const oldBehandelingenContainer = document.getElementById('medewerker-behandelingen');
-                                    if (oldBehandelingenContainer) {
-                                        oldBehandelingenContainer.remove();
-                                    }
-                                } else {
-                                    // Als er geen medewerker is geselecteerd, reset behandelingen container
-                                    behandelingenContainer.innerHTML = `
-                                        <div class="alert alert-info">
-                                            <i class="fas fa-info-circle me-2"></i>
-                                            Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                                    html += '</div>';
+                                    behandelingenContainer.innerHTML = html;
+                                    
+                                    // Maak de hele behandeling-card klikbaar
+                                    document.querySelectorAll('.behandeling-card').forEach(card => {
+                                        card.addEventListener('click', function() {
+                                            const checkbox = this.querySelector('input[type="checkbox"]');
+                                            checkbox.checked = !checkbox.checked;
+                                            
+                                            if (checkbox.checked) {
+                                                this.classList.add('selected');
+                                            } else {
+                                                this.classList.remove('selected');
+                                            }
+                                        });
+                                    });
+                                }
+                            }
+                            
+                            // Initialiseer de kalender
+                            renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+                            
+                            // Voeg eventlisteners toe voor maandnavigatie
+                            prevMonthBtn.addEventListener('click', function() {
+                                currentDate.setMonth(currentDate.getMonth() - 1);
+                                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+                            });
+                            
+                            nextMonthBtn.addEventListener('click', function() {
+                                currentDate.setMonth(currentDate.getMonth() + 1);
+                                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+                            });
+                            
+                            // Validatie bij verzenden
+                            document.getElementById('afspraakForm').addEventListener('submit', function(e) {
+                                // Controleer of er een datum is geselecteerd
+                                if (!hiddenDatumInput.value) {
+                                    e.preventDefault();
+                                    datumDisplay.innerHTML = `
+                                        <div class="text-danger">
+                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                            Selecteer een datum
                                         </div>
                                     `;
+                                    return;
                                 }
                                 
-                                if (this.value) {
-                                    const medewerkerId = this.value;
-                                    const selectedDate = datumInput.value;
-                                    
-                                    // Fetch available times for this medewerker on this date
-                                    fetch(`/api/available-times/${medewerkerId}/${selectedDate}`)
-                                        .then(response => {
-                                            console.log('Times response:', response);
-                                            return response.json();
-                                        })
-                                        .then(data => {
-                                            console.log('Times data:', data);
-                                            // Enable the tijd select
-                                            tijdSelect.disabled = false;
-                                            
-                                            // Add the times as options
-                                            if (data.length > 0) {
-                                                data.forEach(time => {
-                                                    const option = document.createElement('option');
-                                                    option.value = time;
-                                                    
-                                                    // Format the time for display (e.g., "09:00")
-                                                    const timeParts = time.split(':');
-                                                    option.textContent = `${timeParts[0]}:${timeParts[1]}`;
-                                                    
-                                                    tijdSelect.appendChild(option);
-                                                });
-                                            } else {
-                                                tijdSelect.innerHTML = '<option value="">Geen tijden beschikbaar</option>';
-                                            }
-                                        })
-                                        .catch(error => {
-                                            console.error('Error fetching times:', error);
-                                        });
-                                } else {
-                                    tijdSelect.disabled = true;
+                                // Controleer of er een medewerker is geselecteerd
+                                if (!medewerkerIdInput.value) {
+                                    e.preventDefault();
+                                    medewerkerContainer.innerHTML += `
+                                        <div class="alert alert-danger mt-3">
+                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                            Selecteer een medewerker
+                                        </div>
+                                    `;
+                                    return;
+                                }
+                                
+                                // Controleer of er een tijd is geselecteerd
+                                if (!tijdInput.value) {
+                                    e.preventDefault();
+                                    tijdContainer.innerHTML += `
+                                        <div class="alert alert-danger mt-3">
+                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                            Selecteer een tijd
+                                        </div>
+                                    `;
+                                    return;
+                                }
+                                
+                                // Controleer of er behandelingen zijn geselecteerd
+                                const behandelingen = document.querySelectorAll('input[name="behandelingen[]"]:checked');
+                                if (behandelingen.length === 0) {
+                                    e.preventDefault();
+                                    const alertDiv = document.createElement('div');
+                                    alertDiv.className = 'alert alert-danger mt-3';
+                                    alertDiv.innerHTML = `
+                                        <i class="fas fa-exclamation-circle me-2"></i>
+                                        Selecteer tenminste één behandeling
+                                    `;
+                                    behandelingenContainer.appendChild(alertDiv);
                                 }
                             });
                         });

@@ -24,22 +24,6 @@ class KlantenController extends Controller
         if ($isAuthenticated) {
             $data['medewerkers'] = Medewerker::all();
             $data['behandelingen'] = Behandeling::all();
-            
-            // Haal de behandelingsgeschiedenis op (vorige afspraken)
-            $data['behandelingsgeschiedenis'] = $klant->reserveringen()
-                ->with(['medewerker', 'behandelingen'])
-                ->where('datum', '<', now()->format('Y-m-d'))
-                ->orderBy('datum', 'desc')
-                ->orderBy('tijd', 'desc')
-                ->get();
-                
-            // Aankomende afspraken
-            $data['aankomende_afspraken'] = $klant->reserveringen()
-                ->with(['medewerker', 'behandelingen'])
-                ->where('datum', '>=', now()->format('Y-m-d'))
-                ->orderBy('datum', 'asc')
-                ->orderBy('tijd', 'asc')
-                ->get();
         }
         
         return view('klanten.index', $data);
