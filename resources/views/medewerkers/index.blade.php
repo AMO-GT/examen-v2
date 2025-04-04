@@ -231,69 +231,57 @@
     <!-- Team Section -->
     <div class="row mt-5">
         <div class="col-12 text-center mb-4">
-            <h2 class="section-title">Ons Team</h2>
+            <h2 class="section-title" style="color: #4169E1;">Ons Team</h2>
+            <p class="text-muted">Ontmoet onze ervaren stylisten</p>
         </div>
         <!-- Oumnia -->
         <div class="col-md-3">
-            <div class="team-member">
-                <div class="team-photo">
-                    <img src="{{ asset('images/oumnia.jpg') }}" alt="Oumnia" class="img-fluid rounded" style="width: 100%; height: 400px; object-fit: cover;">
-                </div>
-                <div class="team-details mt-3">
-                    <h4 class="team-name">Oumnia</h4>
-                    <div class="team-specialties">
-                        <span class="badge bg-purple">Punten Knippen</span>
-                        <span class="badge bg-purple">Haarverzorging</span>
-                        <span class="badge bg-purple">Styling</span>
-                    </div>
+            <div class="text-center">
+                <img src="{{ asset('images/oumnia.jpg') }}" alt="Oumnia" class="img-fluid" style="width: 100%; height: 400px; object-fit: cover;">
+                <h5 class="mt-3 mb-2">Oumnia</h5>
+                <div>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Punten Knippen</span>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Haarverzorging</span>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Styling</span>
                 </div>
             </div>
         </div>
+
         <!-- Anna Fleur -->
         <div class="col-md-3">
-            <div class="team-member">
-                <div class="team-photo">
-                    <img src="{{ asset('images/annafleur.jpg') }}" alt="Anna Fleur" class="img-fluid rounded" style="width: 100%; height: 400px; object-fit: cover;">
-                </div>
-                <div class="team-details mt-3">
-                    <h4 class="team-name">Anna Fleur</h4>
-                    <div class="team-specialties">
-                        <span class="badge bg-purple">Kleuren</span>
-                        <span class="badge bg-purple">Highlights</span>
-                        <span class="badge bg-purple">Balayage</span>
-                    </div>
+            <div class="text-center">
+                <img src="{{ asset('images/annafleur.jpg') }}" alt="Anna Fleur" class="img-fluid" style="width: 100%; height: 400px; object-fit: cover;">
+                <h5 class="mt-3 mb-2">Anna Fleur</h5>
+                <div>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Kleuren</span>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Highlights</span>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Balayage</span>
                 </div>
             </div>
         </div>
+
         <!-- Nazli -->
         <div class="col-md-3">
-            <div class="team-member">
-                <div class="team-photo">
-                    <img src="{{ asset('images/nazli.png') }}" alt="Nazli" class="img-fluid rounded" style="width: 100%; height: 400px; object-fit: cover;">
-                </div>
-                <div class="team-details mt-3">
-                    <h4 class="team-name">Nazli</h4>
-                    <div class="team-specialties">
-                        <span class="badge bg-purple">Dames Knippen</span>
-                        <span class="badge bg-purple">Föhnen</span>
-                        <span class="badge bg-purple">Opsteken</span>
-                    </div>
+            <div class="text-center">
+                <img src="{{ asset('images/nazli.png') }}" alt="Nazli" class="img-fluid" style="width: 100%; height: 400px; object-fit: cover;">
+                <h5 class="mt-3 mb-2">Nazli</h5>
+                <div>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Dames Knippen</span>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Föhnen</span>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Opsteken</span>
                 </div>
             </div>
         </div>
+
         <!-- Jan -->
         <div class="col-md-3">
-            <div class="team-member">
-                <div class="team-photo">
-                    <img src="{{ asset('images/jan.jpg') }}" alt="Jan" class="img-fluid rounded" style="width: 100%; height: 400px; object-fit: cover;">
-                </div>
-                <div class="team-details mt-3">
-                    <h4 class="team-name">Jan</h4>
-                    <div class="team-specialties">
-                        <span class="badge bg-purple">Knippen</span>
-                        <span class="badge bg-purple">Kleuren</span>
-                        <span class="badge bg-purple">Treatments</span>
-                    </div>
+            <div class="text-center">
+                <img src="{{ asset('images/jan.jpg') }}" alt="Jan" class="img-fluid" style="width: 100%; height: 400px; object-fit: cover;">
+                <h5 class="mt-3 mb-2">Jan</h5>
+                <div>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Knippen</span>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Kleuren</span>
+                    <span class="badge rounded-pill" style="background-color: #4169E1;">Treatments</span>
                 </div>
             </div>
         </div>
@@ -655,6 +643,27 @@ function deleteProduct(productId) {
     .total-price {
         color: #000;
         font-size: 1.1em;
+    }
+
+    /* Team Section Styling */
+    .team-img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 0;
+    }
+
+    .badge {
+        font-weight: normal;
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    h5 {
+        font-weight: normal;
+        margin-bottom: 0.5rem;
     }
 </style>
 @endsection
