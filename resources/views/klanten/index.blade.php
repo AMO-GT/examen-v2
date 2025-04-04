@@ -159,7 +159,7 @@
     }
     
     .table thead th {
-        background: var(--gradient-primary);
+        background: var(--primary-purple);
         color: white;
         font-weight: 600;
         border: none;
@@ -473,19 +473,10 @@
                                     <label for="behandelingen" class="form-label">
                                         <i class="fas fa-cut me-2 text-primary"></i>Behandelingen
                                     </label>
-                                    <div class="card p-3 bg-white border-0 shadow-sm">
-                                        <div class="row">
-                                            @foreach($behandelingen as $behandeling)
-                                                <div class="col-md-6 mb-2">
-                                                    <div class="form-check d-flex align-items-center">
-                                                        <input class="form-check-input me-2" type="checkbox" name="behandelingen[]" value="{{ $behandeling->behandeling_id }}" id="behandeling_{{ $behandeling->behandeling_id }}">
-                                                        <label class="form-check-label d-flex justify-content-between w-100" for="behandeling_{{ $behandeling->behandeling_id }}">
-                                                            <span>{{ $behandeling->naam }}</span>
-                                                            <span class="badge bg-primary">€{{ number_format($behandeling->prijs, 2) }}</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                                    <div id="behandelingenContainer" class="card p-3 bg-white border-0 shadow-sm">
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            Selecteer eerst een medewerker om beschikbare behandelingen te zien.
                                         </div>
                                     </div>
                                     @error('behandelingen')
@@ -507,6 +498,7 @@
                             const datumInput = document.getElementById('datum');
                             const medewerkerSelect = document.getElementById('medewerker_id');
                             const tijdSelect = document.getElementById('tijd');
+                            const behandelingenContainer = document.getElementById('behandelingenContainer');
                             
                             // Wanneer de datum verandert
                             datumInput.addEventListener('change', function() {
@@ -514,6 +506,14 @@
                                 medewerkerSelect.innerHTML = '<option value="">Selecteer een medewerker</option>';
                                 tijdSelect.innerHTML = '<option value="">Selecteer eerst een medewerker</option>';
                                 tijdSelect.disabled = true;
+                                
+                                // Reset behandelingen container
+                                behandelingenContainer.innerHTML = `
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                                    </div>
+                                `;
                                 
                                 const selectedDate = new Date(this.value);
                                 if (selectedDate) {
@@ -563,43 +563,51 @@
                                     const medewerker = window.medewerkerData.find(m => m.medewerker_id === medewerkerId);
                                     
                                     if (medewerker && medewerker.behandelingen) {
-                                        // Vind het container element om behandelingen te tonen
-                                        let behandelingenContainer = document.getElementById('medewerker-behandelingen');
-                                        
-                                        // Maak een container als die nog niet bestaat
-                                        if (!behandelingenContainer) {
-                                            behandelingenContainer = document.createElement('div');
-                                            behandelingenContainer.id = 'medewerker-behandelingen';
-                                            behandelingenContainer.className = 'alert alert-info mt-3';
-                                            
-                                            // Voeg de container toe na de selectie van de medewerker
-                                            this.parentNode.appendChild(behandelingenContainer);
-                                        }
-                                        
-                                        // Toon de behandelingen in de container
-                                        let html = `<h5>Behandelingen die ${medewerker.naam} kan uitvoeren:</h5>`;
-                                        html += '<ul class="list-group">';
+                                        // Update de behandelingen container
+                                        let html = '<div class="row">';
                                         
                                         if (medewerker.behandelingen.length > 0) {
                                             medewerker.behandelingen.forEach(behandeling => {
-                                                html += `<li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    ${behandeling.naam} (${behandeling.duur} min)
-                                                    <span class="badge bg-primary rounded-pill">€${parseFloat(behandeling.prijs).toFixed(2)}</span>
-                                                </li>`;
+                                                html += `
+                                                    <div class="col-md-6 mb-2">
+                                                        <div class="form-check d-flex align-items-center">
+                                                            <input class="form-check-input me-2" type="checkbox" name="behandelingen[]" value="${behandeling.behandeling_id}" id="behandeling_${behandeling.behandeling_id}">
+                                                            <label class="form-check-label d-flex justify-content-between w-100" for="behandeling_${behandeling.behandeling_id}">
+                                                                <span>${behandeling.naam}</span>
+                                                                <span class="badge bg-primary">€${parseFloat(behandeling.prijs).toFixed(2)}</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                `;
                                             });
                                         } else {
-                                            html += '<li class="list-group-item">Geen behandelingen gevonden voor deze medewerker</li>';
+                                            html += `
+                                                <div class="col-12">
+                                                    <div class="alert alert-warning">
+                                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                                        Deze medewerker heeft geen beschikbare behandelingen.
+                                                    </div>
+                                                </div>
+                                            `;
                                         }
                                         
-                                        html += '</ul>';
+                                        html += '</div>';
                                         behandelingenContainer.innerHTML = html;
                                     }
-                                } else {
-                                    // Als er geen medewerker is geselecteerd, verwijder de behandelingen container
-                                    const behandelingenContainer = document.getElementById('medewerker-behandelingen');
-                                    if (behandelingenContainer) {
-                                        behandelingenContainer.remove();
+                                    
+                                    // Let's also remove the old medewerker-behandelingen container if it exists
+                                    const oldBehandelingenContainer = document.getElementById('medewerker-behandelingen');
+                                    if (oldBehandelingenContainer) {
+                                        oldBehandelingenContainer.remove();
                                     }
+                                } else {
+                                    // Als er geen medewerker is geselecteerd, reset behandelingen container
+                                    behandelingenContainer.innerHTML = `
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                                        </div>
+                                    `;
                                 }
                                 
                                 if (this.value) {
