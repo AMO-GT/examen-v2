@@ -46,6 +46,8 @@ Route::middleware('auth:klant')->group(function () {
     // Reserveringen routes
     Route::post('/reserveringen', [ReserveringenController::class, 'store'])->name('reserveringen.store');
     Route::delete('/reserveringen/{id}', [ReserveringenController::class, 'destroy'])->name('reserveringen.destroy');
+    Route::get('/reserveringen/{id}/edit', [ReserveringenController::class, 'edit'])->name('reserveringen.edit');
+    Route::put('/reserveringen/{id}', [ReserveringenController::class, 'update'])->name('reserveringen.update');
 });
 
 // API routes voor afspraken maken

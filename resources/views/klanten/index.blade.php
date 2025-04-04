@@ -87,6 +87,7 @@
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Weet u zeker dat u deze afspraak wilt annuleren?')">Annuleren</button>
                                                             </form>
+                                                            <a href="{{ route('reserveringen.edit', $reservering->reservering_id) }}" class="btn btn-sm btn-primary">Wijzigen</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
