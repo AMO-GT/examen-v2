@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Reservering;
 use App\Models\Medewerker;
 use App\Models\Behandeling;
+use App\Mail\ReserveringBevestiging;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rule;
 
 class ReserveringenController extends Controller
@@ -50,9 +52,37 @@ class ReserveringenController extends Controller
 
         // Koppel de geselecteerde behandelingen aan de reservering
         $reservering->behandelingen()->attach($request->behandelingen);
+        
+        // Haal de reservering op met alle relaties voor in de mail
+        $reservering = Reservering::with(['klant', 'medewerker', 'behandelingen'])
+            ->findOrFail($reservering->reservering_id);
+            
+        // Zorg dat het klant e-mailadres uit de database wordt gebruikt
+        $klantEmail = $reservering->klant->email;
+            
+        // Stuur een eenvoudige bevestigingsmail
+        try {
+            // Eenvoudige data voor de mail template
+            $mailData = [
+                'naam' => $reservering->klant->naam,
+                'datum' => $reservering->datum,
+                'tijd' => $reservering->tijd,
+                'medewerker' => $reservering->medewerker->naam
+            ];
+            
+            Mail::send('emails.simple-reservering-bevestiging', $mailData, function($message) use ($klantEmail) {
+                $message->to($klantEmail)
+                    ->subject('Bevestiging van uw afspraak bij The Hair Hub');
+            });
+            
+            \Log::info('Bevestigingsmail verzonden naar: ' . $klantEmail);
+        } catch (\Exception $e) {
+            // Log de error maar laat de gebruiker niet merken dat iets misging
+            \Log::error('Er is een fout opgetreden bij het verzenden van de bevestigingsmail: ' . $e->getMessage());
+        }
 
         return redirect()->route('klanten.index')
-            ->with('success', 'Uw afspraak is succesvol gemaakt!');
+            ->with('success', 'Uw afspraak is succesvol gemaakt! Een bevestiging is per e-mail verzonden.');
     }
     
     /**
@@ -124,8 +154,37 @@ class ReserveringenController extends Controller
         // Werk de behandelingen bij door de oude te verwijderen en nieuwe toe te voegen
         $reservering->behandelingen()->sync($request->behandelingen);
         
+        // Haal de reservering op met alle relaties voor in de mail
+        $reservering = Reservering::with(['klant', 'medewerker', 'behandelingen'])
+            ->findOrFail($id);
+            
+        // Zorg dat het klant e-mailadres uit de database wordt gebruikt
+        $klantEmail = $reservering->klant->email;
+            
+        // Stuur een eenvoudige bevestigingsmail voor de update
+        try {
+            // Eenvoudige data voor de mail template
+            $mailData = [
+                'naam' => $reservering->klant->naam,
+                'datum' => $reservering->datum,
+                'tijd' => $reservering->tijd,
+                'medewerker' => $reservering->medewerker->naam,
+                'is_update' => true
+            ];
+            
+            Mail::send('emails.simple-reservering-bevestiging', $mailData, function($message) use ($klantEmail) {
+                $message->to($klantEmail)
+                    ->subject('Wijziging van uw afspraak bij The Hair Hub');
+            });
+            
+            \Log::info('Update-bevestigingsmail verzonden naar: ' . $klantEmail);
+        } catch (\Exception $e) {
+            // Log de error maar laat de gebruiker niet merken dat iets misging
+            \Log::error('Er is een fout opgetreden bij het verzenden van de update-bevestigingsmail: ' . $e->getMessage());
+        }
+        
         return redirect()->route('klanten.index')
-            ->with('success', 'Uw afspraak is succesvol bijgewerkt!');
+            ->with('success', 'Uw afspraak is succesvol bijgewerkt! Een nieuwe bevestiging is per e-mail verzonden.');
     }
 
     /**
@@ -141,10 +200,43 @@ class ReserveringenController extends Controller
                 ->with('error', 'U bent niet bevoegd om deze afspraak te annuleren.');
         }
 
+        // Haal de reservering op met alle relaties voor in de mail
+        $reservering = Reservering::with(['klant', 'medewerker', 'behandelingen'])
+            ->findOrFail($id);
+            
+        // E-mailadres en gegevens van klant opslaan voor bevestigingsmail na verwijderen
+        $klantEmail = $reservering->klant->email;
+        $klantNaam = $reservering->klant->naam;
+        $afspraakDatum = $reservering->datum;
+        $afspraakTijd = $reservering->tijd;
+        $medewerkerNaam = $reservering->medewerker->naam;
+
         // Verwijder de reservering (en door cascade ook de gekoppelde behandelingen)
         $reservering->delete();
+        
+        // Stuur een eenvoudige annuleringsmail
+        try {
+            // Eenvoudige data voor de mail template
+            $mailData = [
+                'naam' => $klantNaam,
+                'datum' => $afspraakDatum,
+                'tijd' => $afspraakTijd,
+                'medewerker' => $medewerkerNaam,
+                'is_cancel' => true
+            ];
+            
+            Mail::send('emails.simple-reservering-bevestiging', $mailData, function($message) use ($klantEmail) {
+                $message->to($klantEmail)
+                    ->subject('Annulering van uw afspraak bij The Hair Hub');
+            });
+            
+            \Log::info('Annuleringsmail verzonden naar: ' . $klantEmail);
+        } catch (\Exception $e) {
+            // Log de error maar laat de gebruiker niet merken dat iets misging
+            \Log::error('Er is een fout opgetreden bij het verzenden van de annuleringsmail: ' . $e->getMessage());
+        }
 
         return redirect()->route('klanten.index')
-            ->with('success', 'Uw afspraak is succesvol geannuleerd!');
+            ->with('success', 'Uw afspraak is succesvol geannuleerd! Een bevestiging van annulering is per e-mail verzonden.');
     }
 } 

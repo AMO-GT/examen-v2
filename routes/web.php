@@ -58,6 +58,33 @@ Route::middleware('auth:klant')->group(function () {
 Route::get('/api/available-medewerkers/{dayOfWeek}', [ApiController::class, 'getAvailableMedewerkers']);
 Route::get('/api/available-times/{medewerkerId}/{date}', [ApiController::class, 'getAvailableTimes']);
 
+// Test route voor e-mail
+Route::get('/test-email', function() {
+    $reservering = \App\Models\Reservering::with(['klant', 'medewerker', 'behandelingen'])->first();
+    
+    if (!$reservering) {
+        return 'Geen reserveringen gevonden om te testen';
+    }
+    
+    try {
+        $mailData = [
+            'naam' => $reservering->klant->naam,
+            'datum' => $reservering->datum,
+            'tijd' => $reservering->tijd,
+            'medewerker' => $reservering->medewerker->naam
+        ];
+        
+        \Illuminate\Support\Facades\Mail::send('emails.simple-reservering-bevestiging', $mailData, function($message) use ($reservering) {
+            $message->to($reservering->klant->email)
+                ->subject('TEST - Bevestiging van uw afspraak bij The Hair Hub');
+        });
+        
+        return 'E-mail verzonden naar ' . $reservering->klant->email . '. Check je e-mail!';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
+
 //<-----------------------------------------Badr------------------------------------------>
 
 
