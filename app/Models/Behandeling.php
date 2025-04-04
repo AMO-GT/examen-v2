@@ -18,11 +18,18 @@ class Behandeling extends Model
         'categorie',
         'prijs',
         'duur_minuten',
-        'is_actief'
+        'is_actief',
+        'is_populair'
     ];
 
     protected $casts = [
         'prijs' => 'decimal:2',
         'is_actief' => 'boolean',
+        'is_populair' => 'boolean'
     ];
+
+    public function medewerkers()
+    {
+        return $this->belongsToMany(Medewerker::class, 'medewerker_behandeling', 'behandeling_id', 'medewerker_id');
+    }
 } 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Behandeling;
+use App\Models\Medewerker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -12,7 +13,7 @@ class MedewerkersController extends Controller
     {
         try {
             // Haal alle behandelingen op
-            $behandelingen = Behandeling::all();
+            $behandelingen = Behandeling::with('medewerkers')->get();
             
             // Log het aantal behandelingen
             \Log::info('Aantal behandelingen opgehaald: ' . $behandelingen->count());
@@ -25,8 +26,10 @@ class MedewerkersController extends Controller
             if ($behandelingen->isNotEmpty()) {
                 \Log::info('Voorbeeld behandeling:', $behandelingen->first()->toArray());
             }
+
+            $medewerkers = Medewerker::all();
             
-            return view('medewerkers.index', compact('behandelingen'));
+            return view('medewerkers.index', compact('behandelingen', 'medewerkers'));
         } catch (\Exception $e) {
             \Log::error('Fout bij ophalen behandelingen: ' . $e->getMessage());
             \Log::error($e->getTraceAsString());
@@ -34,7 +37,7 @@ class MedewerkersController extends Controller
         }
     }
 
-    public function storeBehandeling(Request $request)
+    public function store(Request $request)
     {
         try {
             Log::info('Ontvangen behandeling data:', $request->all());
@@ -42,40 +45,36 @@ class MedewerkersController extends Controller
             $validated = $request->validate([
                 'naam' => 'required|string|max:255',
                 'beschrijving' => 'required|string',
-                'categorie' => 'required|string|in:Knipbehandelingen,Kleurbehandelingen,Styling,Treatments',
+                'categorie' => 'required|string',
                 'prijs' => 'required|numeric|min:0',
-                'duur_minuten' => 'required|integer|min:1'
+                'duur_minuten' => 'required|integer|min:1',
+                'is_populair' => 'boolean',
+                'medewerker_ids' => 'array'
             ]);
 
-            Log::info('Gevalideerde data:', $validated);
+            $behandeling = Behandeling::create([
+                'naam' => $validated['naam'],
+                'beschrijving' => $validated['beschrijving'],
+                'categorie' => $validated['categorie'],
+                'prijs' => $validated['prijs'],
+                'duur_minuten' => $validated['duur_minuten'],
+                'is_populair' => $request->has('is_populair'),
+                'is_actief' => true
+            ]);
 
-            $behandeling = Behandeling::create($validated);
-            
-            Log::info('Behandeling aangemaakt:', $behandeling->toArray());
-
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Behandeling succesvol toegevoegd',
-                    'behandeling' => $behandeling
-                ]);
+            if ($request->has('medewerker_ids')) {
+                $behandeling->medewerkers()->attach($request->medewerker_ids);
             }
 
-            return redirect()->route('medewerkers.index')
-                ->with('success', 'Behandeling succesvol toegevoegd');
+            Log::info('Behandeling aangemaakt:', $behandeling->toArray());
+
+            return redirect()->route('medewerkers.index')->with('success', 'Behandeling succesvol toegevoegd!');
         } catch (\Exception $e) {
             Log::error('Fout bij aanmaken behandeling:', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
                 'data' => $request->all()
             ]);
-
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Er is een fout opgetreden: ' . $e->getMessage()
-                ], 500);
-            }
 
             return redirect()->back()
                 ->withInput()
@@ -96,28 +95,37 @@ class MedewerkersController extends Controller
         }
     }
 
-    public function updateBehandeling(Request $request, $id)
+    public function update(Request $request, $id)
     {
         try {
-            $behandeling = Behandeling::findOrFail($id);
-            
             $validated = $request->validate([
                 'naam' => 'required|string|max:255',
                 'beschrijving' => 'required|string',
-                'categorie' => 'required|string|in:Knipbehandelingen,Kleurbehandelingen,Styling,Treatments',
+                'categorie' => 'required|string',
                 'prijs' => 'required|numeric|min:0',
-                'duur_minuten' => 'required|integer|min:1'
+                'duur_minuten' => 'required|integer|min:1',
+                'is_populair' => 'boolean',
+                'medewerker_ids' => 'array'
             ]);
 
-            $behandeling->update($validated);
+            $behandeling = Behandeling::findOrFail($id);
+            $behandeling->update([
+                'naam' => $validated['naam'],
+                'beschrijving' => $validated['beschrijving'],
+                'categorie' => $validated['categorie'],
+                'prijs' => $validated['prijs'],
+                'duur_minuten' => $validated['duur_minuten'],
+                'is_populair' => $request->has('is_populair')
+            ]);
+
+            $behandeling->medewerkers()->sync($request->medewerker_ids ?? []);
 
             Log::info('Behandeling bijgewerkt:', [
                 'id' => $id,
                 'data' => $validated
             ]);
 
-            return redirect()->route('medewerkers.index')
-                           ->with('success', 'De behandeling is succesvol bijgewerkt.');
+            return redirect()->route('medewerkers.index')->with('success', 'Behandeling succesvol bijgewerkt!');
         } catch (\Exception $e) {
             Log::error('Fout bij bijwerken behandeling:', [
                 'error' => $e->getMessage(),
@@ -126,19 +134,18 @@ class MedewerkersController extends Controller
             ]);
 
             return redirect()->back()
-                           ->withInput()
-                           ->with('error', 'Er is een fout opgetreden bij het bijwerken van de behandeling.');
+                ->withInput()
+                ->with('error', 'Er is een fout opgetreden bij het bijwerken van de behandeling.');
         }
     }
 
-    public function deleteBehandeling($id)
+    public function destroy($id)
     {
         try {
             $behandeling = Behandeling::findOrFail($id);
             $behandeling->delete();
 
-            return redirect()->route('medewerkers.index')
-                           ->with('success', 'De behandeling is succesvol verwijderd.');
+            return redirect()->route('medewerkers.index')->with('success', 'Behandeling succesvol verwijderd!');
         } catch (\Exception $e) {
             Log::error('Fout bij verwijderen behandeling:', [
                 'error' => $e->getMessage(),
@@ -146,19 +153,20 @@ class MedewerkersController extends Controller
             ]);
 
             return redirect()->route('medewerkers.index')
-                           ->with('error', 'Er is een fout opgetreden bij het verwijderen van de behandeling.');
+                ->with('error', 'Er is een fout opgetreden bij het verwijderen van de behandeling.');
         }
     }
 
-    public function editBehandeling($id)
+    public function edit($id)
     {
         try {
-            $behandeling = Behandeling::findOrFail($id);
-            return view('medewerkers.edit', compact('behandeling'));
+            $behandeling = Behandeling::with('medewerkers')->findOrFail($id);
+            $medewerkers = Medewerker::all();
+            return view('medewerkers.edit', compact('behandeling', 'medewerkers'));
         } catch (\Exception $e) {
             \Log::error('Fout bij ophalen behandeling voor bewerken: ' . $e->getMessage());
             return redirect()->route('medewerkers.index')
-                           ->with('error', 'Behandeling niet gevonden.');
+                ->with('error', 'Behandeling niet gevonden.');
         }
     }
 } 

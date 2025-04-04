@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Medewerker extends Model
@@ -10,7 +11,11 @@ class Medewerker extends Model
 
     protected $primaryKey = 'medewerker_id';
 
-    protected $fillable = ['eigenaar_id', 'naam', 'email'];
+    protected $fillable = [
+        'naam',
+        'email',
+        'eigenaar_id'
+    ];
 
     // 🔁 Relaties
     public function eigenaar()

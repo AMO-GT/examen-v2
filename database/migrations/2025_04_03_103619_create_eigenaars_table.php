@@ -12,10 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('eigenaars', function (Blueprint $table) {
-            $table->id('eigenaar_id'); // Primaire sleutel
-            $table->string('naam', 100);
-            $table->string('email', 100);
-            $table->timestamps(); // Optioneel: voor created_at en updated_at
+            $table->id('eigenaar_id');
+            $table->string('naam');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('bedrijfsnaam');
+            $table->string('adres');
+            $table->string('postcode');
+            $table->string('plaats');
+            $table->string('telefoon');
+            $table->timestamps();
         });
     }
 

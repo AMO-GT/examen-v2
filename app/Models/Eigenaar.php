@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Eigenaar extends Model
@@ -10,7 +11,20 @@ class Eigenaar extends Model
 
     protected $primaryKey = 'eigenaar_id';
 
-    protected $fillable = ['naam', 'email'];
+    protected $fillable = [
+        'naam',
+        'email',
+        'password',
+        'bedrijfsnaam',
+        'adres',
+        'postcode',
+        'plaats',
+        'telefoon'
+    ];
+
+    protected $hidden = [
+        'password',
+    ];
 
     // Relaties
     public function medewerkers()

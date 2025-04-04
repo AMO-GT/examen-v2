@@ -5,6 +5,7 @@ use App\Http\Controllers\KlantenController;
 use App\Http\Controllers\BeheerdersController;
 use App\Http\Controllers\MedewerkersController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MedewerkerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -25,10 +26,12 @@ Route::middleware(['auth'])->group(function () {
     
     // Medewerkers routes
     Route::get('/medewerkers', [MedewerkersController::class, 'index'])->name('medewerkers.index');
-    Route::post('/medewerkers/behandeling', [MedewerkersController::class, 'storeBehandeling'])->name('medewerkers.behandeling.store');
-    Route::get('/medewerkers/behandeling/{id}/edit', [MedewerkersController::class, 'editBehandeling'])->name('medewerkers.behandeling.edit');
-    Route::put('/medewerkers/behandeling/{id}', [MedewerkersController::class, 'updateBehandeling'])->name('medewerkers.behandeling.update');
-    Route::delete('/medewerkers/behandeling/{id}', [MedewerkersController::class, 'deleteBehandeling'])->name('medewerkers.behandeling.delete');
+    Route::get('/medewerkers/behandeling', [MedewerkersController::class, 'index'])->name('medewerkers.behandeling.index');
+    Route::post('/medewerkers/behandeling', [MedewerkersController::class, 'store'])->name('medewerkers.behandeling.store');
+    Route::get('/medewerkers/behandeling/{id}', [MedewerkersController::class, 'getBehandeling'])->name('medewerkers.behandeling.get');
+    Route::post('/medewerkers/behandeling/{id}', [MedewerkersController::class, 'update'])->name('medewerkers.behandeling.update');
+    Route::post('/medewerkers/behandeling/{id}/delete', [MedewerkersController::class, 'destroy'])->name('medewerkers.behandeling.delete');
+    Route::get('/medewerkers/behandeling/{id}/edit', [MedewerkersController::class, 'edit'])->name('medewerkers.behandeling.edit');
     
     // Klanten routes
     Route::get('/klanten', [KlantenController::class, 'index'])->name('klanten.index');

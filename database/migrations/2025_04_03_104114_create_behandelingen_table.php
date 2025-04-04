@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('duur_minuten'); // in minuten
             $table->decimal('prijs', 10, 2);
             $table->boolean('is_actief')->default(true);
+            $table->boolean('is_populair')->default(false); // Nieuwe kolom voor populaire behandelingen
             $table->timestamps();
         });
     }

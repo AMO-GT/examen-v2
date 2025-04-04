@@ -1,46 +1,140 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h3>Behandeling Bewerken</h3>
+                    <h2 class="mb-0">Behandeling Bewerken</h2>
                 </div>
+
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <form action="{{ route('medewerkers.behandeling.update', $behandeling->behandeling_id) }}" method="POST">
                         @csrf
-                        @method('PUT')
-                        
+
                         <div class="mb-3">
-                            <label class="form-label">Categorie</label>
-                            <select class="form-control" name="categorie" required>
-                                <option value="Knipbehandelingen" {{ $behandeling->categorie == 'Knipbehandelingen' ? 'selected' : '' }}>Knipbehandelingen</option>
-                                <option value="Kleurbehandelingen" {{ $behandeling->categorie == 'Kleurbehandelingen' ? 'selected' : '' }}>Kleurbehandelingen</option>
-                                <option value="Styling" {{ $behandeling->categorie == 'Styling' ? 'selected' : '' }}>Styling</option>
-                                <option value="Treatments" {{ $behandeling->categorie == 'Treatments' ? 'selected' : '' }}>Treatments</option>
+                            <label for="categorie" class="form-label">Categorie</label>
+                            <select class="form-select @error('categorie') is-invalid @enderror" 
+                                    id="categorie" name="categorie" required>
+                                <option value="">Selecteer een categorie</option>
+                                <option value="Knipbehandelingen" {{ old('categorie', $behandeling->categorie) == 'Knipbehandelingen' ? 'selected' : '' }}>Knipbehandelingen</option>
+                                <option value="Kleurbehandelingen" {{ old('categorie', $behandeling->categorie) == 'Kleurbehandelingen' ? 'selected' : '' }}>Kleurbehandelingen</option>
+                                <option value="Styling" {{ old('categorie', $behandeling->categorie) == 'Styling' ? 'selected' : '' }}>Styling</option>
+                                <option value="Treatments" {{ old('categorie', $behandeling->categorie) == 'Treatments' ? 'selected' : '' }}>Treatments</option>
                             </select>
+                            @error('categorie')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Naam</label>
-                            <input type="text" class="form-control" name="naam" value="{{ $behandeling->naam }}" required>
+                            <label for="naam" class="form-label">Naam</label>
+                            <input type="text" class="form-control @error('naam') is-invalid @enderror" 
+                                   id="naam" name="naam" value="{{ old('naam', $behandeling->naam) }}" required>
+                            @error('naam')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Beschrijving</label>
-                            <textarea class="form-control" name="beschrijving" rows="3" required>{{ $behandeling->beschrijving }}</textarea>
+                            <label for="beschrijving" class="form-label">Beschrijving</label>
+                            <textarea class="form-control @error('beschrijving') is-invalid @enderror" 
+                                      id="beschrijving" name="beschrijving" rows="3" required>{{ old('beschrijving', $behandeling->beschrijving) }}</textarea>
+                            @error('beschrijving')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Prijs (€)</label>
-                            <input type="number" class="form-control" name="prijs" value="{{ $behandeling->prijs }}" step="0.01" min="0" required>
+                            <label for="prijs" class="form-label">Prijs (€)</label>
+                            <input type="number" step="0.01" class="form-control @error('prijs') is-invalid @enderror" 
+                                   id="prijs" name="prijs" value="{{ old('prijs', $behandeling->prijs) }}" required>
+                            @error('prijs')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Duur (minuten)</label>
-                            <input type="number" class="form-control" name="duur_minuten" value="{{ $behandeling->duur_minuten }}" min="1" required>
+                            <label for="duur_minuten" class="form-label">Duur (minuten)</label>
+                            <input type="number" class="form-control @error('duur_minuten') is-invalid @enderror" 
+                                   id="duur_minuten" name="duur_minuten" value="{{ old('duur_minuten', $behandeling->duur_minuten) }}" required>
+                            @error('duur_minuten')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Specialisten</label>
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="medewerker_1" 
+                                               name="medewerker_ids[]" value="1"
+                                               {{ in_array(1, $behandeling->medewerkers->pluck('medewerker_id')->toArray()) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="medewerker_1">
+                                            Oumnia
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="medewerker_2" 
+                                               name="medewerker_ids[]" value="2"
+                                               {{ in_array(2, $behandeling->medewerkers->pluck('medewerker_id')->toArray()) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="medewerker_2">
+                                            Anna Fleur
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="medewerker_3" 
+                                               name="medewerker_ids[]" value="3"
+                                               {{ in_array(3, $behandeling->medewerkers->pluck('medewerker_id')->toArray()) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="medewerker_3">
+                                            Nazli
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="medewerker_4" 
+                                               name="medewerker_ids[]" value="4"
+                                               {{ in_array(4, $behandeling->medewerkers->pluck('medewerker_id')->toArray()) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="medewerker_4">
+                                            Jan
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            @error('medewerker_ids')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input @error('is_populair') is-invalid @enderror" 
+                                       id="is_populair" name="is_populair" value="1" 
+                                       {{ old('is_populair', $behandeling->is_populair) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="is_populair">
+                                    <i class="fas fa-fire text-danger"></i> Markeer als populaire behandeling
+                                </label>
+                                @error('is_populair')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="d-flex justify-content-between">
