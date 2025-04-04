@@ -167,10 +167,10 @@
     
     .appointment-form {
         background-color: var(--light-bg);
-        padding: 2rem;
+        padding: 1.2rem;
         border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        margin-top: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-top: 1rem;
     }
     
     .page-header {
@@ -383,12 +383,14 @@
     
     .custom-datepicker {
         position: relative;
+        max-width: 320px;
+        margin: 0 auto;
     }
     
     .date-picker-box {
         border-radius: 10px;
         overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         background-color: white;
         transition: all 0.3s ease;
     }
@@ -396,7 +398,7 @@
     .date-picker-header {
         background: var(--gradient-primary);
         color: white;
-        padding: 12px 15px;
+        padding: 8px 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -405,25 +407,26 @@
     .date-picker-header h5 {
         margin: 0;
         font-weight: 600;
+        font-size: 0.9rem;
     }
     
     .date-picker-body {
-        padding: 15px;
+        padding: 8px 10px;
     }
     
     .date-grid {
         display: grid;
         grid-template-columns: repeat(7, 1fr);
-        gap: 8px;
-        margin-top: 10px;
+        gap: 4px;
+        margin-top: 5px;
     }
     
     .day-name {
         text-align: center;
         font-weight: 600;
         color: var(--text-color);
-        font-size: 0.9rem;
-        margin-bottom: 5px;
+        font-size: 0.75rem;
+        margin-bottom: 3px;
     }
     
     .date-btn {
@@ -439,6 +442,7 @@
         color: var(--text-color);
         cursor: pointer;
         transition: all 0.2s ease;
+        font-size: 0.8rem;
     }
     
     .date-btn:hover:not(:disabled) {
@@ -456,26 +460,28 @@
     }
     
     .date-display {
-        padding: 10px 15px;
+        padding: 6px 10px;
         font-weight: 500;
         text-align: center;
         color: var(--primary-purple);
+        font-size: 0.85rem;
     }
     
     .month-navigation {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 10px;
+        align-items: center;
+        width: 100%;
     }
     
     .month-btn {
         background: none;
         border: none;
         color: white;
-        font-size: 1.2rem;
+        font-size: 0.9rem;
         cursor: pointer;
-        width: 30px;
-        height: 30px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -489,20 +495,19 @@
     
     .current-month {
         font-weight: 600;
-        font-size: 1.1rem;
+        font-size: 0.9rem;
     }
 
     .medewerker-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 15px;
-        margin-top: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
     }
     
     .medewerker-card {
-        border-radius: 10px;
+        border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         background-color: white;
         transition: all 0.3s ease;
         cursor: pointer;
@@ -511,8 +516,8 @@
     }
     
     .medewerker-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     
     .medewerker-card.selected {
@@ -520,7 +525,7 @@
     }
     
     .medewerker-img {
-        height: 120px;
+        height: 80px;
         background: var(--gradient-primary);
         display: flex;
         align-items: center;
@@ -528,17 +533,18 @@
     }
     
     .medewerker-img i {
-        font-size: 3rem;
+        font-size: 2rem;
         color: white;
         opacity: 0.8;
     }
     
     .medewerker-info {
-        padding: 15px;
+        padding: 10px 8px;
         text-align: center;
     }
     
     .medewerker-info h5 {
+        font-size: 0.85rem;
         margin: 0;
         color: var(--primary-purple);
         font-weight: 600;
@@ -547,15 +553,14 @@
     .tijd-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 10px;
+        gap: 8px;
     }
     
     .tijd-card {
-        flex: 0 0 calc(25% - 10px);
-        min-width: 100px;
-        border-radius: 10px;
-        padding: 15px 10px;
+        flex: 0 0 calc(33.333% - 8px);
+        min-width: 80px;
+        padding: 10px 5px;
+        border-radius: 8px;
         background-color: white;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         cursor: pointer;
@@ -577,7 +582,7 @@
     }
     
     .tijd-card .tijd {
-        font-size: 1.1rem;
+        font-size: 0.9rem;
         font-weight: 600;
     }
     
@@ -603,12 +608,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 70px;
+        width: 50px;
     }
     
     .step-number {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
         border-radius: 50%;
         background-color: #f0f0f0;
         color: #666;
@@ -616,12 +621,13 @@
         align-items: center;
         justify-content: center;
         font-weight: 600;
-        margin-bottom: 5px;
+        margin-bottom: 3px;
         transition: all 0.3s ease;
+        font-size: 0.8rem;
     }
     
     .step-label {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         color: #666;
         transition: all 0.3s ease;
     }
@@ -643,19 +649,36 @@
     }
     
     .appointment-step {
-        display: none;
-        padding: 20px;
+        padding: 15px;
         background-color: white;
         border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        display: none;
     }
     
     .appointment-step.active {
         display: block;
     }
     
+    .appointment-step h5 {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    
     .afspraak-overzicht {
         border-left: 3px solid var(--primary-purple);
+        padding: 10px !important;
+        margin: 15px 0 !important;
+    }
+    
+    .afspraak-overzicht h6 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .afspraak-overzicht p {
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
     }
 
     #notifications-container {
@@ -1060,6 +1083,38 @@
             width: 100%;
         }
     }
+
+    /* Modal styles */
+    .modal-content {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .modal-header {
+        border-bottom: none;
+        padding: 1.2rem 1.5rem;
+    }
+    
+    .modal-title {
+        font-weight: 600;
+    }
+    
+    .modal-body .appointment-form {
+        margin-top: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .btn-close-white {
+        filter: brightness(0) invert(1);
+    }
+    
+    /* Aanpassingen voor de behandelingen in modal */
+    #behandelingenContainer {
+        max-height: 300px;
+        overflow-y: auto;
+    }
 </style>
 
 
@@ -1371,780 +1426,201 @@
                         <h5 class="mb-0">Nieuwe Afspraak Maken</h5>
                         <i class="fas fa-calendar-plus"></i>
                     </div>
-                    <div class="card-body">
-                        <div class="appointment-form">
-                            <!-- Status bar voor afspraak maken -->
-                            <div class="appointment-status mb-4">
-                                <div class="progress" style="height: 8px; background-color: #f0f0f0;">
-                                    <div class="progress-bar" role="progressbar" style="width: 0%; background: var(--gradient-primary);" id="appointment-progress"></div>
-                                </div>
-                                <div class="d-flex justify-content-between mt-2">
-                                    <div class="step-indicator active" id="step1-indicator">
-                                        <div class="step-number">1</div>
-                                        <div class="step-label">Datum</div>
+                    <div class="card-body text-center p-4">
+                        <p class="mb-4">Klik op onderstaande knop om een nieuwe afspraak te maken bij The Hair Hub.</p>
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#appointmentModal">
+                            <i class="fas fa-calendar-plus me-2"></i>Afspraak Maken
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Afspraak Modal -->
+                <div class="modal fade" id="appointmentModal" tabindex="-1" aria-labelledby="appointmentModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background: var(--gradient-primary); color: white;">
+                                <h5 class="modal-title" id="appointmentModalLabel">
+                                    <i class="fas fa-calendar-plus me-2"></i>Nieuwe Afspraak Maken
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <div class="appointment-form">
+                                    <!-- Status bar voor afspraak maken -->
+                                    <div class="appointment-status mb-4">
+                                        <div class="progress" style="height: 8px; background-color: #f0f0f0;">
+                                            <div class="progress-bar" role="progressbar" style="width: 0%; background: var(--gradient-primary);" id="appointment-progress"></div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <div class="step-indicator active" id="step1-indicator">
+                                                <div class="step-number">1</div>
+                                                <div class="step-label">Datum</div>
+                                            </div>
+                                            <div class="step-indicator" id="step2-indicator">
+                                                <div class="step-number">2</div>
+                                                <div class="step-label">Medewerker</div>
+                                            </div>
+                                            <div class="step-indicator" id="step3-indicator">
+                                                <div class="step-number">3</div>
+                                                <div class="step-label">Tijd</div>
+                                            </div>
+                                            <div class="step-indicator" id="step4-indicator">
+                                                <div class="step-number">4</div>
+                                                <div class="step-label">Behandelingen</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="step-indicator" id="step2-indicator">
-                                        <div class="step-number">2</div>
-                                        <div class="step-label">Medewerker</div>
-                                    </div>
-                                    <div class="step-indicator" id="step3-indicator">
-                                        <div class="step-number">3</div>
-                                        <div class="step-label">Tijd</div>
-                                    </div>
-                                    <div class="step-indicator" id="step4-indicator">
-                                        <div class="step-number">4</div>
-                                        <div class="step-label">Behandelingen</div>
-                                    </div>
+                                    
+                                    <form action="{{ route('reserveringen.store') }}" method="POST" id="afspraakForm">
+                                        @csrf
+                                        <input type="hidden" name="klant_id" value="{{ $klant->klant_id }}">
+                                        <input type="hidden" name="datum" id="hidden_datum">
+                                        
+                                        <div class="appointment-steps">
+                                            <!-- Stap 1: Datum -->
+                                            <div class="appointment-step active" id="step1">
+                                                <h5 class="mb-3">Stap 1: Kies een datum</h5>
+                                                <div class="custom-datepicker">
+                                                    <div class="date-picker-box">
+                                                        <div class="date-picker-header">
+                                                            <div class="month-navigation">
+                                                                <button type="button" class="month-btn" id="prevMonth">
+                                                                    <i class="fas fa-chevron-left"></i>
+                                                                </button>
+                                                                <div class="current-month" id="currentMonth"></div>
+                                                                <button type="button" class="month-btn" id="nextMonth">
+                                                                    <i class="fas fa-chevron-right"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="date-picker-body">
+                                                            <div class="date-grid" id="daysOfWeek">
+                                                                <div class="day-name">Ma</div>
+                                                                <div class="day-name">Di</div>
+                                                                <div class="day-name">Wo</div>
+                                                                <div class="day-name">Do</div>
+                                                                <div class="day-name">Vr</div>
+                                                                <div class="day-name">Za</div>
+                                                                <div class="day-name">Zo</div>
+                                                            </div>
+                                                            <div class="date-grid" id="dateGrid"></div>
+                                                            <div class="date-display mt-2" id="datumDisplay">Selecteer een datum</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @error('datum')
+                                                    <div class="text-danger mt-2">{{ $message }}</div>
+                                                @enderror
+                                                
+                                                <div class="mt-3 text-end">
+                                                    <button type="button" class="btn btn-primary" id="nextToStep2">
+                                                        Volgende <i class="fas fa-arrow-right ms-1"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Stap 2: Medewerker -->
+                                            <div class="appointment-step" id="step2" style="display: none;">
+                                                <h5 class="mb-3">Stap 2: Kies een medewerker</h5>
+                                                <div id="medewerkerContainer">
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-info-circle me-2"></i>
+                                                        Selecteer eerst een datum
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="medewerker_id" id="medewerker_id" required>
+                                                @error('medewerker_id')
+                                                    <div class="text-danger mt-2">{{ $message }}</div>
+                                                @enderror
+                                                
+                                                <div class="mt-3 d-flex justify-content-between">
+                                                    <button type="button" class="btn btn-outline-secondary" id="backToStep1">
+                                                        <i class="fas fa-arrow-left me-1"></i> Terug
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" id="nextToStep3">
+                                                        Volgende <i class="fas fa-arrow-right ms-1"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Stap 3: Tijd -->
+                                            <div class="appointment-step" id="step3" style="display: none;">
+                                                <h5 class="mb-3">Stap 3: Kies een tijd</h5>
+                                                <div id="tijdContainer">
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-info-circle me-2"></i>
+                                                        Selecteer eerst een medewerker
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="tijd" id="tijd" required>
+                                                @error('tijd')
+                                                    <div class="text-danger mt-2">{{ $message }}</div>
+                                                @enderror
+                                                
+                                                <div class="mt-3 d-flex justify-content-between">
+                                                    <button type="button" class="btn btn-outline-secondary" id="backToStep2">
+                                                        <i class="fas fa-arrow-left me-1"></i> Terug
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" id="nextToStep4">
+                                                        Volgende <i class="fas fa-arrow-right ms-1"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Stap 4: Behandelingen -->
+                                            <div class="appointment-step" id="step4" style="display: none;">
+                                                <h5 class="mb-3">Stap 4: Kies behandelingen</h5>
+                                                <div id="behandelingenContainer" class="card p-3 bg-white border-0 shadow-sm">
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-info-circle me-2"></i>
+                                                        Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                                                    </div>
+                                                </div>
+                                                @error('behandelingen')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                                
+                                                <div class="afspraak-overzicht mt-4 mb-4 p-3 bg-light rounded">
+                                                    <h6 class="mb-3"><i class="fas fa-clipboard-check me-2"></i> Uw afspraak overzicht</h6>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <p class="mb-1"><strong>Datum:</strong></p>
+                                                            <p id="overview-datum">Nog niet geselecteerd</p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <p class="mb-1"><strong>Tijd:</strong></p>
+                                                            <p id="overview-tijd">Nog niet geselecteerd</p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <p class="mb-1"><strong>Medewerker:</strong></p>
+                                                            <p id="overview-medewerker">Nog niet geselecteerd</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Opmerking toevoegen -->
+                                                <div class="mb-4">
+                                                    <label for="opmerkingen" class="form-label">
+                                                        <i class="fas fa-comment-alt me-2 text-primary"></i>Opmerking toevoegen (optioneel)
+                                                    </label>
+                                                    <textarea class="form-control" id="opmerkingen" name="opmerkingen" rows="3" placeholder="Voeg hier eventuele opmerkingen of verzoeken toe voor uw afspraak (bijv. haarlengte, specifieke wensen, etc.)"></textarea>
+                                                    <div class="form-text">Deze opmerking is zichtbaar voor de medewerker ter voorbereiding op uw afspraak.</div>
+                                                </div>
+                                                
+                                                <div class="mt-3 d-flex justify-content-between">
+                                                    <button type="button" class="btn btn-outline-secondary" id="backToStep3">
+                                                        <i class="fas fa-arrow-left me-1"></i> Terug
+                                                    </button>
+                                                    <button type="submit" class="btn btn-success" id="submitButton">
+                                                        <i class="fas fa-check me-2"></i>Afspraak Bevestigen
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            
-                            <form action="{{ route('reserveringen.store') }}" method="POST" id="afspraakForm">
-                                @csrf
-                                <input type="hidden" name="klant_id" value="{{ $klant->klant_id }}">
-                                <input type="hidden" name="datum" id="hidden_datum">
-                                
-                                <div class="appointment-steps">
-                                    <!-- Stap 1: Datum -->
-                                    <div class="appointment-step active" id="step1">
-                                        <h5 class="mb-3">Stap 1: Kies een datum</h5>
-                                        <div class="custom-datepicker">
-                                            <div class="date-picker-box">
-                                                <div class="date-picker-header">
-                                                    <div class="month-navigation">
-                                                        <button type="button" class="month-btn" id="prevMonth">
-                                                            <i class="fas fa-chevron-left"></i>
-                                                        </button>
-                                                        <div class="current-month" id="currentMonth"></div>
-                                                        <button type="button" class="month-btn" id="nextMonth">
-                                                            <i class="fas fa-chevron-right"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="date-picker-body">
-                                                    <div class="date-grid" id="daysOfWeek">
-                                                        <div class="day-name">Ma</div>
-                                                        <div class="day-name">Di</div>
-                                                        <div class="day-name">Wo</div>
-                                                        <div class="day-name">Do</div>
-                                                        <div class="day-name">Vr</div>
-                                                        <div class="day-name">Za</div>
-                                                        <div class="day-name">Zo</div>
-                                                    </div>
-                                                    <div class="date-grid" id="dateGrid"></div>
-                                                    <div class="date-display mt-2" id="datumDisplay">Selecteer een datum</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @error('datum')
-                                            <div class="text-danger mt-2">{{ $message }}</div>
-                                        @enderror
-                                        
-                                        <div class="mt-3 text-end">
-                                            <button type="button" class="btn btn-primary" id="nextToStep2">
-                                                Volgende <i class="fas fa-arrow-right ms-1"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Stap 2: Medewerker -->
-                                    <div class="appointment-step" id="step2" style="display: none;">
-                                        <h5 class="mb-3">Stap 2: Kies een medewerker</h5>
-                                        <div id="medewerkerContainer">
-                                            <div class="alert alert-info">
-                                                <i class="fas fa-info-circle me-2"></i>
-                                                Selecteer eerst een datum
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="medewerker_id" id="medewerker_id" required>
-                                        @error('medewerker_id')
-                                            <div class="text-danger mt-2">{{ $message }}</div>
-                                        @enderror
-                                        
-                                        <div class="mt-3 d-flex justify-content-between">
-                                            <button type="button" class="btn btn-outline-secondary" id="backToStep1">
-                                                <i class="fas fa-arrow-left me-1"></i> Terug
-                                            </button>
-                                            <button type="button" class="btn btn-primary" id="nextToStep3">
-                                                Volgende <i class="fas fa-arrow-right ms-1"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Stap 3: Tijd -->
-                                    <div class="appointment-step" id="step3" style="display: none;">
-                                        <h5 class="mb-3">Stap 3: Kies een tijd</h5>
-                                        <div id="tijdContainer">
-                                            <div class="alert alert-info">
-                                                <i class="fas fa-info-circle me-2"></i>
-                                                Selecteer eerst een medewerker
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="tijd" id="tijd" required>
-                                        @error('tijd')
-                                            <div class="text-danger mt-2">{{ $message }}</div>
-                                        @enderror
-                                        
-                                        <div class="mt-3 d-flex justify-content-between">
-                                            <button type="button" class="btn btn-outline-secondary" id="backToStep2">
-                                                <i class="fas fa-arrow-left me-1"></i> Terug
-                                            </button>
-                                            <button type="button" class="btn btn-primary" id="nextToStep4">
-                                                Volgende <i class="fas fa-arrow-right ms-1"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Stap 4: Behandelingen -->
-                                    <div class="appointment-step" id="step4" style="display: none;">
-                                        <h5 class="mb-3">Stap 4: Kies behandelingen</h5>
-                                        <div id="behandelingenContainer" class="card p-3 bg-white border-0 shadow-sm">
-                                            <div class="alert alert-info">
-                                                <i class="fas fa-info-circle me-2"></i>
-                                                Selecteer eerst een medewerker om beschikbare behandelingen te zien.
-                                            </div>
-                                        </div>
-                                        @error('behandelingen')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                        
-                                        <div class="afspraak-overzicht mt-4 mb-4 p-3 bg-light rounded">
-                                            <h6 class="mb-3"><i class="fas fa-clipboard-check me-2"></i> Uw afspraak overzicht</h6>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <p class="mb-1"><strong>Datum:</strong></p>
-                                                    <p id="overview-datum">Nog niet geselecteerd</p>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <p class="mb-1"><strong>Tijd:</strong></p>
-                                                    <p id="overview-tijd">Nog niet geselecteerd</p>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <p class="mb-1"><strong>Medewerker:</strong></p>
-                                                    <p id="overview-medewerker">Nog niet geselecteerd</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Opmerking toevoegen -->
-                                        <div class="mb-4">
-                                            <label for="opmerkingen" class="form-label">
-                                                <i class="fas fa-comment-alt me-2 text-primary"></i>Opmerking toevoegen (optioneel)
-                                            </label>
-                                            <textarea class="form-control" id="opmerkingen" name="opmerkingen" rows="3" placeholder="Voeg hier eventuele opmerkingen of verzoeken toe voor uw afspraak (bijv. haarlengte, specifieke wensen, etc.)"></textarea>
-                                            <div class="form-text">Deze opmerking is zichtbaar voor de medewerker ter voorbereiding op uw afspraak.</div>
-                                        </div>
-                                        
-                                        <div class="mt-3 d-flex justify-content-between">
-                                            <button type="button" class="btn btn-outline-secondary" id="backToStep3">
-                                                <i class="fas fa-arrow-left me-1"></i> Terug
-                                            </button>
-                                            <button type="submit" class="btn btn-success" id="submitButton">
-                                                <i class="fas fa-check me-2"></i>Afspraak Bevestigen
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
-                            
-                        <!-- Javascript voor dynamische medewerkers en tijden -->
-                        <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const hiddenDatumInput = document.getElementById('hidden_datum');
-                            const datumDisplay = document.getElementById('datumDisplay');
-                            const dateGrid = document.getElementById('dateGrid');
-                            const currentMonthElement = document.getElementById('currentMonth');
-                            const prevMonthBtn = document.getElementById('prevMonth');
-                            const nextMonthBtn = document.getElementById('nextMonth');
-                            const medewerkerIdInput = document.getElementById('medewerker_id');
-                            const medewerkerContainer = document.getElementById('medewerkerContainer');
-                            const tijdInput = document.getElementById('tijd');
-                            const tijdContainer = document.getElementById('tijdContainer');
-                            const behandelingenContainer = document.getElementById('behandelingenContainer');
-                            const submitButton = document.getElementById('submitButton');
-                            
-                            // Navigatie tussen stappen
-                            const step1 = document.getElementById('step1');
-                            const step2 = document.getElementById('step2');
-                            const step3 = document.getElementById('step3');
-                            const step4 = document.getElementById('step4');
-                            
-                            const step1Indicator = document.getElementById('step1-indicator');
-                            const step2Indicator = document.getElementById('step2-indicator');
-                            const step3Indicator = document.getElementById('step3-indicator');
-                            const step4Indicator = document.getElementById('step4-indicator');
-                            
-                            const progressBar = document.getElementById('appointment-progress');
-                            
-                            const nextToStep2Btn = document.getElementById('nextToStep2');
-                            const backToStep1Btn = document.getElementById('backToStep1');
-                            const nextToStep3Btn = document.getElementById('nextToStep3');
-                            const backToStep2Btn = document.getElementById('backToStep2');
-                            const nextToStep4Btn = document.getElementById('nextToStep4');
-                            const backToStep3Btn = document.getElementById('backToStep3');
-                            
-                            const overviewDatum = document.getElementById('overview-datum');
-                            const overviewTijd = document.getElementById('overview-tijd');
-                            const overviewMedewerker = document.getElementById('overview-medewerker');
-                            
-                            // Navigatie handlers
-                            nextToStep2Btn.addEventListener('click', function() {
-                                if (!hiddenDatumInput.value) {
-                                    datumDisplay.innerHTML = `
-                                        <div class="text-danger">
-                                            <i class="fas fa-exclamation-circle me-2"></i>
-                                            Selecteer een datum
-                                        </div>
-                                    `;
-                                    return;
-                                }
-                                
-                                step1.classList.remove('active');
-                                step2.classList.add('active');
-                                step1.style.display = 'none';
-                                step2.style.display = 'block';
-                                
-                                step1Indicator.classList.add('completed');
-                                step2Indicator.classList.add('active');
-                                
-                                progressBar.style.width = '33%';
-                            });
-                            
-                            backToStep1Btn.addEventListener('click', function() {
-                                step2.classList.remove('active');
-                                step1.classList.add('active');
-                                step2.style.display = 'none';
-                                step1.style.display = 'block';
-                                
-                                step2Indicator.classList.remove('active');
-                                step1Indicator.classList.remove('completed');
-                                step1Indicator.classList.add('active');
-                                
-                                progressBar.style.width = '0%';
-                            });
-                            
-                            nextToStep3Btn.addEventListener('click', function() {
-                                if (!medewerkerIdInput.value) {
-                                    medewerkerContainer.innerHTML += `
-                                        <div class="alert alert-danger mt-3">
-                                            <i class="fas fa-exclamation-circle me-2"></i>
-                                            Selecteer een medewerker
-                                        </div>
-                                    `;
-                                    return;
-                                }
-                                
-                                step2.classList.remove('active');
-                                step3.classList.add('active');
-                                step2.style.display = 'none';
-                                step3.style.display = 'block';
-                                
-                                step2Indicator.classList.add('completed');
-                                step2Indicator.classList.remove('active');
-                                step3Indicator.classList.add('active');
-                                
-                                progressBar.style.width = '66%';
-                            });
-                            
-                            backToStep2Btn.addEventListener('click', function() {
-                                step3.classList.remove('active');
-                                step2.classList.add('active');
-                                step3.style.display = 'none';
-                                step2.style.display = 'block';
-                                
-                                step3Indicator.classList.remove('active');
-                                step2Indicator.classList.remove('completed');
-                                step2Indicator.classList.add('active');
-                                
-                                progressBar.style.width = '33%';
-                            });
-                            
-                            nextToStep4Btn.addEventListener('click', function() {
-                                if (!tijdInput.value) {
-                                    tijdContainer.innerHTML += `
-                                        <div class="alert alert-danger mt-3">
-                                            <i class="fas fa-exclamation-circle me-2"></i>
-                                            Selecteer een tijd
-                                        </div>
-                                    `;
-                                    return;
-                                }
-                                
-                                step3.classList.remove('active');
-                                step4.classList.add('active');
-                                step3.style.display = 'none';
-                                step4.style.display = 'block';
-                                
-                                step3Indicator.classList.add('completed');
-                                step3Indicator.classList.remove('active');
-                                step4Indicator.classList.add('active');
-                                
-                                progressBar.style.width = '100%';
-                                
-                                // Update afspraak overzicht
-                                const selectedMedewerkerCard = document.querySelector('.medewerker-card.selected');
-                                if (selectedMedewerkerCard) {
-                                    const medewerkerNaam = selectedMedewerkerCard.querySelector('.medewerker-info h5').textContent;
-                                    overviewMedewerker.textContent = medewerkerNaam;
-                                }
-                                
-                                const selectedTimeCard = document.querySelector('.tijd-card.selected');
-                                if (selectedTimeCard) {
-                                    const tijdTekst = selectedTimeCard.querySelector('.tijd').textContent;
-                                    overviewTijd.textContent = tijdTekst;
-                                }
-                                
-                                if (hiddenDatumInput.value) {
-                                    overviewDatum.textContent = formateerDatum(hiddenDatumInput.value);
-                                }
-                            });
-                            
-                            backToStep3Btn.addEventListener('click', function() {
-                                step4.classList.remove('active');
-                                step3.classList.add('active');
-                                step4.style.display = 'none';
-                                step3.style.display = 'block';
-                                
-                                step4Indicator.classList.remove('active');
-                                step3Indicator.classList.remove('completed');
-                                step3Indicator.classList.add('active');
-                                
-                                progressBar.style.width = '66%';
-                            });
-                            
-                            let currentDate = new Date();
-                            let selectedDate = null;
-                            
-                            // Hulpfunctie voor het formatteren van datums
-                            function formateerDatum(datumString) {
-                                const maanden = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
-                                const dagen = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
-                                
-                                // Let op: datumString is in formaat YYYY-MM-DD (ISO-formaat)
-                                // Maak een nieuwe date-object van de string en corrigeer voor tijdzone-issues
-                                const datum = new Date(datumString + 'T00:00:00');
-                                
-                                // Zorg dat we de correcte dag krijgen, ongeacht de tijdzone
-                                const dateParts = datumString.split('-');
-                                const year = parseInt(dateParts[0]);
-                                const month = parseInt(dateParts[1]) - 1; // Maanden zijn 0-gebaseerd in JavaScript
-                                const day = parseInt(dateParts[2]);
-                                
-                                // Gebruik de lokale tijd voor weergave
-                                return `${dagen[datum.getDay()]} ${day} ${maanden[month]} ${year}`;
-                            }
-                            
-                            // Functie om de kalender te renderen
-                            function renderCalendar(year, month) {
-                                dateGrid.innerHTML = '';
-                                
-                                // Stel de huidige maand in
-                                currentMonthElement.textContent = new Date(year, month, 1).toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' });
-                                
-                                // Bereken de eerste dag van de maand
-                                const firstDay = new Date(year, month, 1).getDay();
-                                // In JavaScript is zondag 0, maar we willen maandag als eerste dag (1)
-                                const firstDayOfGrid = firstDay === 0 ? 6 : firstDay - 1;
-                                
-                                // Bereken het aantal dagen in de huidige maand
-                                const daysInMonth = new Date(year, month + 1, 0).getDate();
-                                
-                                // Voeg lege cellen toe voor dagen vóór de eerste dag van de maand
-                                for (let i = 0; i < firstDayOfGrid; i++) {
-                                    const emptyCell = document.createElement('div');
-                                    dateGrid.appendChild(emptyCell);
-                                }
-                                
-                                // Voeg knoppen toe voor elke dag van de maand
-                                const today = new Date();
-                                today.setHours(0, 0, 0, 0);
-                                
-                                for (let day = 1; day <= daysInMonth; day++) {
-                                    const date = new Date(year, month, day);
-                                    const btn = document.createElement('button');
-                                    btn.type = 'button';
-                                    btn.className = 'date-btn';
-                                    btn.textContent = day;
-                                    
-                                    // Markeer geselecteerde datum
-                                    if (selectedDate && date.getTime() === selectedDate.getTime()) {
-                                        btn.classList.add('active');
-                                    }
-                                    
-                                    // Schakel datums in het verleden uit
-                                    if (date < today) {
-                                        btn.disabled = true;
-                                    } else {
-                                        btn.addEventListener('click', function() {
-                                            // Verwijder de actieve klasse van alle datumknoppen
-                                            document.querySelectorAll('.date-btn').forEach(btn => {
-                                                btn.classList.remove('active');
-                                            });
-                                            
-                                            // Voeg de actieve klasse toe aan de geselecteerde knop
-                                            this.classList.add('active');
-                                            
-                                            // Sla de geselecteerde datum op
-                                            selectedDate = new Date(year, month, day);
-                                            
-                                            // Formatteer de datum in ISO-formaat (YYYY-MM-DD)
-                                            // Zorg dat de juiste dag wordt opgeslagen, ook voor de 31e van een maand
-                                            const formattedYear = selectedDate.getFullYear();
-                                            const formattedMonth = String(selectedDate.getMonth() + 1).padStart(2, '0');
-                                            const formattedDay = String(selectedDate.getDate()).padStart(2, '0');
-                                            const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
-                                            
-                                            hiddenDatumInput.value = formattedDate;
-                                            
-                                            // Update de datumweergave
-                                            datumDisplay.textContent = formateerDatum(formattedDate);
-                                            datumDisplay.style.fontWeight = 'bold';
-                                            
-                                            // Reset medewerker en tijd
-                                            medewerkerIdInput.value = '';
-                                            tijdInput.value = '';
-                                            
-                                            // Reset medewerker en tijd containers
-                                            tijdContainer.innerHTML = `
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-info-circle me-2"></i>
-                                                    Selecteer eerst een medewerker
-                                                </div>
-                                            `;
-                                            
-                                            // Reset behandelingen container
-                                            behandelingenContainer.innerHTML = `
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-info-circle me-2"></i>
-                                                    Selecteer eerst een medewerker om beschikbare behandelingen te zien.
-                                                </div>
-                                            `;
-                                            
-                                            // Get the day of week (0 = Sunday, 1 = Monday, etc.)
-                                            const dayOfWeek = selectedDate.getDay();
-                                            
-                                            // Toon laad indicator
-                                            medewerkerContainer.innerHTML = `
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-spinner fa-spin me-2"></i>
-                                                    Medewerkers laden...
-                                                </div>
-                                            `;
-                                            
-                                            // Fetch available medewerkers for this day
-                                            fetch(`/api/available-medewerkers/${dayOfWeek}`)
-                                                .then(response => response.json())
-                                                .then(data => {
-                                                    // Store the medewerkers data for later use
-                                                    window.medewerkerData = data;
-                                                    
-                                                    // Toon beschikbare medewerkers als kaarten
-                                                    if (data.length > 0) {
-                                                        let html = '<div class="medewerker-grid">';
-                                                        
-                                                        data.forEach(medewerker => {
-                                                            html += `
-                                                                <div class="medewerker-card" data-id="${medewerker.medewerker_id}">
-                                                                    <div class="medewerker-img">
-                                                                        <i class="fas fa-user-md"></i>
-                                                                    </div>
-                                                                    <div class="medewerker-info">
-                                                                        <h5>${medewerker.naam}</h5>
-                                                                    </div>
-                                                                </div>
-                                                            `;
-                                                        });
-                                                        
-                                                        html += '</div>';
-                                                        medewerkerContainer.innerHTML = html;
-                                                        
-                                                        // Voeg click event toe aan medewerker kaarten
-                                                        document.querySelectorAll('.medewerker-card').forEach(card => {
-                                                            card.addEventListener('click', function() {
-                                                                // Verwijder selected class van alle medewerker kaarten
-                                                                document.querySelectorAll('.medewerker-card').forEach(c => {
-                                                                    c.classList.remove('selected');
-                                                                });
-                                                                
-                                                                // Voeg selected class toe aan gekozen kaart
-                                                                this.classList.add('selected');
-                                                                
-                                                                // Update hidden input
-                                                                const medewerkerId = this.getAttribute('data-id');
-                                                                medewerkerIdInput.value = medewerkerId;
-                                                                
-                                                                // Laad tijden voor deze medewerker
-                                                                loadTijden(medewerkerId);
-                                                                
-                                                                // Laad behandelingen voor deze medewerker
-                                                                loadBehandelingen(medewerkerId);
-                                                            });
-                                                        });
-                                                    } else {
-                                                        medewerkerContainer.innerHTML = `
-                                                            <div class="alert alert-warning">
-                                                                <i class="fas fa-exclamation-triangle me-2"></i>
-                                                                Geen medewerkers beschikbaar op deze dag
-                                                            </div>
-                                                        `;
-                                                    }
-                                                })
-                                                .catch(error => {
-                                                    console.error('Error fetching medewerkers:', error);
-                                                    medewerkerContainer.innerHTML = `
-                                                        <div class="alert alert-danger">
-                                                            <i class="fas fa-exclamation-circle me-2"></i>
-                                                            Er is een fout opgetreden bij het laden van medewerkers
-                                                        </div>
-                                                    `;
-                                                });
-                                        });
-                                    }
-                                    
-                                    dateGrid.appendChild(btn);
-                                }
-                            }
-                            
-                            // Functie om tijden te laden voor een medewerker
-                            function loadTijden(medewerkerId) {
-                                // Toon laad indicator
-                                tijdContainer.innerHTML = `
-                                    <div class="alert alert-info">
-                                        <i class="fas fa-spinner fa-spin me-2"></i>
-                                        Beschikbare tijden laden...
-                                    </div>
-                                `;
-                                
-                                // Reset tijd input
-                                tijdInput.value = '';
-                                
-                                // Huidige geselecteerde datum
-                                const selectedDateStr = hiddenDatumInput.value;
-                                
-                                // Controleer nogmaals of we een geldige datum en medewerker hebben
-                                if (!selectedDateStr || !medewerkerId) {
-                                    tijdContainer.innerHTML = `
-                                        <div class="alert alert-warning">
-                                            <i class="fas fa-exclamation-triangle me-2"></i>
-                                            Selecteer eerst een geldige datum en medewerker
-                                        </div>
-                                    `;
-                                    return;
-                                }
-                                
-                                console.log(`Tijden ophalen voor medewerker ${medewerkerId} op datum ${selectedDateStr}`);
-                                
-                                // Fetch beschikbare tijden voor deze medewerker op de geselecteerde datum
-                                fetch(`/api/available-times/${medewerkerId}/${selectedDateStr}`)
-                                    .then(response => {
-                                        // Controleer of de respons OK is
-                                        if (!response.ok) {
-                                            throw new Error(`HTTP error! Status: ${response.status}`);
-                                        }
-                                        return response.json();
-                                    })
-                                    .then(data => {
-                                        console.log('Tijden data ontvangen:', data);
-                                        
-                                        // Zelfs als de API een lege array terugstuurt, toon standaard tijden
-                                        // Dit is een fallback voor het geval er een probleem is met de tijdsblokken
-                                        if (!Array.isArray(data) || data.length === 0) {
-                                            // Genereer standaard werktijden als fallback (9:00 - 17:00)
-                                            const defaultTimes = ['09:00:00', '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00', '15:00:00', '16:00:00'];
-                                            
-                                            let html = `
-                                                <div class="alert alert-info mb-3">
-                                                    <i class="fas fa-info-circle me-2"></i>
-                                                    Er zijn geen specifieke tijden gevonden. Hieronder ziet u de standaard beschikbare tijden.
-                                                </div>
-                                                <div class="tijd-grid">
-                                            `;
-                                            
-                                            defaultTimes.forEach(time => {
-                                                const timeParts = time.split(':');
-                                                const displayTime = `${timeParts[0]}:${timeParts[1]}`;
-                                                
-                                                html += `
-                                                    <div class="tijd-card" data-time="${time}">
-                                                        <div class="tijd">${displayTime}</div>
-                                                    </div>
-                                                `;
-                                            });
-                                            
-                                            html += '</div>';
-                                            tijdContainer.innerHTML = html;
-                                            
-                                            // Voeg click events toe aan tijd kaarten
-                                            addTimeCardEvents();
-                                        } else {
-                                            // Normaal verwerken als we geldige tijden hebben
-                                            let html = '<div class="tijd-grid">';
-                                            
-                                            data.forEach(time => {
-                                                // Format the time for display (e.g., "09:00")
-                                                const timeParts = time.split(':');
-                                                const displayTime = `${timeParts[0]}:${timeParts[1]}`;
-                                                
-                                                html += `
-                                                    <div class="tijd-card" data-time="${time}">
-                                                        <div class="tijd">${displayTime}</div>
-                                                    </div>
-                                                `;
-                                            });
-                                            
-                                            html += '</div>';
-                                            tijdContainer.innerHTML = html;
-                                            
-                                            // Voeg click events toe aan tijd kaarten
-                                            addTimeCardEvents();
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Error fetching times:', error);
-                                        
-                                        // Toon een gebruiksvriendelijke foutmelding en bied een fallback
-                                        tijdContainer.innerHTML = `
-                                            <div class="alert alert-danger mb-3">
-                                                <i class="fas fa-exclamation-circle me-2"></i>
-                                                Er is een fout opgetreden bij het laden van beschikbare tijden.
-                                            </div>
-                                            <div class="tijd-grid">
-                                                <div class="tijd-card" data-time="09:00:00">
-                                                    <div class="tijd">09:00</div>
-                                                </div>
-                                                <div class="tijd-card" data-time="10:00:00">
-                                                    <div class="tijd">10:00</div>
-                                                </div>
-                                                <div class="tijd-card" data-time="11:00:00">
-                                                    <div class="tijd">11:00</div>
-                                                </div>
-                                                <div class="tijd-card" data-time="13:00:00">
-                                                    <div class="tijd">13:00</div>
-                                                </div>
-                                                <div class="tijd-card" data-time="14:00:00">
-                                                    <div class="tijd">14:00</div>
-                                                </div>
-                                                <div class="tijd-card" data-time="15:00:00">
-                                                    <div class="tijd">15:00</div>
-                                                </div>
-                                                <div class="tijd-card" data-time="16:00:00">
-                                                    <div class="tijd">16:00</div>
-                                                </div>
-                                            </div>
-                                        `;
-                                        
-                                        // Voeg click events toe aan tijd kaarten
-                                        addTimeCardEvents();
-                                    });
-                            }
-                            
-                            // Helper functie om click events toe te voegen aan tijd kaarten
-                            function addTimeCardEvents() {
-                                document.querySelectorAll('.tijd-card').forEach(card => {
-                                    card.addEventListener('click', function() {
-                                        // Verwijder selected class van alle tijd kaarten
-                                        document.querySelectorAll('.tijd-card').forEach(c => {
-                                            c.classList.remove('selected');
-                                        });
-                                        
-                                        // Voeg selected class toe aan gekozen kaart
-                                        this.classList.add('selected');
-                                        
-                                        // Update hidden input
-                                        tijdInput.value = this.getAttribute('data-time');
-                                    });
-                                });
-                            }
-                            
-                            // Functie om behandelingen te laden voor een medewerker
-                            function loadBehandelingen(medewerkerId) {
-                                if (!window.medewerkerData) return;
-                                
-                                const medewerker = window.medewerkerData.find(m => m.medewerker_id == medewerkerId);
-                                
-                                if (medewerker && medewerker.behandelingen) {
-                                    // Update de behandelingen container
-                                    let html = '<div class="row">';
-                                    
-                                    if (medewerker.behandelingen.length > 0) {
-                                        medewerker.behandelingen.forEach(behandeling => {
-                                            html += `
-                                                <div class="col-md-6 mb-2">
-                                                    <div class="behandeling-card" data-id="${behandeling.behandeling_id}">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="behandelingen[]" value="${behandeling.behandeling_id}" id="behandeling_${behandeling.behandeling_id}">
-                                                            <div class="behandeling-inner">
-                                                                <label class="form-check-label" for="behandeling_${behandeling.behandeling_id}">
-                                                                    ${behandeling.naam}
-                                                                </label>
-                                                                <span class="badge bg-primary">€${parseFloat(behandeling.prijs).toFixed(2)}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            `;
-                                        });
-                                    } else {
-                                        html += `
-                                            <div class="col-12">
-                                                <div class="alert alert-warning">
-                                                    <i class="fas fa-exclamation-triangle me-2"></i>
-                                                    Deze medewerker heeft geen beschikbare behandelingen.
-                                                </div>
-                                            </div>
-                                        `;
-                                    }
-                                    
-                                    html += '</div>';
-                                    behandelingenContainer.innerHTML = html;
-                                    
-                                    // Maak de hele behandeling-card klikbaar
-                                    document.querySelectorAll('.behandeling-card').forEach(card => {
-                                        card.addEventListener('click', function() {
-                                            const checkbox = this.querySelector('input[type="checkbox"]');
-                                            checkbox.checked = !checkbox.checked;
-                                            
-                                            if (checkbox.checked) {
-                                                this.classList.add('selected');
-                                            } else {
-                                                this.classList.remove('selected');
-                                            }
-                                        });
-                                    });
-                                }
-                            }
-                            
-                            // Initialiseer de kalender
-                            renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
-                            
-                            // Voeg eventlisteners toe voor maandnavigatie
-                            prevMonthBtn.addEventListener('click', function() {
-                                currentDate.setMonth(currentDate.getMonth() - 1);
-                                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
-                            });
-                            
-                            nextMonthBtn.addEventListener('click', function() {
-                                currentDate.setMonth(currentDate.getMonth() + 1);
-                                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
-                            });
-                            
-                            // Validatie bij verzenden
-                            document.getElementById('afspraakForm').addEventListener('submit', function(e) {
-                                // Controleer of er behandelingen zijn geselecteerd
-                                const behandelingen = document.querySelectorAll('input[name="behandelingen[]"]:checked');
-                                if (behandelingen.length === 0) {
-                                    e.preventDefault();
-                                    const alertDiv = document.createElement('div');
-                                    alertDiv.className = 'alert alert-danger mt-3';
-                                    alertDiv.innerHTML = `
-                                        <i class="fas fa-exclamation-circle me-2"></i>
-                                        Selecteer tenminste één behandeling
-                                    `;
-                                    behandelingenContainer.appendChild(alertDiv);
-                                }
-                            });
-                        });
-                        </script>
                     </div>
                 </div>
             </div>
@@ -2391,6 +1867,671 @@
     document.addEventListener('DOMContentLoaded', function() {
         updateCountdown();
         setInterval(updateCountdown, 60000); // Update every minute
+        
+        // Modal appointment form functionality
+        const hiddenDatumInput = document.getElementById('hidden_datum');
+        const datumDisplay = document.getElementById('datumDisplay');
+        const dateGrid = document.getElementById('dateGrid');
+        const currentMonthElement = document.getElementById('currentMonth');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+        const medewerkerIdInput = document.getElementById('medewerker_id');
+        const medewerkerContainer = document.getElementById('medewerkerContainer');
+        const tijdInput = document.getElementById('tijd');
+        const tijdContainer = document.getElementById('tijdContainer');
+        const behandelingenContainer = document.getElementById('behandelingenContainer');
+        const submitButton = document.getElementById('submitButton');
+        
+        // Navigatie tussen stappen
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const step4 = document.getElementById('step4');
+        
+        const step1Indicator = document.getElementById('step1-indicator');
+        const step2Indicator = document.getElementById('step2-indicator');
+        const step3Indicator = document.getElementById('step3-indicator');
+        const step4Indicator = document.getElementById('step4-indicator');
+        
+        const progressBar = document.getElementById('appointment-progress');
+        
+        const nextToStep2Btn = document.getElementById('nextToStep2');
+        const backToStep1Btn = document.getElementById('backToStep1');
+        const nextToStep3Btn = document.getElementById('nextToStep3');
+        const backToStep2Btn = document.getElementById('backToStep2');
+        const nextToStep4Btn = document.getElementById('nextToStep4');
+        const backToStep3Btn = document.getElementById('backToStep3');
+        
+        const overviewDatum = document.getElementById('overview-datum');
+        const overviewTijd = document.getElementById('overview-tijd');
+        const overviewMedewerker = document.getElementById('overview-medewerker');
+        
+        if (nextToStep2Btn) {
+            // Navigatie handlers
+            nextToStep2Btn.addEventListener('click', function() {
+                if (!hiddenDatumInput.value) {
+                    datumDisplay.innerHTML = `
+                        <div class="text-danger">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Selecteer een datum
+                        </div>
+                    `;
+                    return;
+                }
+                
+                step1.classList.remove('active');
+                step2.classList.add('active');
+                step1.style.display = 'none';
+                step2.style.display = 'block';
+                
+                step1Indicator.classList.add('completed');
+                step2Indicator.classList.add('active');
+                
+                progressBar.style.width = '33%';
+            });
+            
+            backToStep1Btn.addEventListener('click', function() {
+                step2.classList.remove('active');
+                step1.classList.add('active');
+                step2.style.display = 'none';
+                step1.style.display = 'block';
+                
+                step2Indicator.classList.remove('active');
+                step1Indicator.classList.remove('completed');
+                step1Indicator.classList.add('active');
+                
+                progressBar.style.width = '0%';
+            });
+            
+            nextToStep3Btn.addEventListener('click', function() {
+                if (!medewerkerIdInput.value) {
+                    medewerkerContainer.innerHTML += `
+                        <div class="alert alert-danger mt-3">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Selecteer een medewerker
+                        </div>
+                    `;
+                    return;
+                }
+                
+                step2.classList.remove('active');
+                step3.classList.add('active');
+                step2.style.display = 'none';
+                step3.style.display = 'block';
+                
+                step2Indicator.classList.add('completed');
+                step2Indicator.classList.remove('active');
+                step3Indicator.classList.add('active');
+                
+                progressBar.style.width = '66%';
+            });
+            
+            backToStep2Btn.addEventListener('click', function() {
+                step3.classList.remove('active');
+                step2.classList.add('active');
+                step3.style.display = 'none';
+                step2.style.display = 'block';
+                
+                step3Indicator.classList.remove('active');
+                step2Indicator.classList.remove('completed');
+                step2Indicator.classList.add('active');
+                
+                progressBar.style.width = '33%';
+            });
+            
+            nextToStep4Btn.addEventListener('click', function() {
+                if (!tijdInput.value) {
+                    tijdContainer.innerHTML += `
+                        <div class="alert alert-danger mt-3">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Selecteer een tijd
+                        </div>
+                    `;
+                    return;
+                }
+                
+                step3.classList.remove('active');
+                step4.classList.add('active');
+                step3.style.display = 'none';
+                step4.style.display = 'block';
+                
+                step3Indicator.classList.add('completed');
+                step3Indicator.classList.remove('active');
+                step4Indicator.classList.add('active');
+                
+                progressBar.style.width = '100%';
+                
+                // Update afspraak overzicht
+                const selectedMedewerkerCard = document.querySelector('.medewerker-card.selected');
+                if (selectedMedewerkerCard) {
+                    const medewerkerNaam = selectedMedewerkerCard.querySelector('.medewerker-info h5').textContent;
+                    overviewMedewerker.textContent = medewerkerNaam;
+                }
+                
+                const selectedTimeCard = document.querySelector('.tijd-card.selected');
+                if (selectedTimeCard) {
+                    const tijdTekst = selectedTimeCard.querySelector('.tijd').textContent;
+                    overviewTijd.textContent = tijdTekst;
+                }
+                
+                if (hiddenDatumInput.value) {
+                    overviewDatum.textContent = formateerDatum(hiddenDatumInput.value);
+                }
+            });
+            
+            backToStep3Btn.addEventListener('click', function() {
+                step4.classList.remove('active');
+                step3.classList.add('active');
+                step4.style.display = 'none';
+                step3.style.display = 'block';
+                
+                step4Indicator.classList.remove('active');
+                step3Indicator.classList.remove('completed');
+                step3Indicator.classList.add('active');
+                
+                progressBar.style.width = '66%';
+            });
+        }
+        
+        let currentDate = new Date();
+        let selectedDate = null;
+        
+        // Hulpfunctie voor het formatteren van datums
+        function formateerDatum(datumString) {
+            const maanden = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+            const dagen = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+            
+            // Let op: datumString is in formaat YYYY-MM-DD (ISO-formaat)
+            const datum = new Date(datumString + 'T00:00:00');
+            
+            // Zorg dat we de correcte dag krijgen, ongeacht de tijdzone
+            const dateParts = datumString.split('-');
+            const year = parseInt(dateParts[0]);
+            const month = parseInt(dateParts[1]) - 1; // Maanden zijn 0-gebaseerd in JavaScript
+            const day = parseInt(dateParts[2]);
+            
+            // Gebruik de lokale tijd voor weergave
+            return `${dagen[datum.getDay()]} ${day} ${maanden[month]} ${year}`;
+        }
+        
+        // Functie om de kalender te renderen
+        function renderCalendar(year, month) {
+            if (!dateGrid) return;
+            
+            dateGrid.innerHTML = '';
+            
+            // Stel de huidige maand in
+            currentMonthElement.textContent = new Date(year, month, 1).toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' });
+            
+            // Bereken de eerste dag van de maand
+            const firstDay = new Date(year, month, 1).getDay();
+            // In JavaScript is zondag 0, maar we willen maandag als eerste dag (1)
+            const firstDayOfGrid = firstDay === 0 ? 6 : firstDay - 1;
+            
+            // Bereken het aantal dagen in de huidige maand
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Voeg lege cellen toe voor dagen vóór de eerste dag van de maand
+            for (let i = 0; i < firstDayOfGrid; i++) {
+                const emptyCell = document.createElement('div');
+                dateGrid.appendChild(emptyCell);
+            }
+            
+            // Voeg knoppen toe voor elke dag van de maand
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'date-btn';
+                btn.textContent = day;
+                
+                // Markeer geselecteerde datum
+                if (selectedDate && date.getTime() === selectedDate.getTime()) {
+                    btn.classList.add('active');
+                }
+                
+                // Schakel datums in het verleden uit
+                if (date < today) {
+                    btn.disabled = true;
+                } else {
+                    btn.addEventListener('click', function() {
+                        // Verwijder de actieve klasse van alle datumknoppen
+                        document.querySelectorAll('.date-btn').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
+                        
+                        // Voeg de actieve klasse toe aan de geselecteerde knop
+                        this.classList.add('active');
+                        
+                        // Sla de geselecteerde datum op
+                        selectedDate = new Date(year, month, day);
+                        
+                        // Formatteer de datum in ISO-formaat (YYYY-MM-DD)
+                        const formattedYear = selectedDate.getFullYear();
+                        const formattedMonth = String(selectedDate.getMonth() + 1).padStart(2, '0');
+                        const formattedDay = String(selectedDate.getDate()).padStart(2, '0');
+                        const formattedDate = `${formattedYear}-${formattedMonth}-${formattedDay}`;
+                        
+                        hiddenDatumInput.value = formattedDate;
+                        
+                        // Update de datumweergave
+                        datumDisplay.textContent = formateerDatum(formattedDate);
+                        datumDisplay.style.fontWeight = 'bold';
+                        
+                        // Reset medewerker en tijd
+                        medewerkerIdInput.value = '';
+                        tijdInput.value = '';
+                        
+                        // Reset medewerker en tijd containers
+                        tijdContainer.innerHTML = `
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Selecteer eerst een medewerker
+                            </div>
+                        `;
+                        
+                        // Reset behandelingen container
+                        behandelingenContainer.innerHTML = `
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                            </div>
+                        `;
+                        
+                        // Get the day of week (0 = Sunday, 1 = Monday, etc.)
+                        const dayOfWeek = selectedDate.getDay();
+                        
+                        // Toon laad indicator
+                        medewerkerContainer.innerHTML = `
+                            <div class="alert alert-info">
+                                <i class="fas fa-spinner fa-spin me-2"></i>
+                                Medewerkers laden...
+                            </div>
+                        `;
+                        
+                        // Fetch beschikbare medewerkers voor deze dag
+                        fetch(`/api/available-medewerkers/${dayOfWeek}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                // Store the medewerkers data for later use
+                                window.medewerkerData = data;
+                                
+                                // Toon beschikbare medewerkers als kaarten
+                                if (data.length > 0) {
+                                    let html = '<div class="medewerker-grid">';
+                                    
+                                    data.forEach(medewerker => {
+                                        html += `
+                                            <div class="medewerker-card" data-id="${medewerker.medewerker_id}">
+                                                <div class="medewerker-img">
+                                                    <i class="fas fa-user-md"></i>
+                                                </div>
+                                                <div class="medewerker-info">
+                                                    <h5>${medewerker.naam}</h5>
+                                                </div>
+                                            </div>
+                                        `;
+                                    });
+                                    
+                                    html += '</div>';
+                                    medewerkerContainer.innerHTML = html;
+                                    
+                                    // Voeg click event toe aan medewerker kaarten
+                                    document.querySelectorAll('.medewerker-card').forEach(card => {
+                                        card.addEventListener('click', function() {
+                                            // Verwijder selected class van alle medewerker kaarten
+                                            document.querySelectorAll('.medewerker-card').forEach(c => {
+                                                c.classList.remove('selected');
+                                            });
+                                            
+                                            // Voeg selected class toe aan gekozen kaart
+                                            this.classList.add('selected');
+                                            
+                                            // Update hidden input
+                                            const medewerkerId = this.getAttribute('data-id');
+                                            medewerkerIdInput.value = medewerkerId;
+                                            
+                                            // Laad tijden voor deze medewerker
+                                            loadTijden(medewerkerId);
+                                            
+                                            // Laad behandelingen voor deze medewerker
+                                            loadBehandelingen(medewerkerId);
+                                        });
+                                    });
+                                } else {
+                                    medewerkerContainer.innerHTML = `
+                                        <div class="alert alert-warning">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            Geen medewerkers beschikbaar op deze dag
+                                        </div>
+                                    `;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching medewerkers:', error);
+                                medewerkerContainer.innerHTML = `
+                                    <div class="alert alert-danger">
+                                        <i class="fas fa-exclamation-circle me-2"></i>
+                                        Er is een fout opgetreden bij het laden van medewerkers
+                                    </div>
+                                `;
+                            });
+                    });
+                }
+                
+                dateGrid.appendChild(btn);
+            }
+        }
+        
+        // Functie om tijden te laden voor een medewerker
+        function loadTijden(medewerkerId) {
+            // Toon laad indicator
+            tijdContainer.innerHTML = `
+                <div class="alert alert-info">
+                    <i class="fas fa-spinner fa-spin me-2"></i>
+                    Beschikbare tijden laden...
+                </div>
+            `;
+            
+            // Reset tijd input
+            tijdInput.value = '';
+            
+            // Huidige geselecteerde datum
+            const selectedDateStr = hiddenDatumInput.value;
+            
+            // Controleer nogmaals of we een geldige datum en medewerker hebben
+            if (!selectedDateStr || !medewerkerId) {
+                tijdContainer.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Selecteer eerst een geldige datum en medewerker
+                    </div>
+                `;
+                return;
+            }
+            
+            // Fetch beschikbare tijden voor deze medewerker op de geselecteerde datum
+            fetch(`/api/available-times/${medewerkerId}/${selectedDateStr}`)
+                .then(response => {
+                    // Controleer of de respons OK is
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Zelfs als de API een lege array terugstuurt, toon standaard tijden
+                    // Dit is een fallback voor het geval er een probleem is met de tijdsblokken
+                    if (!Array.isArray(data) || data.length === 0) {
+                        // Genereer standaard werktijden als fallback (9:00 - 17:00)
+                        const defaultTimes = ['09:00:00', '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00', '15:00:00', '16:00:00'];
+                        
+                        let html = `
+                            <div class="alert alert-info mb-3">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Er zijn geen specifieke tijden gevonden. Hieronder ziet u de standaard beschikbare tijden.
+                            </div>
+                            <div class="tijd-grid">
+                        `;
+                        
+                        defaultTimes.forEach(time => {
+                            const timeParts = time.split(':');
+                            const displayTime = `${timeParts[0]}:${timeParts[1]}`;
+                            
+                            html += `
+                                <div class="tijd-card" data-time="${time}">
+                                    <div class="tijd">${displayTime}</div>
+                                </div>
+                            `;
+                        });
+                        
+                        html += '</div>';
+                        tijdContainer.innerHTML = html;
+                        
+                        // Voeg click events toe aan tijd kaarten
+                        addTimeCardEvents();
+                    } else {
+                        // Normaal verwerken als we geldige tijden hebben
+                        let html = '<div class="tijd-grid">';
+                        
+                        data.forEach(time => {
+                            // Format the time for display (e.g., "09:00")
+                            const timeParts = time.split(':');
+                            const displayTime = `${timeParts[0]}:${timeParts[1]}`;
+                            
+                            html += `
+                                <div class="tijd-card" data-time="${time}">
+                                    <div class="tijd">${displayTime}</div>
+                                </div>
+                            `;
+                        });
+                        
+                        html += '</div>';
+                        tijdContainer.innerHTML = html;
+                        
+                        // Voeg click events toe aan tijd kaarten
+                        addTimeCardEvents();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching times:', error);
+                    
+                    // Toon een gebruiksvriendelijke foutmelding en bied een fallback
+                    tijdContainer.innerHTML = `
+                        <div class="alert alert-danger mb-3">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Er is een fout opgetreden bij het laden van beschikbare tijden.
+                        </div>
+                        <div class="tijd-grid">
+                            <div class="tijd-card" data-time="09:00:00">
+                                <div class="tijd">09:00</div>
+                            </div>
+                            <div class="tijd-card" data-time="10:00:00">
+                                <div class="tijd">10:00</div>
+                            </div>
+                            <div class="tijd-card" data-time="11:00:00">
+                                <div class="tijd">11:00</div>
+                            </div>
+                            <div class="tijd-card" data-time="13:00:00">
+                                <div class="tijd">13:00</div>
+                            </div>
+                            <div class="tijd-card" data-time="14:00:00">
+                                <div class="tijd">14:00</div>
+                            </div>
+                            <div class="tijd-card" data-time="15:00:00">
+                                <div class="tijd">15:00</div>
+                            </div>
+                            <div class="tijd-card" data-time="16:00:00">
+                                <div class="tijd">16:00</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Voeg click events toe aan tijd kaarten
+                    addTimeCardEvents();
+                });
+        }
+        
+        // Helper functie om click events toe te voegen aan tijd kaarten
+        function addTimeCardEvents() {
+            document.querySelectorAll('.tijd-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Verwijder selected class van alle tijd kaarten
+                    document.querySelectorAll('.tijd-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    
+                    // Voeg selected class toe aan gekozen kaart
+                    this.classList.add('selected');
+                    
+                    // Update hidden input
+                    tijdInput.value = this.getAttribute('data-time');
+                });
+            });
+        }
+        
+        // Functie om behandelingen te laden voor een medewerker
+        function loadBehandelingen(medewerkerId) {
+            if (!window.medewerkerData) return;
+            
+            const medewerker = window.medewerkerData.find(m => m.medewerker_id == medewerkerId);
+            
+            if (medewerker && medewerker.behandelingen) {
+                // Update de behandelingen container
+                let html = '<div class="row">';
+                
+                if (medewerker.behandelingen.length > 0) {
+                    medewerker.behandelingen.forEach(behandeling => {
+                        html += `
+                            <div class="col-md-6 mb-2">
+                                <div class="behandeling-card" data-id="${behandeling.behandeling_id}">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="behandelingen[]" value="${behandeling.behandeling_id}" id="behandeling_${behandeling.behandeling_id}">
+                                        <div class="behandeling-inner">
+                                            <label class="form-check-label" for="behandeling_${behandeling.behandeling_id}">
+                                                ${behandeling.naam}
+                                            </label>
+                                            <span class="badge bg-primary">€${parseFloat(behandeling.prijs).toFixed(2)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    html += `
+                        <div class="col-12">
+                            <div class="alert alert-warning">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Deze medewerker heeft geen beschikbare behandelingen.
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+                behandelingenContainer.innerHTML = html;
+                
+                // Maak de hele behandeling-card klikbaar
+                document.querySelectorAll('.behandeling-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const checkbox = this.querySelector('input[type="checkbox"]');
+                        checkbox.checked = !checkbox.checked;
+                        
+                        if (checkbox.checked) {
+                            this.classList.add('selected');
+                        } else {
+                            this.classList.remove('selected');
+                        }
+                    });
+                });
+            }
+        }
+        
+        // Event handlers voor de kalender navigatie
+        if (prevMonthBtn && nextMonthBtn) {
+            prevMonthBtn.addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            });
+            
+            nextMonthBtn.addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            });
+        }
+        
+        // Initialiseer de kalender bij het laden van de pagina
+        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        
+        // Initialiseer de kalender bij het openen van de modal
+        const appointmentModal = document.getElementById('appointmentModal');
+        if (appointmentModal) {
+            appointmentModal.addEventListener('shown.bs.modal', function() {
+                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            });
+            
+            // Reset de modal wanneer deze gesloten wordt
+            appointmentModal.addEventListener('hidden.bs.modal', function() {
+                // Reset alle formuliervelden
+                document.getElementById('afspraakForm').reset();
+                
+                // Reset de stappen naar stap 1
+                step1.classList.add('active');
+                step1.style.display = 'block';
+                step2.classList.remove('active');
+                step2.style.display = 'none';
+                step3.classList.remove('active');
+                step3.style.display = 'none';
+                step4.classList.remove('active');
+                step4.style.display = 'none';
+                
+                // Reset de indicators
+                step1Indicator.classList.add('active');
+                step1Indicator.classList.remove('completed');
+                step2Indicator.classList.remove('active', 'completed');
+                step3Indicator.classList.remove('active', 'completed');
+                step4Indicator.classList.remove('active', 'completed');
+                
+                // Reset de progressbar
+                progressBar.style.width = '0%';
+                
+                // Reset de hidden inputs
+                hiddenDatumInput.value = '';
+                medewerkerIdInput.value = '';
+                tijdInput.value = '';
+                
+                // Reset de displays
+                datumDisplay.textContent = 'Selecteer een datum';
+                datumDisplay.style.fontWeight = 'normal';
+                
+                // Reset de containers
+                medewerkerContainer.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Selecteer eerst een datum
+                    </div>
+                `;
+                
+                tijdContainer.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Selecteer eerst een medewerker
+                    </div>
+                `;
+                
+                behandelingenContainer.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Selecteer eerst een medewerker om beschikbare behandelingen te zien.
+                    </div>
+                `;
+                
+                // Reset het overzicht
+                overviewDatum.textContent = 'Nog niet geselecteerd';
+                overviewTijd.textContent = 'Nog niet geselecteerd';
+                overviewMedewerker.textContent = 'Nog niet geselecteerd';
+            });
+            
+            // Validatie bij verzenden
+            document.getElementById('afspraakForm').addEventListener('submit', function(e) {
+                // Controleer of er behandelingen zijn geselecteerd
+                const behandelingen = document.querySelectorAll('input[name="behandelingen[]"]:checked');
+                if (behandelingen.length === 0) {
+                    e.preventDefault();
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-danger mt-3';
+                    alertDiv.innerHTML = `
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        Selecteer tenminste één behandeling
+                    `;
+                    behandelingenContainer.appendChild(alertDiv);
+                }
+            });
+        }
     });
 </script>
 @endsection
