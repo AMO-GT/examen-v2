@@ -112,6 +112,9 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('medewerkers.index') ? 'active' : '' }}" href="{{ route('medewerkers.index') }}">Medewerkers</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('tijdsblokken.index') ? 'active' : '' }}" href="{{ route('tijdsblokken.index') }}">Tijdsblokken</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         @auth

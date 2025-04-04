@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KlantenController;
 use App\Http\Controllers\BeheerdersController;
 use App\Http\Controllers\MedewerkersController;
+use App\Http\Controllers\TijdsblokController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,6 +22,12 @@ Route::put('/medewerkers/{medewerker}', [BeheerdersController::class, 'update'])
 Route::delete('/medewerkers/{medewerker}', [BeheerdersController::class, 'destroy'])->name('medewerkers.destroy');
 
 
+Route::get('/tijdsblokken', [TijdsblokController::class, 'index'])->name('tijdsblokken.index');
+Route::get('/tijdsblokken/create', [TijdsblokController::class, 'create'])->name('tijdsblokken.create');
+Route::post('/tijdsblokken', [TijdsblokController::class, 'store'])->name('tijdsblokken.store');
+Route::get('/tijdsblokken/{tijdsblok}/edit', [TijdsblokController::class, 'edit'])->name('tijdsblokken.edit');
+Route::put('/tijdsblokken/{tijdsblok}', [TijdsblokController::class, 'update'])->name('tijdsblokken.update');
+Route::delete('/tijdsblokken/{tijdsblok}', [TijdsblokController::class, 'destroy'])->name('tijdsblokken.destroy');
 //<-----------------------------------------AHMAD----------------------------------------->
 //<-----------------------------------------Moooo----------------------------------------->
 // Medewerkers routes
