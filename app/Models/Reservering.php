@@ -12,7 +12,7 @@ class Reservering extends Model
     protected $table = 'reserveringen';
     protected $primaryKey = 'reservering_id';
 
-    protected $fillable = ['klant_id', 'medewerker_id', 'datum', 'tijd'];
+    protected $fillable = ['klant_id', 'medewerker_id', 'datum', 'tijd', 'opmerkingen'];
 
     // 🔁 Relaties
     public function klant()

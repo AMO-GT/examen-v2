@@ -32,6 +32,7 @@ class ReserveringenController extends Controller
             'medewerker_id' => 'required|exists:medewerkers,medewerker_id',
             'behandelingen' => 'required|array',
             'behandelingen.*' => 'exists:behandelingen,behandeling_id',
+            'opmerkingen' => 'nullable|string|max:1000',
         ], [
             'datum.required' => 'Selecteer een datum voor uw afspraak.',
             'datum.after_or_equal' => 'De datum moet vandaag of in de toekomst zijn.',
@@ -40,6 +41,7 @@ class ReserveringenController extends Controller
             'tijd.unique' => 'Deze tijd is al geboekt voor de geselecteerde medewerker op deze datum.',
             'medewerker_id.required' => 'Selecteer een medewerker voor uw afspraak.',
             'behandelingen.required' => 'Selecteer minimaal één behandeling.',
+            'opmerkingen.max' => 'Opmerkingen mogen maximaal 1000 tekens bevatten.',
         ]);
 
         // Maak de reservering aan
@@ -48,6 +50,7 @@ class ReserveringenController extends Controller
             'medewerker_id' => $request->medewerker_id,
             'datum' => $request->datum,
             'tijd' => $request->tijd,
+            'opmerkingen' => $request->opmerkingen,
         ]);
 
         // Koppel de geselecteerde behandelingen aan de reservering
@@ -134,6 +137,7 @@ class ReserveringenController extends Controller
             'medewerker_id' => 'required|exists:medewerkers,medewerker_id',
             'behandelingen' => 'required|array',
             'behandelingen.*' => 'exists:behandelingen,behandeling_id',
+            'opmerkingen' => 'nullable|string|max:1000',
         ], [
             'datum.required' => 'Selecteer een datum voor uw afspraak.',
             'datum.after_or_equal' => 'De datum moet vandaag of in de toekomst zijn.',
@@ -142,6 +146,7 @@ class ReserveringenController extends Controller
             'tijd.unique' => 'Deze tijd is al geboekt voor de geselecteerde medewerker op deze datum.',
             'medewerker_id.required' => 'Selecteer een medewerker voor uw afspraak.',
             'behandelingen.required' => 'Selecteer minimaal één behandeling.',
+            'opmerkingen.max' => 'Opmerkingen mogen maximaal 1000 tekens bevatten.',
         ]);
         
         // Update de reservering
@@ -149,6 +154,7 @@ class ReserveringenController extends Controller
             'medewerker_id' => $request->medewerker_id,
             'datum' => $request->datum,
             'tijd' => $request->tijd,
+            'opmerkingen' => $request->opmerkingen,
         ]);
         
         // Werk de behandelingen bij door de oude te verwijderen en nieuwe toe te voegen

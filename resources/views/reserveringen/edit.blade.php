@@ -234,6 +234,14 @@
                             @enderror
                         </div>
                         
+                        <div class="mb-3">
+                            <label for="opmerkingen" class="form-label">Opmerkingen</label>
+                            <textarea class="form-control @error('opmerkingen') is-invalid @enderror" id="opmerkingen" name="opmerkingen" rows="3" placeholder="Voeg eventuele opmerkingen toe voor uw afspraak (max 1000 tekens)">{{ old('opmerkingen', $reservering->opmerkingen) }}</textarea>
+                            @error('opmerkingen')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-primary">Afspraak Bijwerken</button>
                             <a href="{{ route('klanten.index') }}" class="btn btn-secondary">Annuleren</a>

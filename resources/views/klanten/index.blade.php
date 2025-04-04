@@ -174,11 +174,94 @@
     }
     
     .page-header {
+        background-color: white;
+        border-bottom: 1px solid #eaeaea;
+        padding: 1.5rem 0;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .header-logo {
+        display: flex;
+        align-items: center;
+    }
+    
+    .header-logo img {
+        height: 40px;
+        margin-right: 15px;
+    }
+    
+    .header-title-container {
+        border-left: 3px solid var(--primary-purple);
+        padding-left: 15px;
+    }
+    
+    .header-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--primary-purple);
+        line-height: 1.2;
+    }
+    
+    .header-subtitle {
+        font-size: 0.9rem;
+        color: #6c757d;
+        margin: 0;
+    }
+    
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .user-welcome {
+        display: flex;
+        align-items: center;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #4a5568;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    
+    .user-welcome i {
+        color: var(--primary-purple);
+        font-size: 1.1rem;
+        margin-right: 8px;
+    }
+    
+    .main-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    
+    .page-title-section {
+        margin-bottom: 2rem;
+        position: relative;
+        padding-bottom: 1rem;
+    }
+    
+    .page-title {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .page-title-section::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
         background: var(--gradient-primary);
-        color: white;
-        padding: 3rem 0;
-        margin-bottom: 3rem;
-        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        border-radius: 3px;
     }
     
     .info-item {
@@ -291,7 +374,6 @@
         box-shadow: 0 0 0 0.25rem rgba(107, 70, 193, 0.25);
     }
     
-    /* Maak formuliervelden groter en beter leesbaar op mobiel */
     @media (max-width: 768px) {
         .form-select, .form-control {
             font-size: 16px;
@@ -299,7 +381,6 @@
         }
     }
     
-    /* Styling voor de custom datepicker */
     .custom-datepicker {
         position: relative;
     }
@@ -411,7 +492,6 @@
         font-size: 1.1rem;
     }
 
-    /* Styling voor medewerker kaarten */
     .medewerker-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -464,7 +544,6 @@
         font-weight: 600;
     }
     
-    /* Styling voor tijd kaarten */
     .tijd-grid {
         display: flex;
         flex-wrap: wrap;
@@ -514,7 +593,6 @@
         }
     }
 
-    /* Styling voor de stappenplan */
     .appointment-status {
         margin-bottom: 30px;
     }
@@ -580,7 +658,6 @@
         border-left: 3px solid var(--primary-purple);
     }
 
-    /* Custom Alert Styling */
     #notifications-container {
         position: fixed;
         top: 20px;
@@ -673,7 +750,6 @@
         to { width: 0%; }
     }
     
-    /* Animate.css classes */
     .animate__animated {
         animation-duration: 0.5s;
     }
@@ -707,25 +783,288 @@
             transform: translate3d(0, -30px, 0);
         }
     }
+
+    /* Button Refinements */
+    .action-btn {
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        margin: 0 3px;
+    }
+    
+    .action-btn i {
+        font-size: 0.8rem;
+    }
+    
+    .action-btn.delete-btn {
+        background-color: #f8d7da;
+        border: 1px solid #f5c2c7;
+        color: #dc3545;
+    }
+    
+    .action-btn.delete-btn:hover {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+    }
+    
+    .action-btn.edit-btn {
+        background-color: #cfe2ff;
+        border: 1px solid #b6d4fe;
+        color: #0d6efd;
+    }
+    
+    .action-btn.edit-btn:hover {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        color: white;
+    }
+    
+    .action-btn.success-btn {
+        background-color: #d1e7dd;
+        border: 1px solid #badbcc;
+        color: #198754;
+    }
+    
+    .action-btn.success-btn:hover {
+        background-color: #198754;
+        border-color: #198754;
+        color: white;
+    }
+    
+    /* Adjust button sizes across the site */
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    /* Customer Info Card Refinements */
+    .info-card {
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        background-color: white;
+        overflow: hidden;
+    }
+    
+    .info-card-header {
+        background-color: var(--primary-purple);
+        color: white;
+        padding: 15px 20px;
+        font-weight: 500;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .info-card-header i {
+        font-size: 1.2rem;
+        opacity: 0.8;
+    }
+    
+    .info-card-body {
+        padding: 0;
+    }
+    
+    .info-item {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background-color 0.2s ease;
+    }
+    
+    .info-item:last-child {
+        border-bottom: none;
+    }
+    
+    .info-item:hover {
+        background-color: #f9f9f9;
+    }
+    
+    .info-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f2f1fe;
+        color: var(--primary-purple);
+        margin-right: 15px;
+    }
+    
+    .info-icon i {
+        font-size: 1rem;
+    }
+    
+    .info-content {
+        flex: 1;
+    }
+    
+    .info-label {
+        font-size: 0.8rem;
+        color: #718096;
+        margin-bottom: 4px;
+        font-weight: 500;
+    }
+    
+    .info-value {
+        font-size: 1rem;
+        color: #2d3748;
+        font-weight: 500;
+        word-break: break-word;
+    }
+    
+    .info-card-footer {
+        display: flex;
+        gap: 8px;
+        padding: 15px 20px;
+        background-color: #f9fafb;
+        border-top: 1px solid #f0f0f0;
+    }
+    
+    .info-btn {
+        flex: 1;
+        padding: 8px 10px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: center;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .info-btn-primary {
+        background-color: #f2f1fe;
+        color: var(--primary-purple);
+    }
+    
+    .info-btn-primary:hover {
+        background-color: var(--primary-purple);
+        color: white;
+    }
+    
+    .info-btn-danger {
+        background-color: #fef1f2;
+        color: #e53e3e;
+    }
+    
+    .info-btn-danger:hover {
+        background-color: #e53e3e;
+        color: white;
+    }
+    
+    .info-btn i {
+        margin-right: 5px;
+        font-size: 0.85rem;
+    }
+
+    /* Add styling for info alerts */
+    .custom-alert-info {
+        background-color: #f0f7fa;
+        border-left: 4px solid #17a2b8;
+    }
+    
+    .custom-alert-info .custom-alert-icon {
+        color: #17a2b8;
+    }
+    
+    .custom-alert-info .custom-alert-progress::before {
+        background: linear-gradient(to right, #17a2b8, #5bc0de);
+    }
+
+    /* Next appointment banner styling */
+    .next-appointment-banner {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+        overflow: hidden;
+    }
+    
+    .next-appointment-content {
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    
+    .next-appointment-greeting {
+        flex: 1;
+    }
+    
+    .greeting-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.2rem;
+    }
+    
+    .next-appointment-info {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+    
+    .next-appointment-date {
+        color: var(--primary-purple);
+        font-weight: 600;
+    }
+    
+    .countdown-container {
+        margin-left: 2rem;
+        text-align: center;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        min-width: 150px;
+    }
+    
+    .countdown-label {
+        font-size: 0.8rem;
+        color: #6c757d;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+    
+    .countdown-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-purple);
+    }
+    
+    .no-appointment-msg {
+        font-style: italic;
+        color: #6c757d;
+    }
+    
+    @media (max-width: 768px) {
+        .next-appointment-content {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .countdown-container {
+            margin-left: 0;
+            margin-top: 1rem;
+            width: 100%;
+        }
+    }
 </style>
 
-<div class="page-header">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-            <h1 class="section-title text-white" style="-webkit-text-fill-color: white;">Klanten Portaal</h1>
-            @if($isAuthenticated)
-            <div class="welcome-text text-white">
-                <p class="mb-0"><i class="fas fa-user-circle me-2"></i>Welkom, {{ $klant->naam }}</p>
-            </div>
-            @endif
-        </div>
-        <p class="lead">Uw persoonlijke omgeving bij The Hair Hub</p>
-    </div>
-</div>
 
-<div class="container">
+<div class="main-container">
     @if($isAuthenticated)
-        <!-- Welkomstbericht voor ingelogde gebruikers -->
         <!-- Removing the welcome banner as requested -->
         
         <!-- Enhanced Success/Error Messages -->
@@ -761,6 +1100,68 @@
             @endif
         </div>
         
+        <!-- Next Appointment Banner -->
+        <div class="next-appointment-banner">
+            <div class="next-appointment-content">
+                <div class="next-appointment-greeting">
+                    <h2 class="greeting-name">Welkom {{ $klant->naam }}</h2>
+                    
+                    @php
+                        // Get next appointment
+                        $now = new DateTime();
+                        $today = $now->format('Y-m-d');
+                        $currentTime = $now->format('H:i:s');
+                        
+                        $nextAppointment = $klant->reserveringen
+                            ->filter(function($reservering) use ($today, $currentTime) {
+                                if ($reservering->datum > $today) {
+                                    return true;
+                                } elseif ($reservering->datum == $today && $reservering->tijd > $currentTime) {
+                                    return true;
+                                }
+                                return false;
+                            })
+                            ->sortBy(function($reservering) {
+                                return $reservering->datum . ' ' . $reservering->tijd;
+                            })
+                            ->first();
+                    @endphp
+                    
+                    @if ($nextAppointment)
+                        @php
+                            $appointmentDateTime = new DateTime($nextAppointment->datum . ' ' . $nextAppointment->tijd);
+                            $interval = $now->diff($appointmentDateTime);
+                            $daysUntil = $interval->days;
+                            
+                            // Format the date in Dutch
+                            setlocale(LC_TIME, 'nl_NL.utf8', 'nl_NL', 'nl');
+                            $appointmentDate = strftime('%A %e %B %Y', strtotime($nextAppointment->datum));
+                            $appointmentTime = date('H:i', strtotime($nextAppointment->tijd));
+                        @endphp
+                        
+                        <p class="next-appointment-info">
+                            Uw eerstvolgende afspraak is op <span class="next-appointment-date">{{ $appointmentDate }}</span> om <span class="next-appointment-date">{{ $appointmentTime }}</span> uur bij kapper <span class="next-appointment-date">{{ $nextAppointment->medewerker->naam }}</span>.
+                        </p>
+                    @else
+                        <p class="next-appointment-info no-appointment-msg">
+                            U heeft momenteel geen afspraken gepland. Plan een nieuwe afspraak hieronder.
+                        </p>
+                    @endif
+                </div>
+                
+                @if ($nextAppointment)
+                <div class="countdown-container">
+                    <div class="countdown-label">Uw afspraak over</div>
+                    <div class="countdown-value" id="appointment-countdown">{{ $daysUntil }} dagen</div>
+                </div>
+                @endif
+            </div>
+        </div>
+        
+        <div class="page-title-section">
+            <h2 class="page-title">Uw Persoonlijke Dashboard</h2>
+        </div>
+
         <div class="row">
             <!-- Linker kolom: Afspraken & Klant informatie -->
             <div class="col-lg-4 mb-4 mb-lg-0">
@@ -785,28 +1186,61 @@
                                             </thead>
                                             <tbody>
                                                 @php
+                                                    // Get current date and time for comparison
+                                                    $now = new DateTime();
+                                                    $today = $now->format('Y-m-d');
+                                                    $currentTime = $now->format('H:i:s');
+                                                    
+                                                    // Separate future and past appointments
+                                                    $futureReserveringen = $klant->reserveringen->filter(function($reservering) use ($today, $currentTime) {
+                                                        if ($reservering->datum > $today) {
+                                                            return true;
+                                                        } elseif ($reservering->datum == $today && $reservering->tijd > $currentTime) {
+                                                            return true;
+                                                        }
+                                                        return false;
+                                                    })->sortBy(function($reservering) {
+                                                        // Sort by date first, then by time
+                                                        return $reservering->datum . ' ' . $reservering->tijd;
+                                                    });
+                                                    
+                                                    $pastReserveringen = $klant->reserveringen->filter(function($reservering) use ($today, $currentTime) {
+                                                        if ($reservering->datum < $today) {
+                                                            return true;
+                                                        } elseif ($reservering->datum == $today && $reservering->tijd <= $currentTime) {
+                                                            return true;
+                                                        }
+                                                        return false;
+                                                    })->sortByDesc(function($reservering) {
+                                                        // Sort by date first, then by time (most recent past at top)
+                                                        return $reservering->datum . ' ' . $reservering->tijd;
+                                                    });
+                                                    
+                                                    // Combine collections: upcoming first, then past
+                                                    $allReserveringen = $futureReserveringen->merge($pastReserveringen);
+                                                    
                                                     // Paginate the appointments
                                                     $perPage = 5;
                                                     $currentPage = request()->get('page', 1);
                                                     $offset = ($currentPage - 1) * $perPage;
-                                                    $reserveringenPaginated = $klant->reserveringen->sortByDesc('datum')->slice($offset, $perPage);
-                                                    $totalPages = ceil($klant->reserveringen->count() / $perPage);
+                                                    $reserveringenPaginated = $allReserveringen->slice($offset, $perPage);
+                                                    $totalPages = ceil($allReserveringen->count() / $perPage);
                                                 @endphp
                                                 
                                                 @foreach($reserveringenPaginated as $reservering)
-                                                    <tr>
+                                                    <tr class="{{ strtotime($reservering->datum) < strtotime('today') ? 'table-light' : '' }}">
                                                         <td>{{ date('d-m-Y', strtotime($reservering->datum)) }}</td>
                                                         <td>{{ date('H:00', strtotime($reservering->tijd)) }}</td>
                                                         <td>
-                                                            <div class="d-flex gap-2">
+                                                            <div class="d-flex justify-content-center">
                                                                 <form action="{{ route('reserveringen.destroy', $reservering->reservering_id) }}" method="POST" class="d-inline">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Weet u zeker dat u deze afspraak wilt annuleren?')">
+                                                                    <button type="submit" class="action-btn delete-btn" onclick="return confirm('Weet u zeker dat u deze afspraak wilt annuleren?')">
                                                                         <i class="fas fa-trash"></i>
                                                                     </button>
                                                                 </form>
-                                                                <a href="{{ route('reserveringen.edit', $reservering->reservering_id) }}" class="btn btn-sm btn-primary">
+                                                                <a href="{{ route('reserveringen.edit', $reservering->reservering_id) }}" class="action-btn edit-btn">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                             </div>
@@ -856,64 +1290,74 @@
                     </div>
                     
                     <!-- Klant informatie -->
-                    <div class="customer-card card">
-                        <div class="card-header">
-                            <h5 class="mb-0">Uw Gegevens</h5>
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <span>Uw Gegevens</span>
                             <i class="fas fa-id-card"></i>
                         </div>
-                        <div class="card-body">
+                        <div class="info-card-body">
                             <div class="info-item">
-                                <i class="fas fa-user"></i>
+                                <div class="info-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
                                 <div class="info-content">
-                                    <strong>Naam</strong>
-                                    <span>{{ $klant->naam }}</span>
+                                    <div class="info-label">Naam</div>
+                                    <div class="info-value">{{ $klant->naam }}</div>
                                 </div>
                             </div>
                             
                             <div class="info-item">
-                                <i class="fas fa-envelope"></i>
+                                <div class="info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
                                 <div class="info-content">
-                                    <strong>Email</strong>
-                                    <span>{{ $klant->email }}</span>
+                                    <div class="info-label">Email</div>
+                                    <div class="info-value">{{ $klant->email }}</div>
                                 </div>
                             </div>
                             
                             <div class="info-item">
-                                <i class="fas fa-phone"></i>
+                                <div class="info-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
                                 <div class="info-content">
-                                    <strong>Telefoon</strong>
-                                    <span>{{ $klant->telefoon ?? 'Niet opgegeven' }}</span>
+                                    <div class="info-label">Telefoon</div>
+                                    <div class="info-value">{{ $klant->telefoon ?? 'Niet opgegeven' }}</div>
                                 </div>
                             </div>
                             
                             <div class="info-item">
-                                <i class="fas fa-home"></i>
+                                <div class="info-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
                                 <div class="info-content">
-                                    <strong>Adres</strong>
-                                    <span>{{ $klant->adres ?? 'Niet opgegeven' }}</span>
+                                    <div class="info-label">Adres</div>
+                                    <div class="info-value">{{ $klant->adres ?? 'Niet opgegeven' }}</div>
                                 </div>
                             </div>
                             
                             <div class="info-item">
-                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="info-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
                                 <div class="info-content">
-                                    <strong>Postcode & Plaats</strong>
-                                    <span>{{ ($klant->postcode ?? 'Niet opgegeven') . ' ' . ($klant->plaats ?? '') }}</span>
+                                    <div class="info-label">Postcode & Plaats</div>
+                                    <div class="info-value">{{ ($klant->postcode ?? 'Niet opgegeven') . ' ' . ($klant->plaats ?? '') }}</div>
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div class="info-card-footer">
+                            <a href="{{ route('klant.edit') }}" class="info-btn info-btn-primary">
+                                <i class="fas fa-edit"></i> Wijzig gegevens
+                            </a>
                             
-                            <div class="dashboard-actions">
-                                <a href="{{ route('klant.edit') }}" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-edit"></i> Wijzig gegevens
-                                </a>
-                                
-                                <form method="POST" action="{{ route('klant.logout') }}" class="flex-grow-1">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm w-100">
-                                        <i class="fas fa-sign-out-alt"></i> Uitloggen
-                                    </button>
-                                </form>
-                            </div>
+                            <form method="POST" action="{{ route('klant.logout') }}" class="flex-grow-1 m-0">
+                                @csrf
+                                <button type="submit" class="info-btn info-btn-danger w-100">
+                                    <i class="fas fa-sign-out-alt"></i> Uitloggen
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -1079,6 +1523,15 @@
                                                     <p id="overview-medewerker">Nog niet geselecteerd</p>
                                                 </div>
                                             </div>
+                                        </div>
+                                        
+                                        <!-- Opmerking toevoegen -->
+                                        <div class="mb-4">
+                                            <label for="opmerkingen" class="form-label">
+                                                <i class="fas fa-comment-alt me-2 text-primary"></i>Opmerking toevoegen (optioneel)
+                                            </label>
+                                            <textarea class="form-control" id="opmerkingen" name="opmerkingen" rows="3" placeholder="Voeg hier eventuele opmerkingen of verzoeken toe voor uw afspraak (bijv. haarlengte, specifieke wensen, etc.)"></textarea>
+                                            <div class="form-text">Deze opmerking is zichtbaar voor de medewerker ter voorbereiding op uw afspraak.</div>
                                         </div>
                                         
                                         <div class="mt-3 d-flex justify-content-between">
@@ -1824,6 +2277,120 @@
                 }, 500);
             }, 5000);
         });
+    });
+
+    // Only show success alerts if changes were actually made
+    document.addEventListener('DOMContentLoaded', function() {
+        // For edit forms, track original form values and only submit if changes were made
+        const editForms = document.querySelectorAll('form[method="POST"]');
+        
+        editForms.forEach(form => {
+            if (form.querySelector('input[name="_method"][value="PUT"]') || 
+                form.getAttribute('action').includes('edit')) {
+                
+                // Store original form values when the page loads
+                const originalValues = {};
+                const formInputs = form.querySelectorAll('input, select, textarea');
+                
+                formInputs.forEach(input => {
+                    if (input.name && input.name !== '_token' && input.name !== '_method') {
+                        if (input.type === 'checkbox' || input.type === 'radio') {
+                            originalValues[input.name] = input.checked;
+                        } else {
+                            originalValues[input.name] = input.value;
+                        }
+                    }
+                });
+                
+                // Check for changes on form submit
+                form.addEventListener('submit', function(e) {
+                    let hasChanges = false;
+                    
+                    formInputs.forEach(input => {
+                        if (input.name && input.name !== '_token' && input.name !== '_method') {
+                            let currentValue;
+                            
+                            if (input.type === 'checkbox' || input.type === 'radio') {
+                                currentValue = input.checked;
+                            } else {
+                                currentValue = input.value;
+                            }
+                            
+                            if (currentValue !== originalValues[input.name]) {
+                                hasChanges = true;
+                            }
+                        }
+                    });
+                    
+                    if (!hasChanges) {
+                        e.preventDefault();
+                        // Optional: show a message that no changes were made
+                        const noChangesMsg = document.createElement('div');
+                        noChangesMsg.className = 'custom-alert custom-alert-info animate__animated animate__fadeInDown';
+                        noChangesMsg.innerHTML = `
+                            <div class="custom-alert-content">
+                                <div class="custom-alert-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="custom-alert-message">Geen wijzigingen aangebracht.</div>
+                                <button type="button" class="custom-alert-close" onclick="this.parentElement.parentElement.remove()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="custom-alert-progress"></div>
+                        `;
+                        
+                        const container = document.getElementById('notifications-container');
+                        container.appendChild(noChangesMsg);
+                        
+                        // Auto-remove the message after 5 seconds
+                        setTimeout(function() {
+                            noChangesMsg.classList.remove('animate__fadeInDown');
+                            noChangesMsg.classList.add('animate__fadeOutUp');
+                            
+                            setTimeout(function() {
+                                noChangesMsg.remove();
+                            }, 500);
+                        }, 5000);
+                    }
+                });
+            }
+        });
+    });
+
+    // Update the countdown in real time
+    function updateCountdown() {
+        const countdownElement = document.getElementById('appointment-countdown');
+        if (countdownElement) {
+            @if ($nextAppointment ?? false)
+                const appointmentDate = new Date('{{ $nextAppointment->datum }}T{{ $nextAppointment->tijd }}');
+                const now = new Date();
+                
+                const diff = appointmentDate - now;
+                if (diff <= 0) {
+                    countdownElement.textContent = "Nu!";
+                    return;
+                }
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                if (days > 0) {
+                    countdownElement.textContent = `${days} ${days === 1 ? 'dag' : 'dagen'}`;
+                } else if (hours > 0) {
+                    countdownElement.textContent = `${hours} ${hours === 1 ? 'uur' : 'uren'}`;
+                } else {
+                    countdownElement.textContent = `${minutes} ${minutes === 1 ? 'minuut' : 'minuten'}`;
+                }
+            @endif
+        }
+    }
+    
+    // Update countdown every minute
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCountdown();
+        setInterval(updateCountdown, 60000); // Update every minute
     });
 </script>
 @endsection
