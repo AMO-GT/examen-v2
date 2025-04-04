@@ -92,50 +92,34 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(135deg, #6B46C1 0%, #2C5282 100%);">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">The Hair Hub</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand text-white" href="{{ route('home') }}">
+                    <i class="fas fa-cut me-2"></i>The Hair Hub
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Dashboard</a>
+                            <a class="nav-link text-white" href="{{ route('home') }}">
+                                <i class="fas fa-home me-1"></i>Home
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('klanten.index') ? 'active' : '' }}" href="{{ route('klanten.index') }}">Klanten</a>
+                            <a class="nav-link text-white" href="{{ route('medewerkers.index') }}">
+                                <i class="fas fa-list me-1"></i>Behandelingen
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('beheerders.index') ? 'active' : '' }}" href="{{ route('beheerders.index') }}">Beheerders</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('medewerkers.index') ? 'active' : '' }}" href="{{ route('medewerkers.index') }}">Medewerkers</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav">
                         @auth
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profiel</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item">Uitloggen</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Inloggen</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Registreren</a>
+                                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="nav-link text-white border-0 bg-transparent">
+                                        <i class="fas fa-sign-out-alt me-1"></i>Uitloggen
+                                    </button>
+                                </form>
                             </li>
                         @endauth
                     </ul>
@@ -164,5 +148,6 @@
                 }
             });
         </script>
+        @stack('scripts')
     </body>
 </html>

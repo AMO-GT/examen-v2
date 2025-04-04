@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('behandelingen', function (Blueprint $table) {
             $table->id('behandeling_id'); // Primaire sleutel
             $table->string('naam', 100);
-            $table->integer('duur'); // in minuten
+            $table->text('beschrijving');
+            $table->string('categorie', 50); // Nieuwe kolom voor de categorie
+            $table->integer('duur_minuten'); // in minuten
             $table->decimal('prijs', 10, 2);
+            $table->boolean('is_actief')->default(true);
             $table->timestamps();
         });
     }
