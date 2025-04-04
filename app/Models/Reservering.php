@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Reservering extends Model
 {
     use HasFactory;
 
+    protected $table = 'reserveringen';
     protected $primaryKey = 'reservering_id';
 
     protected $fillable = ['klant_id', 'medewerker_id', 'datum', 'tijd'];

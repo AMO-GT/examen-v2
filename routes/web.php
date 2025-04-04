@@ -5,6 +5,7 @@ use App\Http\Controllers\KlantenController;
 use App\Http\Controllers\BeheerdersController;
 use App\Http\Controllers\MedewerkersController;
 use App\Http\Controllers\Auth\KlantAuthController;
+use App\Http\Controllers\ReserveringenController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,6 +41,10 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth:klant')->group(function () {
     Route::post('klant/logout', [KlantAuthController::class, 'logout'])->name('klant.logout');
+    
+    // Reserveringen routes
+    Route::post('/reserveringen', [ReserveringenController::class, 'store'])->name('reserveringen.store');
+    Route::delete('/reserveringen/{id}', [ReserveringenController::class, 'destroy'])->name('reserveringen.destroy');
 });
 
 //<-----------------------------------------Badr------------------------------------------>
