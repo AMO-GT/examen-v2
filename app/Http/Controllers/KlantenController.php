@@ -24,6 +24,22 @@ class KlantenController extends Controller
         if ($isAuthenticated) {
             $data['medewerkers'] = Medewerker::all();
             $data['behandelingen'] = Behandeling::all();
+            
+            // Haal de behandelingsgeschiedenis op (vorige afspraken)
+            $data['behandelingsgeschiedenis'] = $klant->reserveringen()
+                ->with(['medewerker', 'behandelingen'])
+                ->where('datum', '<', now()->format('Y-m-d'))
+                ->orderBy('datum', 'desc')
+                ->orderBy('tijd', 'desc')
+                ->get();
+                
+            // Aankomende afspraken
+            $data['aankomende_afspraken'] = $klant->reserveringen()
+                ->with(['medewerker', 'behandelingen'])
+                ->where('datum', '>=', now()->format('Y-m-d'))
+                ->orderBy('datum', 'asc')
+                ->orderBy('tijd', 'asc')
+                ->get();
         }
         
         return view('klanten.index', $data);
@@ -62,11 +78,38 @@ class KlantenController extends Controller
         $klant->postcode = $validated['postcode'];
         $klant->plaats = $validated['plaats'];
         
+        // Controleer of het wachtwoord is gewijzigd
+        $passwordChanged = false;
+        
         if (!empty($validated['password'])) {
             $klant->password = Hash::make($validated['password']);
+            $passwordChanged = true;
         }
         
         $klant->save();
+        
+        // Stuur een e-mail als het wachtwoord is gewijzigd
+        if ($passwordChanged) {
+            try {
+                // Data voor de e-mail template
+                $mailData = [
+                    'naam' => $klant->naam,
+                    'email' => $klant->email,
+                    'is_password_change' => true
+                ];
+                
+                // Verstuur de e-mail
+                \Illuminate\Support\Facades\Mail::send('emails.wachtwoord-gewijzigd', $mailData, function($message) use ($klant) {
+                    $message->to($klant->email)
+                        ->subject('Uw wachtwoord is gewijzigd bij The Hair Hub');
+                });
+                
+                \Illuminate\Support\Facades\Log::info('Wachtwoord-wijziging e-mail verzonden naar: ' . $klant->email);
+            } catch (\Exception $e) {
+                // Log de error maar laat de gebruiker niet merken dat iets misging
+                \Illuminate\Support\Facades\Log::error('Er is een fout opgetreden bij het verzenden van de wachtwoord-wijziging e-mail: ' . $e->getMessage());
+            }
+        }
         
         return redirect()->route('klanten.index')->with('success', 'Uw gegevens zijn succesvol bijgewerkt!');
     }
